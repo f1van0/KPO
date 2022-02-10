@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dll_Visual_CPP", "Dll_Visual_CPP\Dll_Visual_CPP.vcxproj", "{40599EDD-ED2C-4296-81D5-514100CC643E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Debug|x64.ActiveCfg = Debug|x64
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Debug|x64.Build.0 = Debug|x64
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Debug|x86.ActiveCfg = Debug|Win32
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Debug|x86.Build.0 = Debug|Win32
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Release|x64.ActiveCfg = Release|x64
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Release|x64.Build.0 = Release|x64
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Release|x86.ActiveCfg = Release|Win32
+		{40599EDD-ED2C-4296-81D5-514100CC643E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5323D45A-974F-4936-A1E9-4F57A3B4C520}
+	EndGlobalSection
+EndGlobal

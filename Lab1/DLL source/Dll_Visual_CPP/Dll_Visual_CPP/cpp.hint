@@ -1,0 +1,2 @@
+#define DLLVISUALCPP_API __declspec(dllexport)
+#define DLLVISUALCPP_API __declspec(dllimport)
