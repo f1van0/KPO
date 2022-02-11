@@ -109,6 +109,7 @@ namespace C_sharp_starter
 			}
 
 			double avgTime = sumTime / iterations;
+			Console.WriteLine("Длительность: " + avgTime + " мс.");
 			return avgTime;
 		}
 
@@ -133,6 +134,7 @@ namespace C_sharp_starter
 			}
 
 			double avgTime = sumTime / iterations;
+			Console.WriteLine("Длительность: " + avgTime + " мс.");
 			return avgTime;
 		}
 
@@ -148,7 +150,7 @@ namespace C_sharp_starter
 			time = CalculateTimeVectorFunc(func2, 100000, 30);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcName3);
-			time = CalculateTimeMatrixFunc(func3, 100000, 30);
+			time = CalculateTimeMatrixFunc(func3, 635, 30);
 
 			FreeLibrary(pointerDll);
 		}
@@ -157,7 +159,7 @@ namespace C_sharp_starter
         {
 			Program newProgram = new Program();
 			newProgram.CallDll("DllVisualCPP.dll", "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix");
-			Console.WriteLine("Hello World!");
-        }
+			Console.ReadKey();
+		}
     }
 }

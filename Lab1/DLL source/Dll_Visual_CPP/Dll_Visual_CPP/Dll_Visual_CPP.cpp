@@ -11,7 +11,7 @@
 using namespace std;
 
 //Range Value From Vector
-DLLVISUALCPP_API double GetRangeValueFromVector(far double* array, int size)
+DLLEXPORT double GetRangeValueFromVector(far double* array, int size)
 {
 	double minValue1 = array[0];
 	double maxValue1 = array[0];
@@ -29,7 +29,7 @@ DLLVISUALCPP_API double GetRangeValueFromVector(far double* array, int size)
 }
 
 //Average Value of Vector
-DLLVISUALCPP_API double GetAverageValueFromVector(far double* array, int size)
+DLLEXPORT double GetAverageValueFromVector(far double* array, int size)
 {
 	double sum = 0;
 
@@ -42,7 +42,7 @@ DLLVISUALCPP_API double GetAverageValueFromVector(far double* array, int size)
 }
 
 //Average Value of Matrix
-DLLVISUALCPP_API double GetAverageValueFromMatrix(far double** matrix, int size)
+DLLEXPORT double GetAverageValueFromMatrix(far double** matrix, int size)
 {
 	double sum = 0;
 
