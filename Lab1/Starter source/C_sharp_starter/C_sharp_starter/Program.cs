@@ -31,6 +31,8 @@ namespace C_sharp_starter
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		public delegate void VoidVoid();
 
+		public static string path = "C:\\Users\\vanya\\Source\\Repos\\KPO\\Lab1\\Build\\";
+
 		VectorType TryGetVectorFuncFromDll(int pointerDll, string funcName)
 		{
 			IntPtr getProc = GetProcAddress(pointerDll, funcName);
@@ -95,61 +97,74 @@ namespace C_sharp_starter
 			double maxTime = -1;
 			double sumTime = 0;
 			double[] array = GetArray(size);
-			
+
+			QueryPerformanceFrequency(out frequence);
+			QueryPerformanceCounter(out startTime);
+
 			for (int i = 0; i < iterations; i++)
             {
-				QueryPerformanceFrequency(out frequence);
-				QueryPerformanceCounter(out startTime);
 				double value = func(array, size);
-				QueryPerformanceCounter(out endTime);
-				double time = (double)((endTime - startTime)) * 1000 / frequence;
-				sumTime += time;
-				if (minTime > time) minTime = time;
-				if (maxTime < time) maxTime = time;
 			}
 
-			double avgTime = sumTime / iterations;
-			Console.WriteLine("Длительность: " + avgTime + " мс.");
-			return avgTime;
+			QueryPerformanceCounter(out endTime);
+			double time = (double)((endTime - startTime)) * 1000 / frequence / iterations;
+
+			Console.WriteLine("Длительность: " + time + " мс.");
+			return time;
 		}
 
 		double CalculateTimeMatrixFunc(MatrixType func, int size, int iterations)
 		{
 			long startTime, endTime, frequence;
-			double minTime = double.MaxValue;
+			double minTime = 100000;
 			double maxTime = -1;
 			double sumTime = 0;
 			IntPtr[] matrix = GetMatrix(size);
 
+			QueryPerformanceFrequency(out frequence);
+			QueryPerformanceCounter(out startTime);
+
 			for (int i = 0; i < iterations; i++)
 			{
-				QueryPerformanceFrequency(out frequence);
-				QueryPerformanceCounter(out startTime);
 				double value = func(matrix, size);
-				QueryPerformanceCounter(out endTime);
-				double time = (double)((endTime - startTime)) * 1000 / frequence;
-				sumTime += time;
-				if (minTime > time) minTime = time;
-				if (maxTime < time) maxTime = time;
 			}
 
-			double avgTime = sumTime / iterations;
-			Console.WriteLine("Длительность: " + avgTime + " мс.");
-			return avgTime;
+			QueryPerformanceCounter(out endTime);
+			double time = (double)((endTime - startTime)) * 1000 / frequence / iterations;
+
+			Console.WriteLine("Длительность: " + time + " мс.");
+			return time;
 		}
 
-		void CallDll(string dllName, string funcName1, string funcName2, string funcName3)
+		void CallDllSTD(string dllName, string[] funcsName)
 		{
-			int pointerDll = LoadLibrary(dllName);
+			int pointerDll = LoadLibrary(path + dllName);
 			double time;
 
-			VectorType func1 = TryGetVectorFuncFromDll(pointerDll, funcName1);
+			VectorType func1 = TryGetVectorFuncFromDll(pointerDll, funcsName[0]);
 			time = CalculateTimeVectorFunc(func1, 100000, 30);
 
-			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcName2);
+			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
 			time = CalculateTimeVectorFunc(func2, 100000, 30);
 
-			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcName3);
+			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
+			time = CalculateTimeMatrixFunc(func3, 635, 30);
+
+			FreeLibrary(pointerDll);
+		}
+
+		void CallDllCdecl(string dllName, string[] funcsName)
+		{
+			int pointerDll = LoadLibrary(path + dllName);
+			double time;
+
+			VectorType func1 = TryGetVectorFuncFromDll(pointerDll, funcsName[0]);
+			time = CalculateTimeVectorFunc(func1, 100000, 30);
+
+			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
+			time = CalculateTimeVectorFunc(func2, 100000, 30);
+
+			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
 			time = CalculateTimeMatrixFunc(func3, 635, 30);
 
 			FreeLibrary(pointerDll);
@@ -157,8 +172,12 @@ namespace C_sharp_starter
 
 		static void Main(string[] args)
         {
+			string[] funcsName = { "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix" };
 			Program newProgram = new Program();
-			newProgram.CallDll("DllVisualCPP.dll", "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix");
+
+			//newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
+			//newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
+			newProgram.CallDllSTD("Dll_Lazarus.dll", funcsName);
 			Console.ReadKey();
 		}
     }
