@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.cpp,C:\Users\Пользователь\Documents\RAD Studio\Projects\CPPB_dll_work\Unit1.cpp=C:\Users\Пользователь\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.h,C:\Users\Пользователь\Documents\RAD Studio\Projects\CPPB_dll_work\Unit1.h=C:\Users\Пользователь\Documents\RAD Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.cbproj,C:\Users\Пользователь\Documents\RAD Studio\Projects\CPPB_dll_work\Project1.cbproj=C:\Users\Пользователь\Documents\RAD Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Users\Пользователь\Documents\RAD Studio\Projects\CPPB_dll_work\Unit1.dfm=C:\Users\Пользователь\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022.02.13 19:49:21.648,C:\Users\vanya\Source\Repos\KPO\Lab1\Starter source\CPP_Builder_starter\CPP_Builder_Starter.cbproj=C:\Users\vanya\Source\Repos\KPO\Lab1\Starter source\CPP_Builder_starter\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
