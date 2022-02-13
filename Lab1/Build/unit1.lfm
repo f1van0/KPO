@@ -1,0 +1,66 @@
+object Form1: TForm1
+  Left = 256
+  Height = 392
+  Top = 145
+  Width = 808
+  Caption = 'Form1'
+  ClientHeight = 392
+  ClientWidth = 808
+  LCLVersion = '2.2.0.4'
+  object Memo1: TMemo
+    Left = 16
+    Height = 325
+    Top = 39
+    Width = 353
+    Lines.Strings = (
+      'Memo1'
+    )
+    ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 32
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'VC++ DLL'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 113
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Delphi DLL'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+  object Button3: TButton
+    Left = 192
+    Height = 25
+    Top = 8
+    Width = 103
+    Caption = 'C++ Builder DLL'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object Button4: TButton
+    Left = 303
+    Height = 25
+    Top = 8
+    Width = 121
+    Caption = 'C++ Builder v2 DLL'
+    OnClick = Button4Click
+    TabOrder = 4
+  end
+  object Button5: TButton
+    Left = 432
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Lazarus DLL'
+    OnClick = Button5Click
+    TabOrder = 5
+  end
+end

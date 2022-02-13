@@ -38,11 +38,11 @@ double** GetMatrix(int size)
 	return newMatrix;
 }
 
-void ExecuteSTD_DLL(string dll_name, string func_name[5])
+void ExecuteSTD_DLL(string dll_name, string func_name[3])
 {
 	int arraySize = 100000;
 	int matrixSize = 650;
-	int iterations = 50;
+	int iterations = 50; 
 
 	double 	Ftime;
 	LARGE_INTEGER FFrequence, FBeginCount, FEndCount;
@@ -67,7 +67,7 @@ void ExecuteSTD_DLL(string dll_name, string func_name[5])
 
 	cout << "library (" << dll_name << ") loaded\n";
 
-	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, func_name[0].c_str());
+	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetRangeValueFromVector");
 	if (GetRangeValueFromVector != NULL) {
 		QueryPerformanceFrequency(&FFrequence);
 		QueryPerformanceCounter(&FBeginCount);
@@ -87,7 +87,7 @@ void ExecuteSTD_DLL(string dll_name, string func_name[5])
 		
 
 
-	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, func_name[1].c_str());
+	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromVector");
 	if (GetAverageValueFromVector != NULL) {
 		QueryPerformanceFrequency(&FFrequence);
 		QueryPerformanceCounter(&FBeginCount);
@@ -106,7 +106,7 @@ void ExecuteSTD_DLL(string dll_name, string func_name[5])
 	}
 
 
-	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, func_name[2].c_str());
+	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromMatrix");
 	if (GetAverageValueFromMatrix != NULL) {
 		QueryPerformanceFrequency(&FFrequence);
 		QueryPerformanceCounter(&FBeginCount);
@@ -232,8 +232,9 @@ int main()
 	string func_name2[6] = { "Add","Subtract","Multiply","Divide","Fill_1D_Array", "Fill_2D_Array_v2" };
 
 	cout << "DllVisualCPP.dll" << endl;
-	ExecuteSTD_DLL(path + "DllVisualCPP.dll", func_name1);
+	ExecuteSTD_DLL(path + "dll_sample_CB_stdcall.dll", func_name1);
 	ExecuteSTD_DLL(path + "Dll_CPP_Builder.dll", func_name1);
+	ExecuteSTD_DLL(path + "Dll_Lazarus.dll", func_name1);
 	/*
 	cout << endl << endl << "!! Demonstration of Delphi dll" << endl << endl;
 	Dll_demo_work_cdecl("dll_sample_D.dll", func_name1);

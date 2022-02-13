@@ -28,4 +28,31 @@ DLLEXPORT double GetRangeValueFromVector(far double* array, int size)
 	return range1;
 }
 
+//Average Value of Vector
+DLLEXPORT double GetAverageValueFromVector(far double* array, int size)
+{
+	double sum = 0;
 
+	for (int i = 0; i < size; i++)
+	{
+		sum += array[i];
+	}
+
+	return sum / size;
+}
+
+//Average Value of Matrix
+DLLEXPORT double GetAverageValueFromMatrix(far double** matrix, int size)
+{
+	double sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			sum += matrix[j][i];
+		}
+	}
+
+	return sum / (size * size);
+}

@@ -138,16 +138,37 @@ namespace C_sharp_starter
 
 		void CallDllSTD(string dllName, string[] funcsName)
 		{
+			Console.WriteLine("Загрузка Dll: " + dllName);
 			int pointerDll = LoadLibrary(path + dllName);
+			if (pointerDll == 0)
+            {
+				Console.WriteLine("Dll не найден");
+				return;
+			}
 			double time;
 
 			VectorType func1 = TryGetVectorFuncFromDll(pointerDll, funcsName[0]);
+			if (func1 == null)
+            {
+				Console.WriteLine($"Функция {funcsName[0]} не найдена");
+				return;
+			}
 			time = CalculateTimeVectorFunc(func1, 100000, 30);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
+			if (func2 == null)
+			{
+				Console.WriteLine($"Функция {funcsName[1]} не найдена");
+				return;
+			}
 			time = CalculateTimeVectorFunc(func2, 100000, 30);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
+			if (func3 == null)
+			{
+				Console.WriteLine($"Функция {funcsName[2]} не найдена");
+				return;
+			}
 			time = CalculateTimeMatrixFunc(func3, 635, 30);
 
 			FreeLibrary(pointerDll);
@@ -155,16 +176,37 @@ namespace C_sharp_starter
 
 		void CallDllCdecl(string dllName, string[] funcsName)
 		{
+			Console.WriteLine("Загрузка Dll: " + dllName);
 			int pointerDll = LoadLibrary(path + dllName);
+			if (pointerDll == 0)
+			{
+				Console.WriteLine("Dll не найден");
+				return;
+			}
 			double time;
 
 			VectorType func1 = TryGetVectorFuncFromDll(pointerDll, funcsName[0]);
+			if (func1 == null)
+			{
+				Console.WriteLine($"Функция {funcsName[0]} не найдена");
+				return;
+			}
 			time = CalculateTimeVectorFunc(func1, 100000, 30);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
+			if (func2 == null)
+			{
+				Console.WriteLine($"Функция {funcsName[1]} не найдена");
+				return;
+			}
 			time = CalculateTimeVectorFunc(func2, 100000, 30);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
+			if (func3 == null)
+			{
+				Console.WriteLine($"Функция {funcsName[2]} не найдена");
+				return;
+			}
 			time = CalculateTimeMatrixFunc(func3, 635, 30);
 
 			FreeLibrary(pointerDll);
@@ -175,8 +217,8 @@ namespace C_sharp_starter
 			string[] funcsName = { "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix" };
 			Program newProgram = new Program();
 
-			//newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
-			//newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
+			newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
+			newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
 			newProgram.CallDllSTD("Dll_Lazarus.dll", funcsName);
 			Console.ReadKey();
 		}
