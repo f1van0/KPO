@@ -162,7 +162,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[0]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func1, 100000, 30);
+			CalculateTimeVectorFunc(func1, 100000, 50);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
 			if (func2 == null)
@@ -170,7 +170,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[1]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func2, 100000, 30);
+			CalculateTimeVectorFunc(func2, 100000, 50);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
 			if (func3 == null)
@@ -178,7 +178,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[2]} не найдена");
 				return;
 			}
-			CalculateTimeMatrixFunc(func3, 635, 30);
+			CalculateTimeMatrixFunc(func3, 650, 50);
 
 			FreeLibrary(pointerDll);
 		}
@@ -200,7 +200,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[0]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func1, 100000, 30);
+			CalculateTimeVectorFunc(func1, 100000, 50);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
 			if (func2 == null)
@@ -208,7 +208,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[1]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func2, 100000, 30);
+			CalculateTimeVectorFunc(func2, 100000, 50);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
 			if (func3 == null)
@@ -216,7 +216,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[2]} не найдена");
 				return;
 			}
-			CalculateTimeMatrixFunc(func3, 650, 30);
+			CalculateTimeMatrixFunc(func3, 650, 50);
 
 			FreeLibrary(pointerDll);
 		}
