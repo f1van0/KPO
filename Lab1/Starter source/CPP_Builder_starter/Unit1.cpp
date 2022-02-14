@@ -2,6 +2,7 @@
 
 #include <vcl.h>
 #include <math.h>
+#include <sstream>
 #pragma hdrstop
 
 #include "Unit1.h"
@@ -233,7 +234,12 @@ __fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner)
 // ---------------------------------------------------------------------------
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
+	std::ostringstream sstream;
+
 	double 	Ftime;
+	double totalTime = 0;
+	double minTime = 1000;
+	double maxTime = -1;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 
 	VectorTypeSTD GetRangeValueFromVector, GetAverageValueFromVector;
@@ -256,15 +262,35 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetRangeValueFromVector");
 	if (GetRangeValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+
+		Memo1->Lines->Add("START GetRangeValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetRangeValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -272,19 +298,40 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		return;
 	}
 
-
+	totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromVector");
 	if (GetAverageValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -292,18 +339,40 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		return;
 	}
 
+    totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromMatrix");
 	if (GetAverageValueFromMatrix != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromMatrix\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromMatrix(matrix, matrixSize);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -317,7 +386,12 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 // ---------------------------------------------------------------------------
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
+   std::ostringstream sstream;
+
 	double 	Ftime;
+	double totalTime = 0;
+	double minTime = 1000;
+	double maxTime = -1;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 
 	VectorTypeSTD GetRangeValueFromVector, GetAverageValueFromVector;
@@ -340,15 +414,35 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 
 	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetRangeValueFromVector");
 	if (GetRangeValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+
+		Memo1->Lines->Add("START GetRangeValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetRangeValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -356,19 +450,40 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 		return;
 	}
 
-
+	totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromVector");
 	if (GetAverageValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -376,18 +491,40 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 		return;
 	}
 
+    totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromMatrix");
 	if (GetAverageValueFromMatrix != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromMatrix\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromMatrix(matrix, matrixSize);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -397,9 +534,17 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 
 	FreeLibrary(hinstLib);
 }
+
+
+//---------------------------------------------------------------------------
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
+   std::ostringstream sstream;
+
 	double 	Ftime;
+	double totalTime = 0;
+	double minTime = 1000;
+	double maxTime = -1;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 
 	VectorTypeSTD GetRangeValueFromVector, GetAverageValueFromVector;
@@ -422,15 +567,35 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetRangeValueFromVector");
 	if (GetRangeValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+
+		Memo1->Lines->Add("START GetRangeValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetRangeValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -438,19 +603,40 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 		return;
 	}
 
-
+	totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromVector");
 	if (GetAverageValueFromVector != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromVector\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromVector(array, arraySize);
+            QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{
@@ -458,18 +644,40 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 		return;
 	}
 
+    totalTime = 0;
+	minTime = 1000;
+	maxTime = -1;
 
 	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromMatrix");
 	if (GetAverageValueFromMatrix != NULL) {
-		QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
-		QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
+		Memo1->Lines->Add("START GetAverageValueFromMatrix\n");
 		for (int i = 0; i < iterations; i++)
 		{
+            QueryPerformanceFrequency((LARGE_INTEGER*)&FFrequence);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FBeginCount);
 			result = GetAverageValueFromMatrix(matrix, matrixSize);
+			QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
+			Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000;
+			totalTime += Ftime;
+			if (minTime > Ftime) minTime = Ftime;
+			if (maxTime < Ftime) maxTime = Ftime;
 		}
-		QueryPerformanceCounter((LARGE_INTEGER*)&FEndCount);
-		Ftime = ((FEndCount - FBeginCount) / (double)FFrequence) * 1000 / iterations;
-		Memo1->Lines->Add(Ftime);
+		double avgTime = totalTime / iterations;
+
+		sstream << "Min: " << minTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Avg: "  << avgTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+		sstream.str("");
+		sstream.clear();
+
+		sstream << "Max: "  << maxTime << " ms.\n";
+		Memo1->Lines->Add(sstream.str().c_str());
+        sstream.str("");
+		sstream.clear();
 	}
 	else
 	{

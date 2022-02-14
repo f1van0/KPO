@@ -69,15 +69,28 @@ void ExecuteSTD_DLL(string dll_name, string func_name[3])
 
 	GetRangeValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetRangeValueFromVector");
 	if (GetRangeValueFromVector != NULL) {
-		QueryPerformanceFrequency(&FFrequence);
-		QueryPerformanceCounter(&FBeginCount);
+		cout << "START: GetRangeValueFromVector\n";
+		double minTime = 10000;
+		double maxTime = -1;
+		double totalTime = 0;
+
 		for (int i = 0; i < iterations; i++)
 		{
+			QueryPerformanceFrequency(&FFrequence);
+			QueryPerformanceCounter(&FBeginCount);
 			result = GetRangeValueFromVector(array, arraySize);
+			QueryPerformanceCounter(&FEndCount);
+			double time = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000;
+			totalTime += time;
+			if (minTime > time) minTime = time;
+			if (maxTime < time) maxTime = time;
 		}
-		QueryPerformanceCounter(&FEndCount);
-		Ftime = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000 / iterations;
-		cout << Ftime << " ms." << endl;
+
+		double avgTime = totalTime / iterations;
+
+		cout << "Min: " << minTime << " ms.\n";
+		cout << "Avg: " << avgTime << " ms.\n";
+		cout << "Max: " << maxTime << " ms.\n";
 	}
 	else
 	{
@@ -89,15 +102,28 @@ void ExecuteSTD_DLL(string dll_name, string func_name[3])
 
 	GetAverageValueFromVector = (VectorTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromVector");
 	if (GetAverageValueFromVector != NULL) {
-		QueryPerformanceFrequency(&FFrequence);
-		QueryPerformanceCounter(&FBeginCount);
+		cout << "START: GetAverageValueFromVector\n";
+		double minTime = 10000;
+		double maxTime = -1;
+		double totalTime = 0;
+
 		for (int i = 0; i < iterations; i++)
 		{
+			QueryPerformanceFrequency(&FFrequence);
+			QueryPerformanceCounter(&FBeginCount);
 			result = GetAverageValueFromVector(array, arraySize);
+			QueryPerformanceCounter(&FEndCount);
+			double time = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000;
+			totalTime += time;
+			if (minTime > time) minTime = time;
+			if (maxTime < time) maxTime = time;
 		}
-		QueryPerformanceCounter(&FEndCount);
-		Ftime = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000 / iterations;
-		cout << Ftime << " ms." << endl;
+
+		double avgTime = totalTime / iterations;
+
+		cout << "Min: " << minTime << " ms.\n";
+		cout << "Avg: " << avgTime << " ms.\n";
+		cout << "Max: " << maxTime << " ms.\n";
 	}
 	else
 	{
@@ -108,15 +134,28 @@ void ExecuteSTD_DLL(string dll_name, string func_name[3])
 
 	GetAverageValueFromMatrix = (MatrixTypeSTD)GetProcAddress(hinstLib, "GetAverageValueFromMatrix");
 	if (GetAverageValueFromMatrix != NULL) {
-		QueryPerformanceFrequency(&FFrequence);
-		QueryPerformanceCounter(&FBeginCount);
+		cout << "START: GetAverageValueFromMatrix\n";
+		double minTime = 10000;
+		double maxTime = -1;
+		double totalTime = 0;
+
 		for (int i = 0; i < iterations; i++)
 		{
+			QueryPerformanceFrequency(&FFrequence);
+			QueryPerformanceCounter(&FBeginCount);
 			result = GetAverageValueFromMatrix(matrix, matrixSize);
+			QueryPerformanceCounter(&FEndCount);
+			double time = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000;
+			totalTime += time;
+			if (minTime > time) minTime = time;
+			if (maxTime < time) maxTime = time;
 		}
-		QueryPerformanceCounter(&FEndCount);
-		Ftime = ((FEndCount.QuadPart - FBeginCount.QuadPart) / (double)FFrequence.QuadPart) * 1000 / iterations;
-		cout << Ftime << " ms." << endl;
+
+		double avgTime = totalTime / iterations;
+
+		cout << "Min: " << minTime << " ms.\n";
+		cout << "Avg: " << avgTime << " ms.\n";
+		cout << "Max: " << maxTime << " ms.\n";
 	}
 	else
 	{

@@ -174,7 +174,7 @@ end;
 procedure TForm1.Dll_demo_work_stdcall(dll_name: string; f_list: array of string);
 var
   hLib: THandle;
-  rez: double;
+  rez, minTime, maxTime, totalTime, avgTime: double;
   i, y, x: integer;
 
   Ftime: extended;
@@ -203,21 +203,33 @@ begin
     Memo1.Lines.Add('ERROR: unable to load DLL: ' + dll_name);
     exit;
   end;
-  Memo1.Lines.Add('Библиотека' + dll_name + ' Успешно загружена');
+  Memo1.Lines.Add('Библиотека ' + dll_name + ' Успешно загружена');
 
   Pointer(GetRangeValueFromVector) := GetProcAddress(hLib, PChar(f_list[0]));
   if (GetRangeValueFromVector <> nil) then
   begin
+    Memo1.Lines.Add('START: '+f_list[0]);
     arrP := GetArray(sizeArray);
-    QueryPerformanceFrequency(FFrequence);
-    QueryPerformanceCounter(FBeginCount);
+    minTime := 10000;
+    maxTime := -1;
+    totalTime := 0;
     for y:=0 to iterations-1 do
     begin
+      QueryPerformanceFrequency(FFrequence);
+      QueryPerformanceCounter(FBeginCount);
       rez := GetRangeValueFromVector(arrP, sizeArray);
+      QueryPerformanceCounter(FEndCount);
+      Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000;
+      totalTime := totalTime + Ftime;
+      if minTime > Ftime then minTime := Ftime;
+      if maxTime < Ftime then maxTime := Ftime;
     end;
-    QueryPerformanceCounter(FEndCount);
-    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
-    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
+
+    avgTime := totalTime / iterations;
+
+    Memo1.Lines.Add('Min: '+floattostr(minTime)+' ms.');
+    Memo1.Lines.Add('Avg: '+floattostr(avgTime)+' ms.');
+    Memo1.Lines.Add('Max: '+floattostr(maxTime)+' ms.');
   end
   else
     Memo1.Lines.Add('Не удалось найти функцию ' + f_list[0]);
@@ -225,16 +237,28 @@ begin
   Pointer(GetAverageValueFromVector) := GetProcAddress(hLib, PChar(f_list[0]));
   if (GetRangeValueFromVector <> nil) then
   begin
+    Memo1.Lines.Add('START: '+f_list[1]);
     arrP := GetArray(sizeArray);
-    QueryPerformanceFrequency(FFrequence);
-    QueryPerformanceCounter(FBeginCount);
+    minTime := 10000;
+    maxTime := -1;
+    totalTime := 0;
     for y:=0 to iterations-1 do
     begin
+      QueryPerformanceFrequency(FFrequence);
+      QueryPerformanceCounter(FBeginCount);
       rez := GetAverageValueFromVector(arrP, sizeArray);
+      QueryPerformanceCounter(FEndCount);
+      Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000;
+      totalTime := totalTime + Ftime;
+      if minTime > Ftime then minTime := Ftime;
+      if maxTime < Ftime then maxTime := Ftime;
     end;
-    QueryPerformanceCounter(FEndCount);
-    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
-    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
+
+    avgTime := totalTime / iterations;
+
+    Memo1.Lines.Add('Min: '+floattostr(minTime)+' ms.');
+    Memo1.Lines.Add('Avg: '+floattostr(avgTime)+' ms.');
+    Memo1.Lines.Add('Max: '+floattostr(maxTime)+' ms.');
   end
   else
     Memo1.Lines.Add('Не удалось найти функцию ' + f_list[0]);
@@ -242,16 +266,28 @@ begin
   Pointer(GetAverageValueFromMatrix) := GetProcAddress(hLib, PChar(f_list[2]));
   if (GetAverageValueFromMatrix <> nil) then
   begin
+    Memo1.Lines.Add('START: '+f_list[2]);
     matrix := GetMatrix(sizeMatrix);
-    QueryPerformanceFrequency(FFrequence);
-    QueryPerformanceCounter(FBeginCount);
+    minTime := 10000;
+    maxTime := -1;
+    totalTime := 0;
     for y:=0 to iterations-1 do
     begin
+      QueryPerformanceFrequency(FFrequence);
+      QueryPerformanceCounter(FBeginCount);
       rez := GetAverageValueFromMatrix(matrix, sizeMatrix);
+      QueryPerformanceCounter(FEndCount);
+      Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000;
+      totalTime := totalTime + Ftime;
+      if minTime > Ftime then minTime := Ftime;
+      if maxTime < Ftime then maxTime := Ftime;
     end;
-    QueryPerformanceCounter(FEndCount);
-    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
-    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
+
+    avgTime := totalTime / iterations;
+
+    Memo1.Lines.Add('Min: '+floattostr(minTime)+' ms.');
+    Memo1.Lines.Add('Avg: '+floattostr(avgTime)+' ms.');
+    Memo1.Lines.Add('Max: '+floattostr(maxTime)+' ms.');
   end
   else
     Memo1.Lines.Add('Не удалось найти функцию ' + f_list[2]);
