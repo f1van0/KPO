@@ -10,6 +10,10 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
+int arraySize = 100000;
+int matrixSize = 650;
+int iterations = 50;
+
 double* GetArray(int size)
 {
 	double* newArray = new double[size];
@@ -229,10 +233,6 @@ __fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner)
 // ---------------------------------------------------------------------------
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	int arraySize = 100000;
-	int matrixSize = 650;
-	int iterations = 50;
-
 	double 	Ftime;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 
@@ -315,11 +315,8 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 }
 
 // ---------------------------------------------------------------------------
-void __fastcall TForm1::Button2Click(TObject *Sender) {
-   int arraySize = 100000;
-	int matrixSize = 650;
-	int iterations = 50;
-
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
 	double 	Ftime;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 
@@ -402,10 +399,6 @@ void __fastcall TForm1::Button2Click(TObject *Sender) {
 }
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
-   int arraySize = 100000;
-	int matrixSize = 650;
-	int iterations = 50;
-
 	double 	Ftime;
 	ULONGLONG  FFrequence, FBeginCount,  FEndCount;
 

@@ -64,9 +64,9 @@ namespace C_sharp_starter
 			double[] newArray = new double[size];
 			for (int i = 0; i < size; i++)
             {
-				newArray[i] = size * Math.Pow(i + 1, 3 / 4) * Math.Cos(i) / Math.Atan(i + 1);
+				newArray[i] = Math.Pow(i + 1, 3 / 4) * Math.Cos(i) / Math.Atan(i + 1);
 			}
-
+			
 			return newArray;
 		}
 
@@ -217,8 +217,8 @@ namespace C_sharp_starter
 			string[] funcsName = { "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix" };
 			Program newProgram = new Program();
 
-			newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
-			newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
+			//newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
+			//newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
 			newProgram.CallDllSTD("Dll_Lazarus.dll", funcsName);
 			Console.ReadKey();
 		}

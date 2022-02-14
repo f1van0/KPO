@@ -9,13 +9,13 @@
         <Filename Value="DLL_Lazarus.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="16"/>
-        <CursorPos X="41" Y="19"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="43"/>
+        <CursorPos X="28" Y="60"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="12">
+    <JumpHistory HistoryIndex="21">
       <Position>
         <Filename Value="DLL_Lazarus.lpr"/>
         <Caret Line="18" Column="80" TopLine="4"/>
@@ -67,6 +67,42 @@
       <Position>
         <Filename Value="DLL_Lazarus.lpr"/>
         <Caret Line="29" Column="16" TopLine="11"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="37" Column="19" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="24" Column="16" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="51" Column="45" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="24" Column="20" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="58" Column="13" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="46" Column="94" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="60" Column="29" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="50" Column="45" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="DLL_Lazarus.lpr"/>
+        <Caret Line="17" Column="3" TopLine="19"/>
       </Position>
     </JumpHistory>
     <RunParams>

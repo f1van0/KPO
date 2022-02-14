@@ -231,24 +231,9 @@ int main()
 	string func_name1_CBuilder_stdcall[6] = { "Add","Subtract","Multiply","Divide","Fill_1D_Array", "Fill_2D_Array" };
 	string func_name2[6] = { "Add","Subtract","Multiply","Divide","Fill_1D_Array", "Fill_2D_Array_v2" };
 
-	cout << "DllVisualCPP.dll" << endl;
-	ExecuteSTD_DLL(path + "dll_sample_CB_stdcall.dll", func_name1);
+	ExecuteSTD_DLL(path + "DllVisualCPP.dll", func_name1);
 	ExecuteSTD_DLL(path + "Dll_CPP_Builder.dll", func_name1);
 	ExecuteSTD_DLL(path + "Dll_Lazarus.dll", func_name1);
-	/*
-	cout << endl << endl << "!! Demonstration of Delphi dll" << endl << endl;
-	Dll_demo_work_cdecl("dll_sample_D.dll", func_name1);
-
-	cout << endl << endl << "!! Demonstration of Lazarus dll" << endl << endl;
-	Dll_demo_work_cdecl("dll_sample_L.dll", func_name1);
-
-
-	cout << endl << endl << "!! Demonstration of C++ Builder cdecl dll" << endl << endl;
-	Dll_demo_work_cdecl("dll_sample_CB_cdecl.dll", func_name1_CBuilder_cdecl);
-
-	cout << endl << endl << "!! Demonstration of C++ Builder stdcall dll" << endl << endl;
-	Dll_demo_work_stdcall("dll_sample_CB_stdcall.dll", func_name1_CBuilder_stdcall);
-	*/
 
 	int pause;
 	cin >> pause;

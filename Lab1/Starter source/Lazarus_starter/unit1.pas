@@ -5,7 +5,7 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, dynlibs;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, dynlibs, Math, Windows;
 
 type
   FdoubleOps = function(a, b: double): double; cdecl;
@@ -26,10 +26,13 @@ type
   MatrixTypeCDECL = function(mas: P2dArray; size: integer): double; cdecl;
 
   VectorTypeSTD = function(mas: PDoubleArray; size: integer): double; stdcall;
-  MatrixTypeSTD = function(mas: P2dArray; size: integer): double; stdcall;
+  MatrixTypeSTD = function(mas: T2dArray; size: integer): double; stdcall;
 
 // Константы с названием функций
 const
+  sizeArray: integer = 100000;
+  sizeMatrix: integer = 650;
+  iterations: integer = 50;
   func_name1: array [0..2] of string = ('GetRangeValueFromVector', 'GetAverageValueFromVector', 'GetAverageValueFromMatrix');
   func_name1_CBuilder_cdecl: array [0..5] of string =
     ('_Add', '_Subtract', '_Multiply', '_Divide',
@@ -47,14 +50,12 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Button4: TButton;
-    Button5: TButton;
     Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Memo1Change(Sender: TObject);
   private
 
   public
@@ -71,6 +72,35 @@ implementation
 {$R *.lfm}
 
 { TForm1 }
+
+function GetArray(size: integer): PDoubleArray;
+var
+ i: integer;
+ arr: array of double;
+ begin
+   SetLength(arr, sizeArray);
+   for i:=0 to size-1 do
+    begin
+      arr[i] := Power(i + 1, 3 / 4) * cos(i) / arcTan(i + 1);
+    end;
+   result := @arr[0];
+ end;
+
+function GetMatrix(size: integer): T2dArray;
+var
+ i, j: integer;
+ matrix: array of array of double;
+ begin
+   SetLength(matrix, size, size); // выделение памяти
+   for j:=0 to size-1 do
+    begin
+      for i:=0 to size-1 do
+       begin
+         matrix[i][j] := Power(i + 1, 3 / 4) * cos(i) / arcTan(i + 1);
+       end;
+    end;
+   result := @matrix[0];
+ end;
 
 procedure TForm1.Dll_demo_work_cdecl(dll_name: string; f_list: array of string);
 var
@@ -98,9 +128,6 @@ var
   matrixP: P2dArray;
 
 begin
-  iterations := 50;
-  sizeArray := 100000;
-  sizeMatrix := 600;
 
   hLib := 0;
   Memo1.Lines.Clear;
@@ -148,32 +175,25 @@ procedure TForm1.Dll_demo_work_stdcall(dll_name: string; f_list: array of string
 var
   hLib: THandle;
   rez: double;
-  sizeArray, sizeMatrix, iterations, i, y, x: integer;
+  i, y, x: integer;
 
-  // простые методы
-  fAdd, fSubtract, fMultiply, fDivide: FdoubleOps;
-  // метод обработки  одномерного массива
-  fillmas: FmasProc;
-  // метод обработки двумерного массива
-  fmas2d: fillmas2d;
+  Ftime: extended;
+  FFrequence: TLargeInteger;
+  FBeginCount: TLargeInteger;
+  FEndCount: TLargeInteger;
 
   GetRangeValueFromVector: VectorTypeSTD;
   GetAverageValueFromVector: VectorTypeSTD;
   GetAverageValueFromMatrix: MatrixTypeSTD;
 
   // переменные для массива
-  arr: array of double;
   arrP: PDoubleArray;
 
   // переменные для двумерного массива
-  matrix: array of array of double;
+  matrix: T2dArray;
   matrixP: P2dArray;
 
 begin
-  iterations := 50;
-  sizeArray := 100000;
-  sizeMatrix := 600;
-
   hLib := 0;
   Memo1.Lines.Clear;
   if hLib = 0 then
@@ -183,32 +203,58 @@ begin
     Memo1.Lines.Add('ERROR: unable to load DLL: ' + dll_name);
     exit;
   end;
-  Memo1.Lines.Add('Библиотека' + dll_name +
-    ' Успешно загружена');
+  Memo1.Lines.Add('Библиотека' + dll_name + ' Успешно загружена');
 
-  /// Пример одномерный массив ////
-  SetLength(arr, sizeArray); // выделение памяти
   Pointer(GetRangeValueFromVector) := GetProcAddress(hLib, PChar(f_list[0]));
   if (GetRangeValueFromVector <> nil) then
   begin
-    arrP := @arr[0];;
-    rez := GetRangeValueFromVector(arrP, sizeArray);
+    arrP := GetArray(sizeArray);
+    QueryPerformanceFrequency(FFrequence);
+    QueryPerformanceCounter(FBeginCount);
+    for y:=0 to iterations-1 do
+    begin
+      rez := GetRangeValueFromVector(arrP, sizeArray);
+    end;
+    QueryPerformanceCounter(FEndCount);
+    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
+    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
   end
   else
-    Memo1.Lines.Add('Не удалось найти функцию ' + f_list[4]);
+    Memo1.Lines.Add('Не удалось найти функцию ' + f_list[0]);
 
-  /// Пример двумерный массив ////
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('Пример работы с двумерным массивом');
-  SetLength(matrix, sizeMatrix, sizeMatrix); // выделение памяти
+  Pointer(GetAverageValueFromVector) := GetProcAddress(hLib, PChar(f_list[0]));
+  if (GetRangeValueFromVector <> nil) then
+  begin
+    arrP := GetArray(sizeArray);
+    QueryPerformanceFrequency(FFrequence);
+    QueryPerformanceCounter(FBeginCount);
+    for y:=0 to iterations-1 do
+    begin
+      rez := GetAverageValueFromVector(arrP, sizeArray);
+    end;
+    QueryPerformanceCounter(FEndCount);
+    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
+    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
+  end
+  else
+    Memo1.Lines.Add('Не удалось найти функцию ' + f_list[0]);
+
   Pointer(GetAverageValueFromMatrix) := GetProcAddress(hLib, PChar(f_list[2]));
   if (GetAverageValueFromMatrix <> nil) then
   begin
-    matrixP := @matrix[0];
-    rez := GetAverageValueFromMatrix(matrixP, sizeMatrix);
+    matrix := GetMatrix(sizeMatrix);
+    QueryPerformanceFrequency(FFrequence);
+    QueryPerformanceCounter(FBeginCount);
+    for y:=0 to iterations-1 do
+    begin
+      rez := GetAverageValueFromMatrix(matrix, sizeMatrix);
+    end;
+    QueryPerformanceCounter(FEndCount);
+    Ftime := ((FEndCount - FBeginCount) / FFrequence) * 1000 / iterations;
+    Memo1.Lines.Add(floattostr(Ftime)+' ms.');
   end
   else
-    Memo1.Lines.Add('Не удалось найти функцию ' + f_list[5]);
+    Memo1.Lines.Add('Не удалось найти функцию ' + f_list[2]);
 
   if hLib <> 0 then
     FreeLibrary(hLib);
@@ -229,18 +275,17 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 
 begin
-  Dll_demo_work_cdecl('Dll_Lazarus.dll', func_name1_CBuilder_cdecl);
+  Dll_demo_work_stdcall('Dll_Lazarus.dll', func_name1);
 end;
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TForm1.FormCreate(Sender: TObject);
 begin
-   Dll_demo_work_stdcall('dll_sample_CB_stdcall.dll', func_name1_CBuilder_stdcall);
+
 end;
 
-procedure TForm1.Button5Click(Sender: TObject);
-
+procedure TForm1.Memo1Change(Sender: TObject);
 begin
-  Dll_demo_work_cdecl('DLL_sample_L.dll', func_name1);
+
 end;
 
 end.

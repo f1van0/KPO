@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\i386-win32\fpc.exe" Date="1411536590"/>
+  <Params Value=" -MObjFPC -Scghi -WR -O1 -g -gl -l -vewnhibq &quot;-FiC:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus&quot; &quot;-FuC:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus\&quot; &quot;-FEC:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus\&quot; &quot;-oC:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus\Dll_Lazarus.dll&quot; DLL_Lazarus.lpr"/>
+</CONFIG>

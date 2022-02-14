@@ -35,11 +35,11 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="C:\Users\vanya\Source\Repos\KPO\Lab1\Build\Dll_Lazarus.dll"/>
+      <Filename Value="Dll_Lazarus.dll"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <UnitOutputDirectory Value="C:\Users\vanya\Source\Repos\KPO\Lab1\Build"/>
+      <UnitOutputDirectory Value="C:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus"/>
     </SearchPaths>
     <CodeGeneration>
       <RelocatableUnit Value="True"/>
