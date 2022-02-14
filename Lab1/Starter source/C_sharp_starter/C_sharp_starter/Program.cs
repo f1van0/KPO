@@ -217,8 +217,8 @@ namespace C_sharp_starter
 			string[] funcsName = { "GetRangeValueFromVector", "GetAverageValueFromVector", "GetAverageValueFromMatrix" };
 			Program newProgram = new Program();
 
-			//newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
-			//newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
+			newProgram.CallDllSTD("DllVisualCPP.dll", funcsName);
+			newProgram.CallDllSTD("Dll_CPP_Builder.dll", funcsName);
 			newProgram.CallDllSTD("Dll_Lazarus.dll", funcsName);
 			Console.ReadKey();
 		}

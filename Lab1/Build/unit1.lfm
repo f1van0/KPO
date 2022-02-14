@@ -6,6 +6,7 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 392
   ClientWidth = 808
+  OnCreate = FormCreate
   LCLVersion = '2.2.0.4'
   object Memo1: TMemo
     Left = 16
@@ -15,6 +16,7 @@ object Form1: TForm1
     Lines.Strings = (
       'Memo1'
     )
+    OnChange = Memo1Change
     ScrollBars = ssVertical
     TabOrder = 0
   end
@@ -23,7 +25,7 @@ object Form1: TForm1
     Height = 25
     Top = 8
     Width = 75
-    Caption = 'VC++ DLL'
+    Caption = 'VS C++ DLL'
     OnClick = Button1Click
     TabOrder = 1
   end
@@ -32,7 +34,7 @@ object Form1: TForm1
     Height = 25
     Top = 8
     Width = 75
-    Caption = 'Delphi DLL'
+    Caption = 'C++ Builder DLL'
     OnClick = Button2Click
     TabOrder = 2
   end
@@ -41,26 +43,8 @@ object Form1: TForm1
     Height = 25
     Top = 8
     Width = 103
-    Caption = 'C++ Builder DLL'
+    Caption = 'Lazarus DLL'
     OnClick = Button3Click
     TabOrder = 3
-  end
-  object Button4: TButton
-    Left = 303
-    Height = 25
-    Top = 8
-    Width = 121
-    Caption = 'C++ Builder v2 DLL'
-    OnClick = Button4Click
-    TabOrder = 4
-  end
-  object Button5: TButton
-    Left = 432
-    Height = 25
-    Top = 8
-    Width = 75
-    Caption = 'Lazarus DLL'
-    OnClick = Button5Click
-    TabOrder = 5
   end
 end

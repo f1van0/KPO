@@ -227,9 +227,6 @@ int main()
 {
 	string path = "C:\\Users\\vanya\\Source\\Repos\\KPO\\Lab1\\Build\\";
 	string func_name1[3] = { "GetRangeValueFromVector","GetAverageValueFromVector","GetAverageValueFromMatrix" };
-	string func_name1_CBuilder_cdecl[6] = { "_Add","_Subtract","_Multiply","_Divide","_Fill_1D_Array", "_Fill_2D_Array" };
-	string func_name1_CBuilder_stdcall[6] = { "Add","Subtract","Multiply","Divide","Fill_1D_Array", "Fill_2D_Array" };
-	string func_name2[6] = { "Add","Subtract","Multiply","Divide","Fill_1D_Array", "Fill_2D_Array_v2" };
 
 	ExecuteSTD_DLL(path + "DllVisualCPP.dll", func_name1);
 	ExecuteSTD_DLL(path + "Dll_CPP_Builder.dll", func_name1);
