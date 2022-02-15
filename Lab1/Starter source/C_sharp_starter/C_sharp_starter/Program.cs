@@ -165,6 +165,8 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[0]} не найдена");
 				return;
 			}
+
+			Console.WriteLine($"Функция {funcsName[0]} выполняется:");
 			CalculateTimeVectorFunc(func1);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
@@ -173,6 +175,8 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[1]} не найдена");
 				return;
 			}
+
+			Console.WriteLine($"Функция {funcsName[1]} выполняется:");
 			CalculateTimeVectorFunc(func2);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
@@ -181,6 +185,8 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[2]} не найдена");
 				return;
 			}
+
+			Console.WriteLine($"Функция {funcsName[2]} выполняется:");
 			CalculateTimeMatrixFunc(func3);
 
 			FreeLibrary(pointerDll);
