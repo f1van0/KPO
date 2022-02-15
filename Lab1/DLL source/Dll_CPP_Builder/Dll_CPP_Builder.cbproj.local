@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.cbproj,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cbproj=C:\Users\Fenix\Documents\RAD Studio\Projects\Project1.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.cbproj,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_CB_cdecl.cbproj=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.302,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_cdecl.cpp=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.929,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.cbproj,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_cdecl.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.cpp,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cpp=C:\Users\Fenix\Documents\RAD Studio\Projects\File1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.235,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\gjyjty.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.884,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.628,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\gjyjty.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.cbproj,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cbproj=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_CB_cdecl.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.cpp,C:\Users\Fenix\Documents\RAD Studio\Projects\File1.cpp=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.302,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cpp=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_cdecl.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.cbproj,D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_cdecl.cbproj=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.929,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.235,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\gjyjty.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.884,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\Dll_CPP_Builder.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.628,C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\gjyjty.cbproj=C:\Users\vanya\Downloads\DLL Demo\Cpp_Builder\dll_sample_stdcall\dll_sample_CB_stdcall.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.cbproj,C:\Users\Fenix\Documents\RAD Studio\Projects\Project1.cbproj=D:\Programming\Demostration\DLLS\Cpp_Builder\dll_sample_CDecl\dll_sample_cdecl.cbproj</Transaction>
   </Transactions>
 </BorlandProject>
