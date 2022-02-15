@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #include <windows.h>
+#include <math.h>
 //---------------------------------------------------------------------------
 //   Important note about DLL memory management when your DLL uses the
 //   static version of the RunTime Library:
@@ -57,14 +58,22 @@ DLLEXPORT double GetRangeValueFromVector(far double* arr, int size)
 //Average Value of Vector
 DLLEXPORT double GetAverageValueFromVector(far double* arr, int size)
 {
-	double sum = 0;
+	double sum1 = 0;
+	double sum2 = 0;
 
 	for (int i = 0; i < size; i++)
 	{
-		sum += arr[i];
+		if ((int)(arr[i]) % 2 == 1)
+		{
+			sum2 += arr[i];
+		}
+		else
+		{
+			sum1 += arr[i];
+		}
 	}
 
-	return sum / size;
+	return (sum1 + sum2) / size;
 }
 
 //Average Value of Matrix
@@ -80,7 +89,21 @@ DLLEXPORT double GetAverageValueFromMatrix(far double** matrix, int size)
 		}
 	}
 
-	return sum / (size * size);
+	double averageValue = sum / (size * size);
+	sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (matrix[j][i] > averageValue || i == j)
+			{
+				sum += matrix[j][i];
+			}
+		}
+	}
+
+	return sum;
 }
 
 

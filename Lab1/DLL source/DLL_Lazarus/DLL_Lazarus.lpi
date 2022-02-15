@@ -39,7 +39,6 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <UnitOutputDirectory Value="C:\Users\vanya\Source\Repos\KPO\Lab1\DLL source\Dll_Lazarus"/>
     </SearchPaths>
     <CodeGeneration>
       <RelocatableUnit Value="True"/>

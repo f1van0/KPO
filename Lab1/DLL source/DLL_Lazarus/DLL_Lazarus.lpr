@@ -37,20 +37,24 @@ minValue, maxValue:double;
  function GetAverageValueFromVector(arr: PDoubleArray; size:integer): double; stdcall;
 var
 i:integer;
-sum:double;
+sum1, sum2:double;
  begin
-   sum:=0;
+   sum1:=0;
+   sum2:=0;
    for i := 0 to size - 1 do
    begin
-    sum:= sum + arr^[i];
+    if (trunc(arr^[i]) mod 2 = 0) then
+       sum2:= sum2 + arr^[i]
+    else
+       sum1:= sum1 + arr^[i];
    end;
-   result:=sum / size;
+   result:=(sum1 + sum2) / size;
  end;
 
  function GetAverageValueFromMatrix(matrix:p2dArray; size:integer):double;  stdcall;
  var
  x,y:integer;
- sum:double;
+ sum, avgValue:double;
  begin
    sum:=0;
    for y:=0 to size-1 do
@@ -59,8 +63,20 @@ sum:double;
      begin
        sum := sum + matrix^[y][x];
      end;
-   result:=sum / (size * size);
    end;
+   avgValue:=sum / (size * size);
+
+   sum:=0;
+   for y:=0 to size-1 do
+   begin
+     for x:=0 to size-1  do
+     begin
+       if (matrix^[y][x] > avgValue) or (x = y) then
+         sum := sum + matrix^[y][x];
+     end;
+   end;
+
+   result := sum
  end;
 
 

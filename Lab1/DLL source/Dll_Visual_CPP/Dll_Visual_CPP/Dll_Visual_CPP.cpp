@@ -31,14 +31,22 @@ DLLEXPORT double GetRangeValueFromVector(far double* array, int size)
 //Average Value of Vector
 DLLEXPORT double GetAverageValueFromVector(far double* array, int size)
 {
-	double sum = 0;
+	double sum1 = 0;
+	double sum2 = 0;
 
 	for (int i = 0; i < size; i++)
 	{
-		sum += array[i];
+		if ((int)trunc(array[i]) % 2 == 1)
+		{
+			sum2 += array[i];
+		}
+		else
+		{
+			sum1 += array[i];
+		}
 	}
 
-	return sum / size;
+	return (sum1 + sum2) / size;
 }
 
 //Average Value of Matrix
@@ -54,5 +62,19 @@ DLLEXPORT double GetAverageValueFromMatrix(far double** matrix, int size)
 		}
 	}
 
-	return sum / (size * size);
+	double averageValue = sum / (size * size);
+	sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (matrix[j][i] > averageValue || i == j)
+			{
+				sum += matrix[j][i];
+			}
+		}
+	}
+
+	return sum;
 }
