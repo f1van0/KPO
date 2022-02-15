@@ -31,7 +31,10 @@ namespace C_sharp_starter
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		public delegate void VoidVoid();
 
-		public static string path = "C:\\Users\\vanya\\Source\\Repos\\KPO\\Lab1\\Build\\";
+		public static string path = "C:\\Users\\Redmi\\Documents\\KPO\\Lab1\\Build\\";
+		static int iterations = 50;
+		static int arraySize = 100000;
+		static int matrixSize = 650;
 
 		VectorType TryGetVectorFuncFromDll(int pointerDll, string funcName)
 		{
@@ -90,19 +93,19 @@ namespace C_sharp_starter
 			return newMatrix;
 		}
 
-		void CalculateTimeVectorFunc(VectorType func, int size, int iterations)
+		void CalculateTimeVectorFunc(VectorType func)
         {
 			long startTime, endTime, frequence;
 			double minTime = 10000;
 			double maxTime = -1;
 			double totalTime = 0;
-			double[] array = GetArray(size);
+			double[] array = GetArray(arraySize);
 
 			for (int i = 0; i < iterations; i++)
             {
 				QueryPerformanceFrequency(out frequence);
 				QueryPerformanceCounter(out startTime);
-				double value = func(array, size);
+				double value = func(array, arraySize);
 				QueryPerformanceCounter(out endTime);
 				double time = (double)((endTime - startTime)) * 1000 / frequence;
 				totalTime += time;
@@ -117,20 +120,20 @@ namespace C_sharp_starter
 			Console.WriteLine("Max: " + maxTime + " ms.");
 		}
 
-		void CalculateTimeMatrixFunc(MatrixType func, int size, int iterations)
+		void CalculateTimeMatrixFunc(MatrixType func)
 		{
 			long startTime, endTime, frequence;
 			double minTime = 10000;
 			double maxTime = -1;
 			double totalTime = 0;
-			IntPtr[] matrix = GetMatrix(size);
+			IntPtr[] matrix = GetMatrix(matrixSize);
 
 			
 			for (int i = 0; i < iterations; i++)
 			{
 				QueryPerformanceFrequency(out frequence);
 				QueryPerformanceCounter(out startTime);
-				double value = func(matrix, size);
+				double value = func(matrix, matrixSize);
 				QueryPerformanceCounter(out endTime);
 				double time = (double)((endTime - startTime)) * 1000 / frequence;
 				totalTime += time;
@@ -148,7 +151,7 @@ namespace C_sharp_starter
 		void CallDllSTD(string dllName, string[] funcsName)
 		{
 			Console.WriteLine("Загрузка Dll: " + dllName);
-			int pointerDll = LoadLibrary(path + dllName);
+			int pointerDll = LoadLibrary(dllName);
 			if (pointerDll == 0)
             {
 				Console.WriteLine("Dll не найден");
@@ -162,7 +165,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[0]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func1, 100000, 50);
+			CalculateTimeVectorFunc(func1);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
 			if (func2 == null)
@@ -170,7 +173,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[1]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func2, 100000, 50);
+			CalculateTimeVectorFunc(func2);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
 			if (func3 == null)
@@ -178,7 +181,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[2]} не найдена");
 				return;
 			}
-			CalculateTimeMatrixFunc(func3, 650, 50);
+			CalculateTimeMatrixFunc(func3);
 
 			FreeLibrary(pointerDll);
 		}
@@ -186,7 +189,7 @@ namespace C_sharp_starter
 		void CallDllCdecl(string dllName, string[] funcsName)
 		{
 			Console.WriteLine("Загрузка Dll: " + dllName);
-			int pointerDll = LoadLibrary(path + dllName);
+			int pointerDll = LoadLibrary(dllName);
 			if (pointerDll == 0)
 			{
 				Console.WriteLine("Dll не найден");
@@ -200,7 +203,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[0]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func1, 100000, 50);
+			CalculateTimeVectorFunc(func1);
 
 			VectorType func2 = TryGetVectorFuncFromDll(pointerDll, funcsName[1]);
 			if (func2 == null)
@@ -208,7 +211,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[1]} не найдена");
 				return;
 			}
-			CalculateTimeVectorFunc(func2, 100000, 50);
+			CalculateTimeVectorFunc(func2);
 
 			MatrixType func3 = TryGetMatrixFuncFromDll(pointerDll, funcsName[2]);
 			if (func3 == null)
@@ -216,7 +219,7 @@ namespace C_sharp_starter
 				Console.WriteLine($"Функция {funcsName[2]} не найдена");
 				return;
 			}
-			CalculateTimeMatrixFunc(func3, 650, 50);
+			CalculateTimeMatrixFunc(func3);
 
 			FreeLibrary(pointerDll);
 		}
