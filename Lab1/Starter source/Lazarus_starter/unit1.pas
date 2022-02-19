@@ -234,8 +234,8 @@ begin
   else
     Memo1.Lines.Add('Не удалось найти функцию ' + f_list[0]);
 
-  Pointer(GetAverageValueFromVector) := GetProcAddress(hLib, PChar(f_list[0]));
-  if (GetRangeValueFromVector <> nil) then
+  Pointer(GetAverageValueFromVector) := GetProcAddress(hLib, PChar(f_list[1]));
+  if (GetAverageValueFromVector <> nil) then
   begin
     Memo1.Lines.Add('START: '+f_list[1]);
     arrP := GetArray(sizeArray);
