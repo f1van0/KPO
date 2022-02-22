@@ -38,8 +38,9 @@ DLLEXPORT const char* GetPluginName(char* str)
 
 
 // Непосредственное реализация методов
-DLLEXPORT int* GetArray(int size, int minValue, int maxValue)
+DLLEXPORT int* GetArray(int minValue, int maxValue, int size)
 {
+	srand(std::time(nullptr));
 	int* newArray = new int[size];
 	for (int i = 0; i < size; i++)
 	{

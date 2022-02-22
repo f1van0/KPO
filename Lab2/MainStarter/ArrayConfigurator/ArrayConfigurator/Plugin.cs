@@ -20,16 +20,6 @@ namespace ArrayConfigurator
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate IntPtr ServiceInfoType([MarshalAs(UnmanagedType.AnsiBStr)] string str);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int[] ValuesToArrayFuncType(int size, int minValue, int maxValue);
-
-
-        [DllImport("Kernel32.dll")]
-        private static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
-
-        [DllImport("Kernel32.dll")]
-        private static extern bool QueryPerformanceFrequency(out long lpFrequency);
-
         [DllImport("kernel32.dll", EntryPoint = "LoadLibrary")]
         static extern int LoadLibrary(
             [MarshalAs(UnmanagedType.LPStr)] string lpLibFileName);
@@ -83,10 +73,15 @@ namespace ArrayConfigurator
                     (GetProcAddress(pointerDll, "GetPluginFunctions"));
 
             if (pluginFuncsProc == null)
+            {
                 return null;
+            }
             string dllFuncs = Marshal.PtrToStringAnsi(pluginFuncsProc());
             if (dllFuncs == null)
+            {
+                FreeLibrary(pointerDll);
                 return null;
+            }
 
             string[] strFuncsNames = dllFuncs.Split(' ');
 
@@ -118,7 +113,9 @@ namespace ArrayConfigurator
                 PluginFunction func = new PluginFunction(elem, type, description, cfg);
                 Funcs.Add(func);
             }
-            
+
+            FreeLibrary(pointerDll);
+
             //Проверка наличия функций
             if (Funcs.Count == 0)
                 return null;
@@ -126,15 +123,5 @@ namespace ArrayConfigurator
                 return this;
             return this;
         }
-        /*
-        public void ApplyFunction(string funcName, int size, int minValue, int maxValue)
-        {
-            int pointerDll = LoadLibrary(Name);
-            ReceiveArrayFuncType func = Marshal.GetDelegateForFunctionPointer<ReceiveArrayFuncType>
-                (GetProcAddress(pointerDll, funcName));
-
-            int[] resultArray = func(size, minValue, maxValue);
-        }
-         */
     }
 }

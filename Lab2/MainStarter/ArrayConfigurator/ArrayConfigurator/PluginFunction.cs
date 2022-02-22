@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,20 @@ namespace ArrayConfigurator
 
     class PluginFunction
     {
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate IntPtr ValuesToArrayFuncType(int minValue, int maxValue, int size);
+
+        [DllImport("kernel32.dll", EntryPoint = "LoadLibrary")]
+        static extern int LoadLibrary(
+            [MarshalAs(UnmanagedType.LPStr)] string lpLibFileName);
+
+        [DllImport("kernel32.dll", EntryPoint = "GetProcAddress")]
+        static extern IntPtr GetProcAddress(int hModule,
+            [MarshalAs(UnmanagedType.LPStr)] string lpProcName);
+
+        [DllImport("kernel32.dll", EntryPoint = "FreeLibrary")]
+        static extern bool FreeLibrary(int hModule);
+
         public string Name;
         public FuncTypes Type;
         public string Description;
@@ -57,6 +72,10 @@ namespace ArrayConfigurator
                 }
                 controlElement[i % 4] = elementsDescr[i];
             }
+
+            if (controlElement[0] != "" && controlElement[1] != "" && controlElement[2] != "" && controlElement[3] != "")
+                optionControls.AddRange(CreateControl(controlElement));
+
             //1. Тип элемента
             //2. Подпись (у NumericUpDown автоматически создается Label с подписью, а у RadioButton, как и у Label, записывается Text)
             //3. Название .Name элемента
@@ -97,6 +116,8 @@ namespace ArrayConfigurator
 
                         NumericUpDown numUpDown = new NumericUpDown();
                         numUpDown.Name = controlDescription[2];
+                        numUpDown.Minimum = -1000000;
+                        numUpDown.Maximum = 1000000;
                         int bottomMargin;
                         if (int.TryParse(controlDescription[3], out bottomMargin))
                             numUpDown.Margin = new Padding(0, 0, 0, bottomMargin);
@@ -127,6 +148,41 @@ namespace ArrayConfigurator
                         return label;
                     }
             }
+        }
+
+        public int[] ApplyFunction(string dllName, int[] array, FlowLayoutPanel panel)
+        {
+            int pointerDll = LoadLibrary(dllName);
+            if (Type == FuncTypes.valuesToArray)
+            {    
+                ValuesToArrayFuncType func = Marshal.GetDelegateForFunctionPointer<ValuesToArrayFuncType>
+                    (GetProcAddress(pointerDll, Name));
+
+                int minValue = 0, maxValue = 0, size = 0;
+
+                for (int i = 0; i < panel.Controls.Count; i++)
+                {
+                    if (panel.Controls[i] is NumericUpDown)
+                    {
+                        if (panel.Controls[i].Name == "MinValue")
+                            minValue = (int)((NumericUpDown)panel.Controls[i]).Value;
+                        else if (panel.Controls[i].Name == "MaxValue")
+                            maxValue = (int)((NumericUpDown)panel.Controls[i]).Value;
+                        else if (panel.Controls[i].Name == "Size")
+                            size = (int)((NumericUpDown)panel.Controls[i]).Value;
+                    }
+                }
+
+                IntPtr ptr = func(minValue, maxValue, size);
+                // points to arr[1], which is first value
+                int[] result = new int[size];
+                Marshal.Copy(ptr, result, 0, size);
+                FreeLibrary(pointerDll);
+                return result;
+            }
+
+            FreeLibrary(pointerDll);
+            return new int[0];
         }
     }
 }

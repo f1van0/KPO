@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,13 @@ namespace ArrayConfigurator
 {
     public partial class Form1 : Form
     {
+        [DllImport("Kernel32.dll")]
+        private static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
+
+        [DllImport("Kernel32.dll")]
+        private static extern bool QueryPerformanceFrequency(out long lpFrequency);
+
+
         private List<Plugin> _plugins;
         private Plugin activePlugin = null;
         private PluginFunction activeFunc = null;
@@ -48,7 +56,8 @@ namespace ArrayConfigurator
                     Button newButton = new Button();
                     newButton.Name = func.Name;
                     newButton.Text = func.Name;
-                    newButton.Size = new Size(180, 40);
+                    newButton.Size = new Size(100, 30);
+                    newButton.Click += SetActivePlugin;
                     ModulePanel.Controls.Add(newButton);
                 }
             }
@@ -87,9 +96,30 @@ namespace ArrayConfigurator
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
+            long startTime, endTime, frequence;
+
             if (activePlugin != null && activeFunc != null)
             {
-                //activePlugin.ApplyFunction(activeFunc.Name, ...);
+                string[] strArray = ArrayTextBox.Text.Split(' ');
+                List<int> listArray = new List<int>();
+                int currentValue;
+                foreach(var str in strArray)
+                {
+                    if (int.TryParse(str, out currentValue))
+                        listArray.Add(currentValue);
+                }
+
+                QueryPerformanceFrequency(out frequence);
+                QueryPerformanceCounter(out startTime);
+                int[] result = activeFunc.ApplyFunction(activePlugin.Name, listArray.ToArray(), OptionsPanel);
+                QueryPerformanceCounter(out endTime);
+                double time = (double)((endTime - startTime)) * 1000 / frequence;
+
+                ArrayTextBox.Text = "";
+                for (int i = 0; i < result.Length; i++)
+                    ArrayTextBox.Text += result[i].ToString() + ' ';
+
+                TimeLabel.Text = $"Duration time: {time} ms";
             }
         }
 
