@@ -35,10 +35,10 @@ namespace ArrayConfigurator
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.OptionsPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -109,10 +109,10 @@ namespace ArrayConfigurator
             // OptionsPanel
             // 
             this.OptionsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.OptionsPanel.Controls.Add(this.label5);
-            this.OptionsPanel.Controls.Add(this.radioButton3);
             this.OptionsPanel.Controls.Add(this.radioButton1);
             this.OptionsPanel.Controls.Add(this.radioButton2);
+            this.OptionsPanel.Controls.Add(this.label5);
+            this.OptionsPanel.Controls.Add(this.radioButton3);
             this.OptionsPanel.Controls.Add(this.numericUpDown1);
             this.OptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.OptionsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -125,33 +125,11 @@ namespace ArrayConfigurator
             this.OptionsPanel.TabStop = true;
             this.OptionsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.OptionsPanel_Paint);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 12);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 17);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Return";
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(17, 33);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(120, 21);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Average value";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
             // radioButton1
             // 
             this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(32, 62);
+            this.radioButton1.Location = new System.Drawing.Point(32, 16);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(89, 21);
@@ -164,7 +142,7 @@ namespace ArrayConfigurator
             // 
             this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(31, 91);
+            this.radioButton2.Location = new System.Drawing.Point(31, 45);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(92, 21);
@@ -172,6 +150,28 @@ namespace ArrayConfigurator
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Max value";
             this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 17);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Return";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(17, 91);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(120, 21);
+            this.radioButton3.TabIndex = 9;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Average value";
+            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
             // 

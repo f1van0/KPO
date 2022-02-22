@@ -7,86 +7,43 @@
 
 
 // Простые интерфейсные функции Реализация
-
-DLLEXPORT const char* PluginFunctions()
+DLLEXPORT const char* GetPluginFunctions()
 {
-	return "Brightes_Correction Message";
+	return "GetArray";
 }
 
-DLLEXPORT const char* PluginDescriptions(char * str)
+DLLEXPORT const char* GetPluginDescriptions(char* str)
 {
-	if (strcmp(str, "Brightes_Correction") == 0) return "Brightness correction in YUV mode";
-	if (strcmp(str, "Message") == 0) return "some sample message";
+	if (strcmp(str, "GetArray") == 0) return "Generates an array based on the passed values of the number of elements, minimum and maximum";
 	return "Not found";
 }
 
-DLLEXPORT const char* PluginCFG(char * str)
+DLLEXPORT const char* GetPluginCFG(char* str)
 {
-	if (strcmp(str, "Brightes_Correction") == 0) return "Label;L1;10;10;Brightness change!TrackBar;INPUT_1;10;30;150;0;510;255;255;1!Label;LBINPUT_1;170;40;0!1";
-	if (strcmp(str, "Message") == 0) return "";
-	return "Label;L1;10;10;Not found!0";
+	if (strcmp(str, "GetArray") == 0) return "NumericUpDown;Enter minimum value;MinValue;6;NumericUpDown;Enter maximum value;MaxValue;6;NumericUpDown;Enter size of array;Size;0";
+	return "Label;Not found;ErrorLabel;0";
 }
 
-DLLEXPORT const char* GetPluginType(char * str)
+DLLEXPORT const char* GetPluginTypes(char* str)
 {
-	if (strcmp(str, "Brightes_Correction") == 0) return "IMG2IMG";  // будет как список
-	if (strcmp(str, "Message") == 0) return "MSGBox";  // бедет встраиваться в меню
+	if (strcmp(str, "GetArray") == 0) return "VarsToArr";  // будет как список
 	return "Not found";
 }
 
-DLLEXPORT const char* PluginLabName(char * str)
+DLLEXPORT const char* GetPluginName(char* str)
 {
-	if (strcmp(str, "Brightes_Correction") == 0) return "Коррекция яркости";
-	if (strcmp(str, "Message") == 0) return "Тестовое сообщение";
+	if (strcmp(str, "GetArray") == 0) return "Random Values Generator";
 	return "Not found";
 }
-
-/// Перечень экспортируемых функций
-DLLEXPORT double Brightes_Correction(unsigned char *InIMG, unsigned char *OutIMG, const int Width, const int Heigth, char * str);
-DLLEXPORT const char* Message();
 
 
 // Непосредственное реализация методов
-
-const char* Message()
+DLLEXPORT int* GetArray(int size, int minValue, int maxValue)
 {
-	return "тестовое сообщение как пример из файла 1";
-}
-
-double Brightes_Correction(unsigned char *InIMG, unsigned char *OutIMG, const int Width, const int Heigth, char * str)
-{
-	double BLUT[256];
-	int offset = 0, mode = 1;
-	double time_s = omp_get_wtime();
-	sscanf_s(str, "%d", &offset);
-
-#pragma omp parallel for
-	for (int i = 0; i<256; i++)
+	int* newArray = new int[size];
+	for (int i = 0; i < size; i++)
 	{
-		BLUT[i] = i + offset;
+		newArray[i] = rand() % (maxValue - minValue) + minValue;
 	}
-
-	unsigned char r, g, b;
-	double Yy, u, v;
-	int rowSize = Width * 4;
-
-	for (int dy = 0; dy<Heigth; dy++)
-	{
-		int y = dy*rowSize;
-		for (int kx = 0; kx<Width; kx++)
-		{
-			int pos = kx * 4 + y;
-			b = InIMG[pos];
-			g = InIMG[pos + 1];
-			r = InIMG[pos + 2];
-			RGBToYUV(r, g, b, Yy, u, v);
-			Yy = BLUT[int(Yy)];
-			YUVToRGB(Yy, u, v, r, g, b);
-			OutIMG[pos] = b;
-			OutIMG[pos + 1] = g;
-			OutIMG[pos + 2] = r;
-		}
-	}
-
-	return  omp_get_wtime() - time_s;
+	return  newArray;
 }

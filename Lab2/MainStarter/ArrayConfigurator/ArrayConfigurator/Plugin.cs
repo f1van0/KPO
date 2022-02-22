@@ -12,13 +12,16 @@ namespace ArrayConfigurator
     {
         //Типы функций у плагина
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate string ServiceFuncsType();
+        private delegate IntPtr ServiceTest(string str);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate string ServiceInfoType(string str);
+        private delegate IntPtr ServiceFuncsType();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate double ReceiveArrayFuncType(int size, int minValue, int maxValue);
+        private delegate IntPtr ServiceInfoType([MarshalAs(UnmanagedType.AnsiBStr)] string str);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int[] ValuesToArrayFuncType(int size, int minValue, int maxValue);
 
 
         [DllImport("Kernel32.dll")]
@@ -38,9 +41,8 @@ namespace ArrayConfigurator
         [DllImport("kernel32.dll", EntryPoint = "FreeLibrary")]
         static extern bool FreeLibrary(int hModule);
 
-        string name;
-        string description;
-        List<PluginFunction> funcs;
+        public string Name;
+        public List<PluginFunction> Funcs;
 
         public List<string> GetFuncsName(string strFuncs)
         {
@@ -64,58 +66,75 @@ namespace ArrayConfigurator
             return funcsName;
         }
 
+        public List<string> GetFuncsName()
+        {
+            List<string> funcsNames = new List<string>();
+            foreach (var func in Funcs) funcsNames.Add(func.Name);
+            return funcsNames;
+        }
+
         public Plugin VerifyPlugin(string fileName)
         {
             int pointerDll = LoadLibrary(fileName);
+            Name = fileName;
 
             //Получение функций из dll
-            ServiceFuncsType plaginFuncsProc = Marshal.GetDelegateForFunctionPointer<ServiceFuncsType>
-                (GetProcAddress(pointerDll, "GetPluginFunctions"));
+            ServiceFuncsType pluginFuncsProc = Marshal.GetDelegateForFunctionPointer<ServiceFuncsType>
+                    (GetProcAddress(pointerDll, "GetPluginFunctions"));
 
-            //TODO: перевод одной строки с функциями в список 
-
-            if (plaginFuncsProc == null)
+            if (pluginFuncsProc == null)
                 return null;
-            string dllFuncs = plaginFuncsProc();
+            string dllFuncs = Marshal.PtrToStringAnsi(pluginFuncsProc());
             if (dllFuncs == null)
                 return null;
 
-            List<string> strFuncsNames = GetFuncsName(dllFuncs);
+            string[] strFuncsNames = dllFuncs.Split(' ');
 
             //Цикл, в котором инициализируются данные по всем функциям
-            funcs = new List<PluginFunction>();
-            foreach (var elem in strFuncsNames)
+            Funcs = new List<PluginFunction>();
+            foreach (string elem in strFuncsNames)
             {
                 ServiceInfoType pluginTypesProc = Marshal.GetDelegateForFunctionPointer<ServiceInfoType>
                     (GetProcAddress(pointerDll, "GetPluginTypes"));
                 ServiceInfoType pluginDescriptionsProc = Marshal.GetDelegateForFunctionPointer<ServiceInfoType>
                     (GetProcAddress(pointerDll, "GetPluginDescriptions"));
                 ServiceInfoType pluginCFG = Marshal.GetDelegateForFunctionPointer<ServiceInfoType>
-                    (GetProcAddress(pointerDll, "GetPluginDescriptions"));
+                    (GetProcAddress(pointerDll, "GetPluginCFG"));
                 
                 if (pluginTypesProc == null || pluginDescriptionsProc == null || pluginCFG == null)
                 {
                     continue;
                 }
-
-                string type = pluginTypesProc(elem);
-                string description = pluginDescriptionsProc(elem);
-                string cfg = pluginCFG(elem);
-
-                if (type == null || description == null || cfg == null)
+            
+                string type = Marshal.PtrToStringAnsi(pluginTypesProc(elem));
+                string description = Marshal.PtrToStringAnsi(pluginDescriptionsProc(elem));
+                string cfg = Marshal.PtrToStringAnsi(pluginCFG(elem));
+            
+                if (type == "Not found" || description == "Not found" || cfg == "Not found")
                 {
                     continue;
                 }
-
-                PluginFunction func = new PluginFunction().VerifyFunc(elem, type, description, cfg);
-                funcs.Add(func);
+            
+                PluginFunction func = new PluginFunction(elem, type, description, cfg);
+                Funcs.Add(func);
             }
-
+            
             //Проверка наличия функций
-            if (funcs.Count == 0)
+            if (Funcs.Count == 0)
                 return null;
             else
                 return this;
+            return this;
         }
+        /*
+        public void ApplyFunction(string funcName, int size, int minValue, int maxValue)
+        {
+            int pointerDll = LoadLibrary(Name);
+            ReceiveArrayFuncType func = Marshal.GetDelegateForFunctionPointer<ReceiveArrayFuncType>
+                (GetProcAddress(pointerDll, funcName));
+
+            int[] resultArray = func(size, minValue, maxValue);
+        }
+         */
     }
 }

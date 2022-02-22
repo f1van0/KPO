@@ -1,5 +1,6 @@
 #include <math.h>
 #include <iostream>
+#include <string>
 
 // Экспорт Функций
 #define DLLEXPORT extern "C" __declspec(dllexport)
@@ -15,12 +16,12 @@
 
 
 // Простые интерфейсные функции
-DLLEXPORT const char* PluginFunctions();
-DLLEXPORT const char* PluginDescriptions(char * str);
-DLLEXPORT const char* PluginLName(char * str);
-DLLEXPORT const char* PluginCFG(char * str);
-DLLEXPORT const char* GetPluginType(char * str); // для определения типа например для встраивание в интерфейс
-
+DLLEXPORT const char* GetPluginFunctions();
+DLLEXPORT const char* GetPluginDescriptions(char* str);
+DLLEXPORT const char* GetPluginName(char* str);
+DLLEXPORT const char* GetPluginCFG(char* str);
+DLLEXPORT const char* GetPluginTypes(char* str); // для определения типа например для встраивание в интерфейс
+DLLEXPORT int* GetArray(int size, int minValue, int maxValue);
 
 /// Работа с картинками
 // Чтение изображений 32bit

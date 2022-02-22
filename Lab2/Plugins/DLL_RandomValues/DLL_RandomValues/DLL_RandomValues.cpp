@@ -27,7 +27,7 @@ DLLEXPORT const char* GetPluginCFG(char* str)
 
 DLLEXPORT const char* GetPluginTypes(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "List";  // будет как список
+	if (strcmp(str, "GetArray") == 0) return "VarsToArr";  // будет как список
 	return "Not found";
 }
 
@@ -37,13 +37,9 @@ DLLEXPORT const char* GetPluginName(char* str)
 	return "Not found";
 }
 
-/// Перечень экспортируемых функций
-DLLEXPORT int* GetArray(int size, int minValue, int maxValue);
-
 
 // Непосредственное реализация методов
-
-int* GetArray(int size, int minValue, int maxValue)
+DLLEXPORT int* GetArray(int size, int minValue, int maxValue)
 {
 	int* newArray = new int[size];
 	for (int i = 0; i < size; i++)

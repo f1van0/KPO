@@ -19,7 +19,7 @@ namespace ArrayConfigurator
         public string Name;
         public FuncTypes Type;
         public string Description;
-        public List<Control> options;
+        public List<Control> optionControls;
 
         public PluginFunction(string name, string type, string description, string cfg)
         {
@@ -42,28 +42,90 @@ namespace ArrayConfigurator
 
         public void InitOptions(string cfg)
         {
-            int i = 0;
+            optionControls = new List<Control>();
             string[] controlElement = new string[4];
-            foreach (var elem in cfg)
+            string[] elementsDescr = cfg.Split(';');
+
+            for (int i = 0; i < elementsDescr.Length; i++)
             {
-                if (elem == ';')
+                if (i % 4 == 0 && i != 0)
                 {
-                    if (i == 3)
-                    {
-                        //TODO: запарсить значения
-                        Control ctrl = new Button(); ...
+                    optionControls.AddRange(CreateControl(controlElement));
 
-                        for (int j = 0; j < 4; j++)
-                            controlElement[j] = "";
-
-                        i = 0;
-                    }
-                    else
-                        i++;
-                    continue;
+                    for (int j = 0; j < 4; j++)
+                        controlElement[j] = "";
                 }
+                controlElement[i % 4] = elementsDescr[i];
+            }
+            //1. Тип элемента
+            //2. Подпись (у NumericUpDown автоматически создается Label с подписью, а у RadioButton, как и у Label, записывается Text)
+            //3. Название .Name элемента
+            //4. Отсуп Margin в виде числа
+            //foreach (var elem in cfg)
+            //{
+            //    if (elem == ';')
+            //    {
+            //        if (i == 3)
+            //        {
+            //            optionControls.AddRange(CreateControl(controlElement));
+            //
+            //            for (int j = 0; j < 4; j++)
+            //                controlElement[j] = "";
+            //
+            //            i = 0;
+            //        }
+            //        else
+            //            i++;
+            //        continue;
+            //    }
+            //
+            //    controlElement[i] += elem;
+            //}
+        }
 
-                controlElement[i] += elem;
+        IEnumerable<Control> CreateControl(string[] controlDescription)
+        {
+            switch (controlDescription[0])
+            {
+                case "NumericUpDown":
+                    {
+                        Control[] newControls = new Control[2];
+
+                        Label label = new Label();
+                        label.Text = controlDescription[1];
+                        newControls[0] = label;
+
+                        NumericUpDown numUpDown = new NumericUpDown();
+                        numUpDown.Name = controlDescription[2];
+                        int bottomMargin;
+                        if (int.TryParse(controlDescription[3], out bottomMargin))
+                            numUpDown.Margin = new Padding(0, 0, 0, bottomMargin);
+                        newControls[1] = numUpDown;
+
+                        return newControls;
+                    }
+                case "RadioButton":
+                    {
+                        RadioButton[] radioButton = new RadioButton[1];
+                        radioButton[0].Text = controlDescription[1];
+                        radioButton[0].Name = controlDescription[2];
+                        int bottomMargin;
+                        if (int.TryParse(controlDescription[3], out bottomMargin))
+                            radioButton[0].Margin = new Padding(0, 0, 0, bottomMargin);
+
+                        return radioButton;
+                    }
+                default:
+                    {
+                        Label[] label = new Label[1];
+                        label[0].Text = controlDescription[1];
+                        label[0].Name = controlDescription[2];
+                        int bottomMargin;
+                        if (int.TryParse(controlDescription[3], out bottomMargin))
+                            label[0].Margin = new Padding(0, 0, 0, bottomMargin);
+
+                        return label;
+                    }
             }
         }
     }
