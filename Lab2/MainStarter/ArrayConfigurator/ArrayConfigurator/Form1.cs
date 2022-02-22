@@ -75,6 +75,7 @@ namespace ArrayConfigurator
                 PluginFunction func = plugin.Funcs.Find(x => x.Name.Contains(sendButton.Name));
                 if (func != null)
                 {
+                    OptionsPanel.Controls.Clear();
                     activeFunc = func;
                     BuildOptions(func.optionControls);
                 }
@@ -100,24 +101,15 @@ namespace ArrayConfigurator
 
             if (activePlugin != null && activeFunc != null)
             {
-                string[] strArray = ArrayTextBox.Text.Split(' ');
-                List<int> listArray = new List<int>();
-                int currentValue;
-                foreach(var str in strArray)
-                {
-                    if (int.TryParse(str, out currentValue))
-                        listArray.Add(currentValue);
-                }
+                int[] arr = ConvertText.ConvertTextToIntArray(ArrayTextBox.Text);
 
                 QueryPerformanceFrequency(out frequence);
                 QueryPerformanceCounter(out startTime);
-                int[] result = activeFunc.ApplyFunction(activePlugin.Name, listArray.ToArray(), OptionsPanel);
+                int[] result = activeFunc.ApplyFunction(activePlugin.Name, arr, OptionsPanel);
                 QueryPerformanceCounter(out endTime);
                 double time = (double)((endTime - startTime)) * 1000 / frequence;
 
-                ArrayTextBox.Text = "";
-                for (int i = 0; i < result.Length; i++)
-                    ArrayTextBox.Text += result[i].ToString() + ' ';
+                ArrayTextBox.Text = ConvertText.ConvertIntArrayToText(result);
 
                 TimeLabel.Text = $"Duration time: {time} ms";
             }

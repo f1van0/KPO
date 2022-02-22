@@ -21,4 +21,4 @@ DLLEXPORT const char* GetPluginDescriptions(char* str);
 DLLEXPORT const char* GetPluginName(char* str);
 DLLEXPORT const char* GetPluginCFG(char* str);
 DLLEXPORT const char* GetPluginTypes(char* str); // для определения типа например для встраивание в интерфейс
-DLLEXPORT int* GetArray(int minValue, int maxValue, int size);
+DLLEXPORT int GetSpecialValue(int* arr, int size, int flag);

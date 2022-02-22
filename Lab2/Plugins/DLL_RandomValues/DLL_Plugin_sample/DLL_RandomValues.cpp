@@ -1,13 +1,9 @@
-п»ї// DLL_Plugin_sample.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Рµ С„СѓРЅРєС†РёРё РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ DLL.
-//
-
-#include "pch.h"
-#include "DLL_RandomValues.h"
+#include "stdafx.h"
+#include "PluginBase.h"
 #include <omp.h>
 
 
-// РџСЂРѕСЃС‚С‹Рµ РёРЅС‚РµСЂС„РµР№СЃРЅС‹Рµ С„СѓРЅРєС†РёРё Р РµР°Р»РёР·Р°С†РёСЏ
-
+// Простые интерфейсные функции Реализация
 DLLEXPORT const char* GetPluginFunctions()
 {
 	return "GetArray";
@@ -27,7 +23,7 @@ DLLEXPORT const char* GetPluginCFG(char* str)
 
 DLLEXPORT const char* GetPluginTypes(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "VarsToArr";  // Р±СѓРґРµС‚ РєР°Рє СЃРїРёСЃРѕРє
+	if (strcmp(str, "GetArray") == 0) return "VarsToArr";  // будет как список
 	return "Not found";
 }
 
@@ -38,9 +34,10 @@ DLLEXPORT const char* GetPluginName(char* str)
 }
 
 
-// РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕРµ СЂРµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ
-DLLEXPORT int* GetArray(int size, int minValue, int maxValue)
+// Непосредственное реализация методов
+DLLEXPORT int* GetArray(int minValue, int maxValue, int size)
 {
+	srand(std::time(nullptr));
 	int* newArray = new int[size];
 	for (int i = 0; i < size; i++)
 	{

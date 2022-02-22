@@ -9,42 +9,58 @@
 // Простые интерфейсные функции Реализация
 DLLEXPORT const char* GetPluginFunctions()
 {
-	return "GetArray";
+	return "GetSpecialValue";
 }
 
 DLLEXPORT const char* GetPluginDescriptions(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "Generates an array based on the passed values of the number of elements, minimum and maximum";
+	if (strcmp(str, "GetSpecialValue") == 0) return "Finds the minimum, maximum, and arithmetic mean and returns the one that was selected";
 	return "Not found";
 }
 
 DLLEXPORT const char* GetPluginCFG(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "NumericUpDown;Enter minimum value;MinValue;6;NumericUpDown;Enter maximum value;MaxValue;6;NumericUpDown;Enter size of array;Size;0";
+	if (strcmp(str, "GetSpecialValue") == 0) return "RadioButton;Return min value;MinValue;5;RadioButton;Return average value;AvgValue;5;RadioButton;Return max value;MaxValue;5";
 	return "Label;Not found;ErrorLabel;0";
 }
 
 DLLEXPORT const char* GetPluginTypes(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "VarsToArr";  // будет как список
+	if (strcmp(str, "GetSpecialValue") == 0) return "ArrToVar";  // будет как список
 	return "Not found";
 }
 
 DLLEXPORT const char* GetPluginName(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "Random Values Generator";
+	if (strcmp(str, "GetSpecialValue") == 0) return "Special Value Returner";
 	return "Not found";
 }
 
 
 // Непосредственное реализация методов
-DLLEXPORT int* GetArray(int minValue, int maxValue, int size)
+DLLEXPORT int GetSpecialValue(int* arr, int size, int flag)
 {
-	srand(std::time(nullptr));
-	int* newArray = new int[size];
+	int minValue = arr[0];
+	int maxValue = arr[0];
+	int avgValue = 0;
+	int totalValue = 0;
 	for (int i = 0; i < size; i++)
 	{
-		newArray[i] = rand() % (maxValue - minValue) + minValue;
+		if (minValue > arr[i])
+			minValue = arr[i];
+		if (maxValue < arr[i])
+			maxValue = arr[i];
+		totalValue += arr[i];
 	}
-	return  newArray;
+	avgValue = totalValue / size;
+
+	switch(flag)
+	{
+	case 0:
+		return minValue;
+	case 1:
+		return avgValue;
+	default:
+		return maxValue;
+	}
 }

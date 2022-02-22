@@ -20,6 +20,13 @@ namespace ArrayConfigurator
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate IntPtr ValuesToArrayFuncType(int minValue, int maxValue, int size);
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate IntPtr ArrayToArrayFuncType(int[] arr, int sign, int size);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int ArrayToValueFuncType(int[] arr, int size, int flag);
+
+
         [DllImport("kernel32.dll", EntryPoint = "LoadLibrary")]
         static extern int LoadLibrary(
             [MarshalAs(UnmanagedType.LPStr)] string lpLibFileName);
@@ -127,14 +134,16 @@ namespace ArrayConfigurator
                     }
                 case "RadioButton":
                     {
-                        RadioButton[] radioButton = new RadioButton[1];
-                        radioButton[0].Text = controlDescription[1];
-                        radioButton[0].Name = controlDescription[2];
+                        Control[] newControls = new Control[1];
+                        RadioButton newRadioButton = new RadioButton();
+                        newRadioButton.Text = controlDescription[1];
+                        newRadioButton.Name = controlDescription[2];
                         int bottomMargin;
                         if (int.TryParse(controlDescription[3], out bottomMargin))
-                            radioButton[0].Margin = new Padding(0, 0, 0, bottomMargin);
-
-                        return radioButton;
+                            newRadioButton.Margin = new Padding(0, 0, 0, bottomMargin);
+                        
+                        newControls[0] = newRadioButton;
+                        return newControls;
                     }
                 default:
                     {
@@ -152,6 +161,7 @@ namespace ArrayConfigurator
 
         public int[] ApplyFunction(string dllName, int[] array, FlowLayoutPanel panel)
         {
+            int[] result;
             int pointerDll = LoadLibrary(dllName);
             if (Type == FuncTypes.valuesToArray)
             {    
@@ -175,14 +185,62 @@ namespace ArrayConfigurator
 
                 IntPtr ptr = func(minValue, maxValue, size);
                 // points to arr[1], which is first value
-                int[] result = new int[size];
+                result = new int[size];
                 Marshal.Copy(ptr, result, 0, size);
-                FreeLibrary(pointerDll);
-                return result;
+            }
+            else if (Type == FuncTypes.arrayToArray)
+            {
+                ArrayToArrayFuncType func = Marshal.GetDelegateForFunctionPointer<ArrayToArrayFuncType>
+                    (GetProcAddress(pointerDll, Name));
+
+                int sign = 1;
+
+                for (int i = 0; i < panel.Controls.Count; i++)
+                {
+                    if (panel.Controls[i] is RadioButton)
+                    {
+                        RadioButton radioBtn = (RadioButton)panel.Controls[i];
+                        if (radioBtn.Name == "Ascending" && radioBtn.Checked)
+                            sign = 1;
+                        else if (radioBtn.Name == "Descending" && radioBtn.Checked)
+                            sign = -1;
+                    }
+                }
+
+                IntPtr ptr = func(array, sign, array.Length);
+                // points to arr[1], which is first value
+                result = new int[array.Length];
+                Marshal.Copy(ptr, result, 0, array.Length);
+            }
+            else
+            {
+                ArrayToValueFuncType func = Marshal.GetDelegateForFunctionPointer<ArrayToValueFuncType>
+                    (GetProcAddress(pointerDll, Name));
+
+                int flag = 0;
+
+                for (int i = 0; i < panel.Controls.Count; i++)
+                {
+                    if (panel.Controls[i] is RadioButton)
+                    {
+                        RadioButton radioBtn = (RadioButton)panel.Controls[i];
+                        if (radioBtn.Name == "MinValue" && radioBtn.Checked)
+                            flag = 0;
+                        else if (radioBtn.Name == "AvgValue" && radioBtn.Checked)
+                            flag = 1;
+                        else if (radioBtn.Name == "MaxValue" && radioBtn.Checked)
+                            flag = 2;
+                    }
+                }
+
+                int resultInt = func(array, array.Length, flag);
+                // points to arr[1], which is first value
+                result = new int[1];
+                result[0] = resultInt;
             }
 
             FreeLibrary(pointerDll);
-            return new int[0];
+            return result;
         }
     }
 }
