@@ -14,8 +14,8 @@ DLLEXPORT const char* GetPluginFunctions()
 
 DLLEXPORT const char* GetPluginDescriptions(char* str)
 {
-	if (strcmp(str, "BubbleSort") == 0) return "Sorts an array by the bubble algorithm";
-	else if (strcmp(str, "ShellSort") == 0) return "Sorts an array by the Shell's algorithm";
+	if (strcmp(str, "BubbleSort") == 0) return "Sorts an array by the bubble algorithm\nVersion: 1.1\nAuthor: Frolov Ivan BPI19-01\n";
+	else if (strcmp(str, "ShellSort") == 0) return "Sorts an array by the Shell's algorithm\nVersion: 1.0\nAuthor: Frolov Ivan BPI19-01\n";
 	return "Not found";
 }
 
@@ -44,21 +44,22 @@ DLLEXPORT const char* GetPluginName(char* str)
 // Непосредственное реализация методов
 DLLEXPORT int* BubbleSort(int* arr, int sign, int size)
 {
-	bool isSwapped = true;
-	while (isSwapped)
+	bool swapped;
+	for (int i = 0; i < size - 1; i++)
 	{
-		for (int i = 0; i < 10; i++) {
-			isSwapped = false;
-			for (int j = 0; j < 10 - (i + 1); j++) {
-				if (arr[j] * sign > arr[j + 1] * sign) {
-					isSwapped = true;
-					std::swap(arr[j], arr[j + 1]);
-				}
-			}
-			if (!isSwapped) {
-				break;
+		swapped = false;
+		for (int j = 0; j < size - i - 1; j++)
+		{
+			if (sign * arr[j] > sign * arr[j + 1])
+			{
+				std::swap(arr[j], arr[j + 1]);
+				swapped = true;
 			}
 		}
+
+		// IF no two elements were swapped by inner loop, then break
+		if (swapped == false)
+			break;
 	}
 	return  arr;
 }

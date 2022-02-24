@@ -65,15 +65,20 @@ namespace ArrayConfigurator
         public void InitOptions(string cfg)
         {
             optionControls = new List<Control>();
+            Label description = new Label();
+            description.Text = Description;
+            description.AutoSize = true;
+            description.Margin = new Padding(10, 10, 0, 20);
+            optionControls.Add(description);
             string[] controlElement = new string[4];
             string[] elementsDescr = cfg.Split(';');
-
+            bool isFirst = true;
             for (int i = 0; i < elementsDescr.Length; i++)
             {
                 if (i % 4 == 0 && i != 0)
                 {
-                    optionControls.AddRange(CreateControl(controlElement));
-
+                    optionControls.AddRange(CreateControl(controlElement, isFirst));
+                    isFirst = false;
                     for (int j = 0; j < 4; j++)
                         controlElement[j] = "";
                 }
@@ -81,7 +86,7 @@ namespace ArrayConfigurator
             }
 
             if (controlElement[0] != "" && controlElement[1] != "" && controlElement[2] != "" && controlElement[3] != "")
-                optionControls.AddRange(CreateControl(controlElement));
+                optionControls.AddRange(CreateControl(controlElement, isFirst));
 
             //1. Тип элемента
             //2. Подпись (у NumericUpDown автоматически создается Label с подписью, а у RadioButton, как и у Label, записывается Text)
@@ -109,7 +114,7 @@ namespace ArrayConfigurator
             //}
         }
 
-        IEnumerable<Control> CreateControl(string[] controlDescription)
+        IEnumerable<Control> CreateControl(string[] controlDescription, bool isFirst)
         {
             switch (controlDescription[0])
             {
@@ -123,7 +128,12 @@ namespace ArrayConfigurator
 
                         NumericUpDown numUpDown = new NumericUpDown();
                         numUpDown.Name = controlDescription[2];
-                        numUpDown.Minimum = -1000000;
+
+                        if (controlDescription[2] == "Size")
+                            numUpDown.Minimum = 1;
+                        else
+                            numUpDown.Minimum = -1000000;
+
                         numUpDown.Maximum = 1000000;
                         int bottomMargin;
                         if (int.TryParse(controlDescription[3], out bottomMargin))
@@ -138,6 +148,10 @@ namespace ArrayConfigurator
                         RadioButton newRadioButton = new RadioButton();
                         newRadioButton.Text = controlDescription[1];
                         newRadioButton.Name = controlDescription[2];
+
+                        if (isFirst)
+                            newRadioButton.Checked = true;
+
                         int bottomMargin;
                         if (int.TryParse(controlDescription[3], out bottomMargin))
                             newRadioButton.Margin = new Padding(0, 0, 0, bottomMargin);

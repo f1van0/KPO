@@ -14,7 +14,7 @@ DLLEXPORT const char* GetPluginFunctions()
 
 DLLEXPORT const char* GetPluginDescriptions(char* str)
 {
-	if (strcmp(str, "GetSpecialValue") == 0) return "Finds the minimum, maximum, and arithmetic mean and returns the one that was selected";
+	if (strcmp(str, "GetSpecialValue") == 0) return "Finds the minimum, maximum, and arithmetic mean and returns the one that was selected\nVersion: 1.2\nAuthor: Frolov Ivan BPI19-01";
 	return "Not found";
 }
 

@@ -11,7 +11,7 @@ DLLEXPORT const char* GetPluginFunctions()
 
 DLLEXPORT const char* GetPluginDescriptions(char* str)
 {
-	if (strcmp(str, "GetArray") == 0) return "Generates an array based on the passed values of the number of elements, minimum and maximum";
+	if (strcmp(str, "GetArray") == 0) return "Generates an array based on the passed values of the number of elements, minimum and maximum\nVersion: 1.0\nAuthor: Frolov Ivan BPI19-01\n";
 	return "Not found";
 }
 
@@ -41,6 +41,9 @@ DLLEXPORT int* GetArray(int minValue, int maxValue, int size)
 	int* newArray = new int[size];
 	for (int i = 0; i < size; i++)
 	{
+		if (maxValue - minValue == 0)
+			maxValue++;
+
 		newArray[i] = rand() % (maxValue - minValue) + minValue;
 	}
 	return  newArray;

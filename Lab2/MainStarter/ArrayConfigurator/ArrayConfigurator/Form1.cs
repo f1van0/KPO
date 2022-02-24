@@ -25,31 +25,52 @@ namespace ArrayConfigurator
         private Plugin activePlugin = null;
         private PluginFunction activeFunc = null;
 
-        private List<Plugin> LoadPlugins()
+        private void LoadPlugins()
         {
-            List<Plugin> allPlugins = new List<Plugin>();
+            List<Plugin> newPlugins = new List<Plugin>();
             string[] files = Directory.GetFiles("Plugins\\", "*.dll");
 
             foreach(var elem in files)
             {
-                Plugin currentPlugin = new Plugin().VerifyPlugin(elem);
-                if (currentPlugin != null)
-                    allPlugins.Add(currentPlugin);
+                if (newPlugins.Find(x => x.Name == elem) == null)
+                {
+                    Plugin currentPlugin = new Plugin().VerifyPlugin(elem);
+                    if (currentPlugin != null)
+                        newPlugins.Add(currentPlugin);
+                }
             }
 
-            return allPlugins;
+            _plugins = newPlugins;
+            CreateButtons(newPlugins);
         }
-        
+
+        public void LoadPlugins(string[] files)
+        {
+            List<Plugin> newPlugins = new List<Plugin>();
+
+            foreach (var elem in files)
+            {
+                if (newPlugins.Find(x => x.Name == elem) == null)
+                {
+                    Plugin currentPlugin = new Plugin().VerifyPlugin(elem);
+                    if (currentPlugin != null)
+                        newPlugins.Add(currentPlugin);
+                }
+            }
+
+            _plugins.AddRange(newPlugins);
+            CreateButtons(newPlugins);
+        }
+
         public Form1()
         {
             InitializeComponent();
-            _plugins = LoadPlugins();
-            CreateButtons();
+            LoadPlugins();
         }
 
-        public void CreateButtons()
+        private void CreateButtons(List<Plugin> plugins)
         {
-            foreach(var plugin in _plugins)
+            foreach(var plugin in plugins)
             {
                 foreach(var func in plugin.Funcs)
                 {
@@ -102,6 +123,8 @@ namespace ArrayConfigurator
             if (activePlugin != null && activeFunc != null)
             {
                 int[] arr = ConvertText.ConvertTextToIntArray(ArrayTextBox.Text);
+                if (activeFunc.Type != FuncTypes.valuesToArray && arr.Length < 3)
+                    return;
 
                 QueryPerformanceFrequency(out frequence);
                 QueryPerformanceCounter(out startTime);
@@ -118,6 +141,28 @@ namespace ArrayConfigurator
         private void OptionsPanel_Paint(object sender, PaintEventArgs e)
         {
             
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private async void открытьПлагинToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.DefaultExt = "dll";
+            openFileDialog1.Filter = "dll files (*.dll)|*.dll";
+            openFileDialog1.ShowDialog();
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                LoadPlugins(openFileDialog1.FileNames);
+            }
         }
     }
 }
