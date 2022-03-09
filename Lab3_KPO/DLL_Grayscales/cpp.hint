@@ -1,0 +1,2 @@
+#define DLLCONTRAST_API __declspec(dllexport)
+#define DLLCONTRAST_API __declspec(dllimport)
