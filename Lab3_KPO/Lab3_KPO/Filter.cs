@@ -44,7 +44,7 @@ namespace Lab3_KPO
 			IntPtr getProc;
 			if (pDll != 0)
 			{
-				getProc = GetProcAddress(pDll, "GetFuncName");
+				getProc = GetProcAddress(pDll, "getInfo");
 				if ((int)getProc != 0)
 				{
 					DllGetString GetFuncName = (DllGetString)Marshal.GetDelegateForFunctionPointer(getProc, typeof(DllGetString));
@@ -52,7 +52,7 @@ namespace Lab3_KPO
 					if (tmpResult != "" && tmpResult != null)
 					{
 						Name = tmpResult;
-						getProc = GetProcAddress(pDll, "FilterFunct");
+						getProc = GetProcAddress(pDll, "filterFunct");
 						if ((int)getProc != 0)
 						{
 
