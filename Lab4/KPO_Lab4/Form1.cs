@@ -38,7 +38,7 @@ namespace KPO_Lab4
 			{
 			// http://103.137.83.115:8090/mjpg/video.mjpg
 			// http://188.170.32.93:82/mjpg/1/video.mjpg
-			stream = new StreamDecoder("http://103.137.83.115:8090/mjpg/video.mjpg");
+			stream = new StreamDecoder("http://176.85.178.205:8081/mjpg/video.mjpg");
 			reciever = new VideoReceiver(pictureBox1, stream);
 			reciever.ImageFiltered += PreviewImage;
 
