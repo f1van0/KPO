@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -12,13 +14,13 @@ namespace Lab3_KPO
     {
         private string _uri;
         private HttpClient _client;
-        private byte[] _lastFrame;
-        private object _locker = new object();
         private bool _updateUri;
         private Task tsk;
+        public Filters filters;
 
-        public StreamDecoder()
+        public StreamDecoder(Filters filters)
         {
+            this.filters = filters;
             _client = new HttpClient();
         }
         public void StartDecodingAsync(string uri)
@@ -39,8 +41,6 @@ namespace Lab3_KPO
             }
         }
 
-        public byte[] GetLastFrame() => _lastFrame;
-
         public delegate void FrameHandler(object sender, FrameReceivedEventArgs e);
 
         public event FrameHandler OnFrameReceived;
@@ -58,22 +58,20 @@ namespace Lab3_KPO
         public void Stop()
         {
             isWorked = false;
-            isCanceled = true;
         }
 
         bool isWorked = true;
-        bool isCanceled = false;
         private async Task DoWork()
         {
             while (true)
             {
                 try
                 {
+                    //Создается поток stream для указанного адреса _uri, который будет ассинхронно получать данные
                     using (var stream = await _client.GetStreamAsync(_uri).ConfigureAwait(false))
                     {
                         while (isWorked)
                         {
-                            if (isCanceled) break;
 
                             int contentLength = GetContentLength(stream);
 
@@ -89,19 +87,21 @@ namespace Lab3_KPO
                                 break;
                             }
 
-                            lock (_locker)
+                            byte[] resultImage;
+                            using (var ms = new MemoryStream(content))
                             {
-                                _lastFrame = content;
+                                Bitmap bm = new Bitmap(Image.FromStream(ms));
+                                var ms2 = new MemoryStream();
+                                bm.Save(ms2, ImageFormat.Bmp);
+                                resultImage = filters.ApplyFilter(ms2.ToArray());
                             }
 
                             OnFrameReceived?.Invoke(this, new FrameReceivedEventArgs()
                             {
-                                Frame = content
+                                Frame = resultImage
                             });
                         }
                     }
-                    if (isCanceled)
-                        return;
                 }
                 catch (Exception e)
                 {
