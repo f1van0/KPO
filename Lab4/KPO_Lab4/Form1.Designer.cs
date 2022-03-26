@@ -202,10 +202,11 @@
             // filterCombo
             // 
             this.filterCombo.FormattingEnabled = true;
-            this.filterCombo.Location = new System.Drawing.Point(703, 474);
+            this.filterCombo.Location = new System.Drawing.Point(579, 463);
             this.filterCombo.Name = "filterCombo";
-            this.filterCombo.Size = new System.Drawing.Size(10, 21);
+            this.filterCombo.Size = new System.Drawing.Size(115, 21);
             this.filterCombo.TabIndex = 19;
+            this.filterCombo.SelectedIndexChanged += new System.EventHandler(this.filterCombo_SelectedIndexChanged);
             this.filterCombo.SelectedValueChanged += new System.EventHandler(this.filterCombo_SelectedValueChanged);
             // 
             // label3

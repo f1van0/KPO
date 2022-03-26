@@ -34,11 +34,8 @@ namespace KPO_Lab4
 	class VideoRecorder
 		{
 		public event Action RecordingStart;
-		public event Action RecordingEnd;
 
-		public event Action ProceedingStart;
 		public event Action<ImageFile> FileProceeded;
-		public event Action ProceedingEnd;
 
 		public event Action SavingStart;
 		public event Action<DBRow> InsertDB;
@@ -124,7 +121,6 @@ namespace KPO_Lab4
 		public int Stop ()
 			{
 			Reciever.ImageRecieved -= saveFrame;
-			RecordingEnd?.Invoke();
 			isStopped = true;
 			isRecording = false;
 			planWork();
@@ -247,7 +243,6 @@ namespace KPO_Lab4
 
 		private async Task planWork ()
 			{
-			ProceedingStart?.Invoke();
 			isProceeding = true;
 			int freeWorkers = AvailableWorkers;
 
@@ -282,7 +277,6 @@ namespace KPO_Lab4
 					}
 				}
 			isProceeding = false;
-			ProceedingEnd?.Invoke();
 			Workers.Clear();
 			}
 

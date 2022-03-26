@@ -122,12 +122,12 @@ namespace KPO_Lab4
 		private void comboBox1_SelectedValueChanged (object sender, EventArgs e)
 			{
 			reciever.filter = (VideoFilter)comboBox1.SelectedItem;
-			Filter = (VideoFilter)filterCombo.SelectedItem;
+			//Filter = (VideoFilter)filterCombo.SelectedItem;
 		}
 
 		private void filterCombo_SelectedValueChanged (object sender, EventArgs e)
 			{
-			//Filter = (VideoFilter)filterCombo.SelectedItem;
+			Filter = (VideoFilter)filterCombo.SelectedItem;
 			}
 
 		private void resCombo_SelectedValueChanged (object sender, EventArgs e)
@@ -200,5 +200,10 @@ namespace KPO_Lab4
 			button2.Enabled = !locked;
 			button3.Enabled = !locked;
 			}
+
+        private void filterCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
