@@ -21,14 +21,6 @@ namespace KPO_Lab4
 				Name = Name.Replace(c, '_');
 			}
 
-		string AddQuotesIfRequired (string path)
-			{
-			return !string.IsNullOrWhiteSpace(path) ?
-				path.Contains(" ") && ( !path.StartsWith("\"") && !path.EndsWith("\"") ) ?
-					"\"" + path + "\"" : path :
-					string.Empty;
-			}
-
 		public void Save (string path)
 			{
 			string fullPath = Path.Combine(path, Name);

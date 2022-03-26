@@ -18,7 +18,7 @@ namespace MJPEG
     {
         public event FrameHandler OnFrameReceived;
 
-        private string _uri;
+        public string _uri;
 
         private HttpClient _client;
 

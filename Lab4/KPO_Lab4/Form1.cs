@@ -38,7 +38,7 @@ namespace KPO_Lab4
 			{
 			// http://103.137.83.115:8090/mjpg/video.mjpg
 			// http://188.170.32.93:82/mjpg/1/video.mjpg
-			stream = new StreamDecoder("http://176.85.178.205:8081/mjpg/video.mjpg");
+			stream = new StreamDecoder("http://87.161.102.220:80/mjpg/video.mjpg");
 			reciever = new VideoReceiver(pictureBox1, stream);
 			reciever.ImageFiltered += PreviewImage;
 
@@ -97,7 +97,7 @@ namespace KPO_Lab4
 
 		private void button1_Click(object sender, EventArgs e)
 		{			
-			reciever.Start();
+			reciever.Start(textBox1.Text);
 		}
 
 		private void button2_Click(object sender, EventArgs e)
@@ -122,11 +122,12 @@ namespace KPO_Lab4
 		private void comboBox1_SelectedValueChanged (object sender, EventArgs e)
 			{
 			reciever.filter = (VideoFilter)comboBox1.SelectedItem;
-			}
+			Filter = (VideoFilter)filterCombo.SelectedItem;
+		}
 
 		private void filterCombo_SelectedValueChanged (object sender, EventArgs e)
 			{
-			Filter = (VideoFilter)filterCombo.SelectedItem;
+			//Filter = (VideoFilter)filterCombo.SelectedItem;
 			}
 
 		private void resCombo_SelectedValueChanged (object sender, EventArgs e)
@@ -199,5 +200,5 @@ namespace KPO_Lab4
 			button2.Enabled = !locked;
 			button3.Enabled = !locked;
 			}
-		}
+    }
 }

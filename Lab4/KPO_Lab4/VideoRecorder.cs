@@ -53,6 +53,7 @@ namespace KPO_Lab4
 
 		public List<DBRow> Logs;
 
+		//Очереди по получеию, обработке и 
 		ConcurrentQueue<ImageFile> sourceFiles;
 		ConcurrentQueue<ImageFile> filteredFiles;
 		ConcurrentQueue<ImageFile> dbRequests = new ConcurrentQueue<ImageFile>();

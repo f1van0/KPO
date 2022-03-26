@@ -49,10 +49,11 @@ namespace KPO_Lab4
 			}
 		}
 
-		public void Start()
+		public void Start(string uri)
 		{
 			if ( decoder.isStopped )
 				{
+				decoder._uri = uri;
 				decoder.Stream();
 				decoder.StartDecodingAsync();
 				}
