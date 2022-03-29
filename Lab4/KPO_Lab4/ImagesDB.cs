@@ -44,11 +44,13 @@ namespace KPO_Lab4
 				throw new Exception("Empty data passed");
 			using ( var command = connection.CreateCommand() )
 				{
-				command.CommandText = @"INSERT INTO Image(name, path, process_time, saved_date) 
-										VALUES($name, $path, $time, $saved)";
+				command.CommandText = @"INSERT INTO Image(name, path, process_time, filtering_worker_id, resizing_worker_id, saved_date) 
+										VALUES($name, $path, $time, $saved, $filtering_worker_id, $resizing_worker_id)";
 				command.Parameters.AddWithValue("$name", row.Name);
 				command.Parameters.AddWithValue("$path", row.Path);
 				command.Parameters.AddWithValue("$time", row.ProceedTime);
+				command.Parameters.AddWithValue("$filtering_worker_id", row.FilteringWorkerID);
+				command.Parameters.AddWithValue("$resizing_worker_id", row.ResizingWorkerID);
 				command.Parameters.AddWithValue("$saved", row.Saved.ToString()).Size = 25;
 				command.ExecuteNonQuery();
 				}
@@ -65,6 +67,8 @@ namespace KPO_Lab4
 						[name] NVARCHAR(12) NOT NULL, 
 						[path] NVARCHAR(20) NOT NULL, 
 						[process_time] INT NOT NULL, 
+						[filtering_worker_id] INT NOT NULL, 
+						[resizing_worker_id] INT NOT NULL, 
 						[saved_date] TEXT NOT NULL
 					)";
 				command.ExecuteNonQuery();

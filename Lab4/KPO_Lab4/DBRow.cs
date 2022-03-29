@@ -11,13 +11,17 @@ namespace KPO_Lab4
 		public string Name;
 		public string Path;
 		public DateTime Saved;
+		public int FilteringWorkerID;
+		public int ResizingWorkerID;
 		public int ProceedTime;
 
-		public DBRow (string name, string path, TimeSpan time)
+		public DBRow (string name, string path, int filteringWorkerID, int resizingWorkerID, TimeSpan time)
 			{
 			Name = name;
 			Path = path;
 			Saved = DateTime.Now;
+			FilteringWorkerID = filteringWorkerID;
+			ResizingWorkerID = resizingWorkerID;
 			ProceedTime = (int)time.TotalMilliseconds;
 			}
 

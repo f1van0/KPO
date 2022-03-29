@@ -163,11 +163,12 @@ namespace KPO_Lab4
 		private void SetupProgress(int count)
 			{
 			filteredBar.Value = 0;
-			savedBar.Value = 0;
+			filteredBar.Step = 1;
 			filteredBar.Maximum = count;
+
+			savedBar.Value = 0;
+			savedBar.Step = 1;
 			savedBar.Maximum = count;
-			filteredBar.Step = 1;
-			filteredBar.Step = 1;
 			}
 
 		private void LoadFilters ()

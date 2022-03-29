@@ -81,7 +81,11 @@ namespace KPO_Lab4
 			{
 			cancelDBSource = new CancellationTokenSource();
 			background = Task.Factory.StartNew(delegate (object obj)
-				{ AcceptDBRequests((Control)obj); }, actor, cancelDBSource.Token);
+				{ 
+					AcceptDBRequests((Control)obj); 
+				}, 
+				actor, 
+				cancelDBSource.Token);
 			}
 
 		public void StopDB ()
@@ -153,7 +157,7 @@ namespace KPO_Lab4
 						if ( file.Image == null )
 							break;
 
-						var newRow = new DBRow(file.Name, savePath, file.ProceedTime);
+						var newRow = new DBRow(file.Name, savePath, file.FilteringWorkerID, file.ResizingWorkerID, file.ProceedTime);
 						DB.Insert(newRow);
 						file.Save(savePath);
 						file = new ImageFile();
@@ -219,6 +223,8 @@ namespace KPO_Lab4
 			var then = DateTime.Now;
 			file.Image = result;
 			file.ProceedTime += then - now;
+			file.FilteringWorkerID = Thread.CurrentThread.ManagedThreadId;
+
 			filteredFiles.Enqueue(file);
 			}
 
@@ -231,8 +237,9 @@ namespace KPO_Lab4
 
 			var result = ResizeImage(file.Image, Resolution);
 			var then = DateTime.Now;
-			file.ProceedTime += then - now;
+			file.ProceedTime += then - now + file.ProceedTime;
 			file.Image = result;
+			file.ResizingWorkerID = Thread.CurrentThread.ManagedThreadId;
 
 			dbRequests.Enqueue(file);
 
@@ -283,7 +290,7 @@ namespace KPO_Lab4
 		private void saveFrame (Bitmap img)
 			{
 			if ( isRecording )
-				sourceFiles.Enqueue(new ImageFile(img, RecordTime.ToString() + "_" + sourceFiles.Count));
+				sourceFiles.Enqueue(new ImageFile(img, RecordTime.ToString() + "_" + sourceFiles.Count, 0, 0));
 			}
 		}
 	}
