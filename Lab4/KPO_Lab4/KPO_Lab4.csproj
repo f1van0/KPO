@@ -93,6 +93,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MJPEG\StreamDecoder.cs" />
+    <Compile Include="ThreadStats.cs" />
     <Compile Include="VideoFilter.cs" />
     <Compile Include="VideoReceiver.cs" />
     <Compile Include="VideoRecorder.cs" />

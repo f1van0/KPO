@@ -44,7 +44,8 @@ namespace KPO_Lab4
 
 			recorder = new VideoRecorder(reciever, pictureBox1);
 			recorder.RecordingStart += lockUI;
-			recorder.SavingEnd += releaseUI;
+			recorder.SavingEnd += finalizeWork;
+			recorder.FileRecorded += imageRecorded;
 
 			recorder.InsertDB += savingProgress;
 			recorder.FileProceeded += proceededProgress;
@@ -74,6 +75,11 @@ namespace KPO_Lab4
 			filteredBar.PerformStep();
 			}
 
+		private void imageRecorded(int amount)
+        {
+			imageCounterLabel.Text = "Поступило картинок на обработку: " + amount;
+        }
+
 		private void displayWork (DBRow row)
 			{
 			dbBox.Text += row.ToString() + "\r\n";
@@ -84,8 +90,13 @@ namespace KPO_Lab4
 			toggleLock(true);
 			}
 
-		private void releaseUI ()
+		private void finalizeWork(Dictionary<int, ThreadStats> threadStatistics)
 			{
+			foreach(var elem in threadStatistics)
+            {
+				dbBox.Text += $"Поток {elem.Key} обработал {elem.Value.TasksCompleted} задач, потратив {elem.Value.ProceedTime} мс.\r\n";
+			}
+			
 			toggleLock(false);
 			recBtn.Text = "Записать";
 			}
