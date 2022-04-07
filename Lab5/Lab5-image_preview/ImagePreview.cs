@@ -265,7 +265,7 @@ namespace Lab5_image_preview
                             break;
                         case DataType.Struct:
                             var fullName = Communications.StructFromBytes<FullName>(data.Data);
-                            setFullName(fullName);
+                            postText?.Invoke((Action)delegate () { setFullName(fullName); }); 
                             break;
                         default:
                             break;

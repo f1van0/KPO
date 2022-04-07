@@ -41,8 +41,6 @@ namespace Lab5_entry
         private TcpListener _listener;
         private TcpClient _client;
         private List<TcpClient> _clients;
-        private Task<Task> clientLoop;
-        private Task<Task> packetLoop;
 
         public event Action<Bitmap> ImageReceived;
         public event Action<string> TextReceived;
@@ -87,8 +85,6 @@ namespace Lab5_entry
             _tSource = new CancellationTokenSource();
             _listener.Start();
             _client.Connect(new IPEndPoint(IPAddress.Loopback, cport));
-            clientLoop = Task.Factory.StartNew(handleClients, _tSource.Token);
-            packetLoop = Task.Factory.StartNew(handlePackets, _tSource.Token);
         }
 
 

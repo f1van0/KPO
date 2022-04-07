@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using Lab5_entry.IPC;
-
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Lab5_entry
 {
@@ -63,7 +63,7 @@ namespace Lab5_entry
         private void CopyStructureButton_Click(object sender, EventArgs e)
         {
             DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
-            FullName fullName = new FullName(FirstNameTextBox.Text, SecondNameTextBox.Text, ThirdNameTextBox.Text);
+            FullName fullName = GetFullName();
             DataObject fullNameDataObject = new DataObject(fullnameFormat.Name, fullName);
             Clipboard.SetDataObject(fullNameDataObject);
         }
@@ -89,7 +89,6 @@ namespace Lab5_entry
 
         private void sendTextSocket(object sender, EventArgs e)
         {
-            //comms.SendImageSocket(new Bitmap(pictureBox1.Image));
             new Task(() =>
             {
                 try
@@ -139,7 +138,26 @@ namespace Lab5_entry
 
         private void sendStructureSocket(object sender, EventArgs e)
         {
+            new Task(() =>
+            {
+                try
+                {
+                    socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                    socket.Connect("localhost", 7878);
+                    var mstream = new MemoryStream();
 
+                    FullName fn = GetFullName();
+                    BinaryFormatter bf = new BinaryFormatter();
+                    byte[] buffer = Communications.StructToBytes(fn);
+                    buffer = Communications.StructToBytes(new MyDataStruct(DataType.Struct, buffer));
+                    socket.Send(buffer);
+
+                    socket.Disconnect(false);
+                }
+                catch (SocketException)
+                {
+                }
+            }).Start();
         }
 
 
@@ -157,7 +175,7 @@ namespace Lab5_entry
 
         private void sendStructureWM(object sender, EventArgs e)
         {
-            FullName fullName = new FullName(FirstNameTextBox.Text, SecondNameTextBox.Text, ThirdNameTextBox.Text);
+            FullName fullName = GetFullName();
             comms.SendStructWM(fullName);
         }
         private void sendImageWM(object sender, EventArgs e)
@@ -194,6 +212,11 @@ namespace Lab5_entry
                 if (ptrCopyData != IntPtr.Zero)
                     Marshal.FreeCoTaskMem(ptrCopyData);
             }
+        }
+
+        public FullName GetFullName()
+        {
+            return new FullName(FirstNameTextBox.Text, SecondNameTextBox.Text, ThirdNameTextBox.Text);
         }
 
     }
