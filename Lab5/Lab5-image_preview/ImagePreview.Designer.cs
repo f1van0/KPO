@@ -45,6 +45,9 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.CopyImageButton = new System.Windows.Forms.Button();
+            this.PasteImageButton = new System.Windows.Forms.Button();
+            this.PasteTextButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,7 +196,7 @@
             // 
             this.logTextBox.Location = new System.Drawing.Point(1022, 25);
             this.logTextBox.Name = "logTextBox";
-            this.logTextBox.Size = new System.Drawing.Size(332, 376);
+            this.logTextBox.Size = new System.Drawing.Size(332, 395);
             this.logTextBox.TabIndex = 15;
             this.logTextBox.Text = "";
             // 
@@ -206,11 +209,44 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Записи действий:";
             // 
+            // CopyImageButton
+            // 
+            this.CopyImageButton.Location = new System.Drawing.Point(592, 360);
+            this.CopyImageButton.Name = "CopyImageButton";
+            this.CopyImageButton.Size = new System.Drawing.Size(159, 27);
+            this.CopyImageButton.TabIndex = 17;
+            this.CopyImageButton.Text = "Скопировать изображение";
+            this.CopyImageButton.UseVisualStyleBackColor = true;
+            this.CopyImageButton.Click += new System.EventHandler(this.CopyImageButton_Click);
+            // 
+            // PasteImageButton
+            // 
+            this.PasteImageButton.Location = new System.Drawing.Point(592, 393);
+            this.PasteImageButton.Name = "PasteImageButton";
+            this.PasteImageButton.Size = new System.Drawing.Size(159, 27);
+            this.PasteImageButton.TabIndex = 18;
+            this.PasteImageButton.Text = "Вставить изображение";
+            this.PasteImageButton.UseVisualStyleBackColor = true;
+            this.PasteImageButton.Click += new System.EventHandler(this.PasteImageButton_Click);
+            // 
+            // PasteTextButton
+            // 
+            this.PasteTextButton.Location = new System.Drawing.Point(753, 75);
+            this.PasteTextButton.Name = "PasteTextButton";
+            this.PasteTextButton.Size = new System.Drawing.Size(125, 25);
+            this.PasteTextButton.TabIndex = 19;
+            this.PasteTextButton.Text = "Вставить надпись";
+            this.PasteTextButton.UseVisualStyleBackColor = true;
+            this.PasteTextButton.Click += new System.EventHandler(this.PasteTextButton_Click);
+            // 
             // ImagePreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 420);
+            this.ClientSize = new System.Drawing.Size(1366, 446);
+            this.Controls.Add(this.PasteTextButton);
+            this.Controls.Add(this.PasteImageButton);
+            this.Controls.Add(this.CopyImageButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.timeLabel);
@@ -260,6 +296,9 @@
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.RichTextBox logTextBox;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button CopyImageButton;
+        private System.Windows.Forms.Button PasteImageButton;
+        private System.Windows.Forms.Button PasteTextButton;
     }
 	}
 

@@ -397,5 +397,36 @@ namespace Lab5_image_preview
 				logTextBox.Text += newRow.ToString() + "\r\n";
 			}
 		}
-	}
+
+        private void CopyImageButton_Click(object sender, EventArgs e)
+        {
+			if (pictureBox1.Image != null)
+			{
+				Clipboard.SetImage(pictureBox1.Image);
+			}
+		}
+
+        private void PasteImageButton_Click(object sender, EventArgs e)
+        {
+			DateTime timeStart = DateTime.Now;
+			
+			Image img = Clipboard.GetImage();
+
+			if (img == null)
+				return;
+
+			pictureBox1.Image = img;
+			InsertNewEntry("Вставка из буфера обмена", "Вставка изображения", DateTime.Now - timeStart);
+		}
+
+        private void PasteTextButton_Click(object sender, EventArgs e)
+        {
+			string receivedString = Clipboard.GetText();
+
+			if (receivedString == null)
+				return;
+
+			postText.Text = receivedString;
+		}
+    }
 }

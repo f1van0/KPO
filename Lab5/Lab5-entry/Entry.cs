@@ -116,6 +116,22 @@ namespace Lab5_entry
 				ThirdNameTextBox.Text = receivedFullName.third;
 			}
 		}
+
+        private void CopyImageButton_Click(object sender, EventArgs e)
+        {
+			if (pictureBox1.Image != null)
+            {
+				Clipboard.SetImage(pictureBox1.Image);
+			}
+		}
+
+        private void CopyText_Click(object sender, EventArgs e)
+        {
+			if (textBox1.Text != "")
+			{
+				Clipboard.SetText(textBox1.Text);
+			}
+		}
     }
 
 	}

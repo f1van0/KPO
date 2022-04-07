@@ -45,17 +45,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.CopyStructureButton = new System.Windows.Forms.Button();
             this.PasteStructureButton = new System.Windows.Forms.Button();
+            this.CopyImageButton = new System.Windows.Forms.Button();
+            this.CopyText = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // SetImageButton
             // 
-            this.SetImageButton.Location = new System.Drawing.Point(422, 343);
+            this.SetImageButton.Location = new System.Drawing.Point(433, 314);
             this.SetImageButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetImageButton.Name = "SetImageButton";
-            this.SetImageButton.Size = new System.Drawing.Size(94, 25);
+            this.SetImageButton.Size = new System.Drawing.Size(94, 54);
             this.SetImageButton.TabIndex = 0;
-            this.SetImageButton.Text = "Set Image";
+            this.SetImageButton.Text = "Изменить изображение";
             this.SetImageButton.UseVisualStyleBackColor = true;
             this.SetImageButton.Click += new System.EventHandler(this.SetImageButton_Click);
             // 
@@ -68,9 +70,9 @@
             this.PostTextButton.Location = new System.Drawing.Point(260, 343);
             this.PostTextButton.Margin = new System.Windows.Forms.Padding(2);
             this.PostTextButton.Name = "PostTextButton";
-            this.PostTextButton.Size = new System.Drawing.Size(76, 25);
+            this.PostTextButton.Size = new System.Drawing.Size(131, 25);
             this.PostTextButton.TabIndex = 3;
-            this.PostTextButton.Text = "Post text";
+            this.PostTextButton.Text = "Отправить текст";
             this.PostTextButton.UseVisualStyleBackColor = true;
             this.PostTextButton.Click += new System.EventHandler(this.postTextButton_Click);
             // 
@@ -79,9 +81,9 @@
             this.SendImageButton.Location = new System.Drawing.Point(531, 343);
             this.SendImageButton.Margin = new System.Windows.Forms.Padding(2);
             this.SendImageButton.Name = "SendImageButton";
-            this.SendImageButton.Size = new System.Drawing.Size(94, 25);
+            this.SendImageButton.Size = new System.Drawing.Size(153, 25);
             this.SendImageButton.TabIndex = 4;
-            this.SendImageButton.Text = "Send Image";
+            this.SendImageButton.Text = "Отправить изображение";
             this.SendImageButton.UseVisualStyleBackColor = true;
             this.SendImageButton.Click += new System.EventHandler(this.SendImageButton_Click);
             // 
@@ -172,31 +174,55 @@
             // 
             // CopyStructureButton
             // 
-            this.CopyStructureButton.Location = new System.Drawing.Point(631, 185);
+            this.CopyStructureButton.Location = new System.Drawing.Point(705, 185);
             this.CopyStructureButton.Margin = new System.Windows.Forms.Padding(2);
             this.CopyStructureButton.Name = "CopyStructureButton";
-            this.CopyStructureButton.Size = new System.Drawing.Size(94, 25);
+            this.CopyStructureButton.Size = new System.Drawing.Size(85, 25);
             this.CopyStructureButton.TabIndex = 16;
-            this.CopyStructureButton.Text = "Copy";
+            this.CopyStructureButton.Text = "Скопировать";
             this.CopyStructureButton.UseVisualStyleBackColor = true;
             this.CopyStructureButton.Click += new System.EventHandler(this.CopyStructureButton_Click);
             // 
             // PasteStructureButton
             // 
-            this.PasteStructureButton.Location = new System.Drawing.Point(767, 185);
+            this.PasteStructureButton.Location = new System.Drawing.Point(794, 185);
             this.PasteStructureButton.Margin = new System.Windows.Forms.Padding(2);
             this.PasteStructureButton.Name = "PasteStructureButton";
-            this.PasteStructureButton.Size = new System.Drawing.Size(94, 25);
+            this.PasteStructureButton.Size = new System.Drawing.Size(67, 25);
             this.PasteStructureButton.TabIndex = 17;
-            this.PasteStructureButton.Text = "Paste";
+            this.PasteStructureButton.Text = "Вставить";
             this.PasteStructureButton.UseVisualStyleBackColor = true;
             this.PasteStructureButton.Click += new System.EventHandler(this.PasteStructureButton_Click);
+            // 
+            // CopyImageButton
+            // 
+            this.CopyImageButton.Location = new System.Drawing.Point(531, 314);
+            this.CopyImageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyImageButton.Name = "CopyImageButton";
+            this.CopyImageButton.Size = new System.Drawing.Size(153, 25);
+            this.CopyImageButton.TabIndex = 19;
+            this.CopyImageButton.Text = "Скопировать изображение";
+            this.CopyImageButton.UseVisualStyleBackColor = true;
+            this.CopyImageButton.Click += new System.EventHandler(this.CopyImageButton_Click);
+            // 
+            // CopyText
+            // 
+            this.CopyText.Location = new System.Drawing.Point(260, 314);
+            this.CopyText.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyText.Name = "CopyText";
+            this.CopyText.Size = new System.Drawing.Size(131, 25);
+            this.CopyText.TabIndex = 20;
+            this.CopyText.Text = "Скопировать текст";
+            this.CopyText.UseVisualStyleBackColor = true;
+            this.CopyText.Click += new System.EventHandler(this.CopyText_Click);
             // 
             // Entry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 379);
+            this.Controls.Add(this.CopyText);
+            this.Controls.Add(this.CopyImageButton);
             this.Controls.Add(this.PasteStructureButton);
             this.Controls.Add(this.CopyStructureButton);
             this.Controls.Add(this.label5);
@@ -245,6 +271,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CopyStructureButton;
         private System.Windows.Forms.Button PasteStructureButton;
+        private System.Windows.Forms.Button CopyImageButton;
+        private System.Windows.Forms.Button CopyText;
     }
 	}
 
