@@ -53,6 +53,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.imageCounterLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workersUpDown)).BeginInit();
             this.SuspendLayout();
@@ -304,11 +305,21 @@
             this.label8.TabIndex = 30;
             this.label8.Text = "Фильтр записи";
             // 
+            // imageCounterLabel
+            // 
+            this.imageCounterLabel.AutoSize = true;
+            this.imageCounterLabel.Location = new System.Drawing.Point(430, 528);
+            this.imageCounterLabel.Name = "imageCounterLabel";
+            this.imageCounterLabel.Size = new System.Drawing.Size(193, 13);
+            this.imageCounterLabel.TabIndex = 31;
+            this.imageCounterLabel.Text = "Поступило картинок на обработку: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 531);
+            this.ClientSize = new System.Drawing.Size(706, 563);
+            this.Controls.Add(this.imageCounterLabel);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
@@ -370,6 +381,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label imageCounterLabel;
     }
 }
 

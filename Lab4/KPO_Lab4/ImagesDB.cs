@@ -22,7 +22,7 @@ namespace KPO_Lab4
 			List<DBRow> data = new List<DBRow>();
 			using ( var command = connection.CreateCommand() )
 				{
-				command.CommandText = @"SELECT name, path, process_time, saved_date FROM Image ORDER BY name DESC";
+				command.CommandText = @"SELECT name, path, process_time, filtering_worker_id, resizing_worker_id, saved_date FROM Image ORDER BY name DESC";
 				command.ExecuteNonQuery();
 				var result = command.ExecuteReader();
 				while ( result.Read() )
@@ -31,7 +31,9 @@ namespace KPO_Lab4
 					temp.Name = result.GetString(0);
 					temp.Path = result.GetString(1);
 					temp.ProceedTime = result.GetInt32(2);
-					temp.Saved = DateTime.Parse(result.GetString(3));
+					temp.FilteringWorkerID = result.GetInt32(3);
+					temp.ResizingWorkerID = result.GetInt32(4);
+					temp.Saved = DateTime.Parse(result.GetString(5));
 					data.Add(temp);
 					}
 				}
@@ -45,7 +47,7 @@ namespace KPO_Lab4
 			using ( var command = connection.CreateCommand() )
 				{
 				command.CommandText = @"INSERT INTO Image(name, path, process_time, filtering_worker_id, resizing_worker_id, saved_date) 
-										VALUES($name, $path, $time, $saved, $filtering_worker_id, $resizing_worker_id)";
+										VALUES($name, $path, $time, $filtering_worker_id, $resizing_worker_id, $saved)";
 				command.Parameters.AddWithValue("$name", row.Name);
 				command.Parameters.AddWithValue("$path", row.Path);
 				command.Parameters.AddWithValue("$time", row.ProceedTime);

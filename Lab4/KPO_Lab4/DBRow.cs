@@ -27,7 +27,7 @@ namespace KPO_Lab4
 
 		public override string ToString ()
 			{
-			return Name + '[' + ProceedTime + ']';
+			return $"{Name} применял фильтр: {FilteringWorkerID} изменял размер:  {ResizingWorkerID} за {ProceedTime} мс";
 			}
 		}
 	}

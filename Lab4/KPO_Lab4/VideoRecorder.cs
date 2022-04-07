@@ -36,10 +36,11 @@ namespace KPO_Lab4
 		public event Action RecordingStart;
 
 		public event Action<ImageFile> FileProceeded;
+		public event Action<int> FileRecorded;
 
 		public event Action SavingStart;
 		public event Action<DBRow> InsertDB;
-		public event Action SavingEnd;
+		public event Action<Dictionary<int, ThreadStats>> SavingEnd;
 
 
 		public bool isRecording { get; protected set; } = false;
@@ -50,7 +51,9 @@ namespace KPO_Lab4
 
 		public List<DBRow> Logs;
 
-		//Очереди по получеию, обработке и 
+		private int imageRecordedCounter;
+
+		//Очереди по получеию, обработке и занесении в бд 
 		ConcurrentQueue<ImageFile> sourceFiles;
 		ConcurrentQueue<ImageFile> filteredFiles;
 		ConcurrentQueue<ImageFile> dbRequests = new ConcurrentQueue<ImageFile>();
@@ -68,6 +71,8 @@ namespace KPO_Lab4
 		DateTime RecordTime;
 		Task background;
 		CancellationTokenSource cancelDBSource;
+
+		Dictionary<int, ThreadStats> threadStatistics;
 
 		public VideoRecorder (VideoReceiver reciever, Control actor)
 			{
@@ -95,6 +100,8 @@ namespace KPO_Lab4
 
 		public void Record (VideoFilter filter, ImageResolution size, int workersCount, string savePath)
 			{
+			imageRecordedCounter = 0;
+			threadStatistics = new Dictionary<int, ThreadStats>();
 			Filter = filter;
 			Resolution = size;
 			AvailableWorkers = workersCount;
@@ -108,6 +115,7 @@ namespace KPO_Lab4
 			RecordTime = DateTime.Now;
 			sourceFiles = new ConcurrentQueue<ImageFile>();
 			filteredFiles = new ConcurrentQueue<ImageFile>();
+			
 			Reciever.ImageRecieved += saveFrame;
 			}
 
@@ -173,9 +181,8 @@ namespace KPO_Lab4
 					if ( isBusy && !isProceeding )
 						{
 						isBusy = false;
-						if ( actor.InvokeRequired )
-							actor.Invoke(new Action(() =>
-								SavingEnd?.Invoke()));
+						actor.Invoke(new Action(() =>
+								SavingEnd?.Invoke(threadStatistics)));
 						}
 					Thread.Sleep(2000);
 					continue;
@@ -222,8 +229,23 @@ namespace KPO_Lab4
 			var result = Filter.Filter(file.Image);
 			var then = DateTime.Now;
 			file.Image = result;
-			file.ProceedTime += then - now;
-			file.FilteringWorkerID = Thread.CurrentThread.ManagedThreadId;
+
+			TimeSpan proceedTime = then - now + file.ProceedTime;
+			file.ProceedTime += proceedTime;
+
+			int threadID = Thread.CurrentThread.ManagedThreadId;
+			file.FilteringWorkerID = threadID;
+
+			if (threadStatistics.ContainsKey(threadID))
+			{
+				threadStatistics[threadID].TasksCompleted++;
+				threadStatistics[threadID].ProceedTime += (int)proceedTime.TotalMilliseconds;
+			}
+			else
+			{
+				threadStatistics.Add(threadID, new ThreadStats((int)proceedTime.TotalMilliseconds));
+			}
+
 
 			filteredFiles.Enqueue(file);
 			}
@@ -237,9 +259,23 @@ namespace KPO_Lab4
 
 			var result = ResizeImage(file.Image, Resolution);
 			var then = DateTime.Now;
-			file.ProceedTime += then - now + file.ProceedTime;
+
+			TimeSpan proceedTime = then - now + file.ProceedTime;
+			file.ProceedTime += proceedTime;
 			file.Image = result;
-			file.ResizingWorkerID = Thread.CurrentThread.ManagedThreadId;
+
+			int threadID = Thread.CurrentThread.ManagedThreadId;
+			file.ResizingWorkerID = threadID;
+
+			if (threadStatistics.ContainsKey(threadID))
+            {
+				threadStatistics[threadID].TasksCompleted++;
+				threadStatistics[threadID].ProceedTime += (int)proceedTime.TotalMilliseconds;
+			}
+			else
+            {
+				threadStatistics.Add(threadID, new ThreadStats((int)proceedTime.TotalMilliseconds));
+			}
 
 			dbRequests.Enqueue(file);
 
@@ -290,7 +326,13 @@ namespace KPO_Lab4
 		private void saveFrame (Bitmap img)
 			{
 			if ( isRecording )
+            {
+				imageRecordedCounter++;
+				actor.Invoke(new Action(() =>
+						FileRecorded?.Invoke(imageRecordedCounter)));
+
 				sourceFiles.Enqueue(new ImageFile(img, RecordTime.ToString() + "_" + sourceFiles.Count, 0, 0));
+			}
 			}
 		}
 	}
