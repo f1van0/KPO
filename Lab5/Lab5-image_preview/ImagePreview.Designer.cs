@@ -231,11 +231,11 @@
             // 
             // PasteTextButton
             // 
-            this.PasteTextButton.Location = new System.Drawing.Point(753, 75);
+            this.PasteTextButton.Location = new System.Drawing.Point(753, 84);
             this.PasteTextButton.Name = "PasteTextButton";
-            this.PasteTextButton.Size = new System.Drawing.Size(125, 25);
+            this.PasteTextButton.Size = new System.Drawing.Size(96, 25);
             this.PasteTextButton.TabIndex = 19;
-            this.PasteTextButton.Text = "Вставить надпись";
+            this.PasteTextButton.Text = "Вставить";
             this.PasteTextButton.UseVisualStyleBackColor = true;
             this.PasteTextButton.Click += new System.EventHandler(this.PasteTextButton_Click);
             // 

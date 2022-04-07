@@ -91,7 +91,6 @@
   <ItemGroup>
     <Compile Include="DB.cs" />
     <Compile Include="DBRow.cs" />
-    <Compile Include="FullName.cs" />
     <Compile Include="ImagePreview.cs">
       <SubType>Form</SubType>
     </Compile>

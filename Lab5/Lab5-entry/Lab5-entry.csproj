@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communications.cs" />
     <Compile Include="Entry.cs">
       <SubType>Form</SubType>
     </Compile>
