@@ -69,7 +69,7 @@ namespace Lab5_entry
 				}
 			}
 
-		private void previewButton_Click (object sender, EventArgs e)
+		private void SetImageButton_Click (object sender, EventArgs e)
 		{
 			if ( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
@@ -78,7 +78,7 @@ namespace Lab5_entry
 			}	
 		}
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SendImageButton_Click(object sender, EventArgs e)
         {
 			new Task(() =>
 			{
@@ -95,7 +95,7 @@ namespace Lab5_entry
 			}).Start();
 		}
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CopyStructureButton_Click(object sender, EventArgs e)
         {
 			DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
 			FullName fullName = new FullName(FirstNameTextBox.Text, SecondNameTextBox.Text, ThirdNameTextBox.Text);
@@ -103,7 +103,7 @@ namespace Lab5_entry
 			Clipboard.SetDataObject(fullNameDataObject);
 		}
 
-        private void button3_Click(object sender, EventArgs e)
+        private void PasteStructureButton_Click(object sender, EventArgs e)
         {
 			DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
 			IDataObject retrievedObject = Clipboard.GetDataObject();

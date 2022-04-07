@@ -28,11 +28,11 @@
 		/// </summary>
 		private void InitializeComponent ()
 			{
-            this.previewButton = new System.Windows.Forms.Button();
+            this.SetImageButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.PostTextButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SendImageButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -43,21 +43,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.SecondNameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.CopyStructureButton = new System.Windows.Forms.Button();
+            this.PasteStructureButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // previewButton
+            // SetImageButton
             // 
-            this.previewButton.Location = new System.Drawing.Point(422, 343);
-            this.previewButton.Margin = new System.Windows.Forms.Padding(2);
-            this.previewButton.Name = "previewButton";
-            this.previewButton.Size = new System.Drawing.Size(94, 25);
-            this.previewButton.TabIndex = 0;
-            this.previewButton.Text = "Set Image";
-            this.previewButton.UseVisualStyleBackColor = true;
-            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
+            this.SetImageButton.Location = new System.Drawing.Point(422, 343);
+            this.SetImageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SetImageButton.Name = "SetImageButton";
+            this.SetImageButton.Size = new System.Drawing.Size(94, 25);
+            this.SetImageButton.TabIndex = 0;
+            this.SetImageButton.Text = "Set Image";
+            this.SetImageButton.UseVisualStyleBackColor = true;
+            this.SetImageButton.Click += new System.EventHandler(this.SetImageButton_Click);
             // 
             // openFileDialog1
             // 
@@ -74,16 +74,16 @@
             this.PostTextButton.UseVisualStyleBackColor = true;
             this.PostTextButton.Click += new System.EventHandler(this.postTextButton_Click);
             // 
-            // button1
+            // SendImageButton
             // 
-            this.button1.Location = new System.Drawing.Point(531, 343);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 25);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Send Image";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SendImageButton.Location = new System.Drawing.Point(531, 343);
+            this.SendImageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SendImageButton.Name = "SendImageButton";
+            this.SendImageButton.Size = new System.Drawing.Size(94, 25);
+            this.SendImageButton.TabIndex = 4;
+            this.SendImageButton.Text = "Send Image";
+            this.SendImageButton.UseVisualStyleBackColor = true;
+            this.SendImageButton.Click += new System.EventHandler(this.SendImageButton_Click);
             // 
             // textBox1
             // 
@@ -170,35 +170,35 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Копируемая структура структура:";
             // 
-            // button2
+            // CopyStructureButton
             // 
-            this.button2.Location = new System.Drawing.Point(631, 185);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 25);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Copy";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.CopyStructureButton.Location = new System.Drawing.Point(631, 185);
+            this.CopyStructureButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyStructureButton.Name = "CopyStructureButton";
+            this.CopyStructureButton.Size = new System.Drawing.Size(94, 25);
+            this.CopyStructureButton.TabIndex = 16;
+            this.CopyStructureButton.Text = "Copy";
+            this.CopyStructureButton.UseVisualStyleBackColor = true;
+            this.CopyStructureButton.Click += new System.EventHandler(this.CopyStructureButton_Click);
             // 
-            // button3
+            // PasteStructureButton
             // 
-            this.button3.Location = new System.Drawing.Point(767, 185);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 25);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Paste";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.PasteStructureButton.Location = new System.Drawing.Point(767, 185);
+            this.PasteStructureButton.Margin = new System.Windows.Forms.Padding(2);
+            this.PasteStructureButton.Name = "PasteStructureButton";
+            this.PasteStructureButton.Size = new System.Drawing.Size(94, 25);
+            this.PasteStructureButton.TabIndex = 17;
+            this.PasteStructureButton.Text = "Paste";
+            this.PasteStructureButton.UseVisualStyleBackColor = true;
+            this.PasteStructureButton.Click += new System.EventHandler(this.PasteStructureButton_Click);
             // 
             // Entry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 379);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.PasteStructureButton);
+            this.Controls.Add(this.CopyStructureButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.ThirdNameTextBox);
             this.Controls.Add(this.label4);
@@ -209,9 +209,9 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SendImageButton);
             this.Controls.Add(this.PostTextButton);
-            this.Controls.Add(this.previewButton);
+            this.Controls.Add(this.SetImageButton);
             this.Location = new System.Drawing.Point(100, 40);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
@@ -228,11 +228,11 @@
 
 		#endregion
 
-		private System.Windows.Forms.Button previewButton;
+		private System.Windows.Forms.Button SetImageButton;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.Button PostTextButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SendImageButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -243,8 +243,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox SecondNameTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button CopyStructureButton;
+        private System.Windows.Forms.Button PasteStructureButton;
     }
 	}
 

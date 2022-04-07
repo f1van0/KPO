@@ -179,18 +179,18 @@ namespace Lab5_image_preview
 			*/
 		}
 
-		void setImage(Image img)
+		void SetImage(Image img)
 		{
 			if (pictureBox1.InvokeRequired)
-				pictureBox1.Invoke(new Action<Image>(setImage), img);
+				pictureBox1.Invoke(new Action<Image>(SetImage), img);
 			else
 			{
 				BgImage = img;
-				drawImage();
+				DrawImage();
 			}
 		}
 
-		void drawImage()
+		void DrawImage()
 		{
 			if (BgImage == null)
 				return;
@@ -214,7 +214,7 @@ namespace Lab5_image_preview
 					while (client.Available > 0)
 						memoryStream.WriteByte((byte)clientStream.ReadByte());
 
-					setImage(new Bitmap(memoryStream));
+					SetImage(new Bitmap(memoryStream));
 					InsertNewEntry("Socket TCP", "Получение изображения", DateTime.Now - startTime);
 				}
 			}
@@ -222,7 +222,7 @@ namespace Lab5_image_preview
 
 		private void ImagePreview_SizeChanged(object sender, EventArgs e)
 		{
-			drawImage();
+			DrawImage();
 		}
 
 		private void ImagePreview_FormClosing(object sender, FormClosingEventArgs e)
@@ -235,7 +235,7 @@ namespace Lab5_image_preview
 			thread.Abort();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void PasteStructureButton_Click(object sender, EventArgs e)
 		{
 			DateTime timeStart = DateTime.Now;
 			DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
@@ -251,7 +251,7 @@ namespace Lab5_image_preview
 			}
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		private void ApplyFilterButton_Click(object sender, EventArgs e)
 		{
 			if (pictureBox1.Image == null)
 				return;

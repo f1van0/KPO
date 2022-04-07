@@ -75,7 +75,6 @@ namespace Lab5_image_preview
 
 		public void Dispose()
 		{
-			Insert(new DBRow("Статус приложения", "Завершение работы", new TimeSpan(0)));
 			connection.Close();
 		}
 	}

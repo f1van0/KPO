@@ -36,11 +36,11 @@
             this.FirstNameTextBox = new System.Windows.Forms.TextBox();
             this.ThirdNameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.PasteStructureButton = new System.Windows.Forms.Button();
             this.postText = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ApplyFilterButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
@@ -117,15 +117,15 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Отчество";
             // 
-            // button1
+            // PasteStructureButton
             // 
-            this.button1.Location = new System.Drawing.Point(756, 315);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(233, 39);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Вставить значения из буфера";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.PasteStructureButton.Location = new System.Drawing.Point(756, 315);
+            this.PasteStructureButton.Name = "PasteStructureButton";
+            this.PasteStructureButton.Size = new System.Drawing.Size(233, 39);
+            this.PasteStructureButton.TabIndex = 9;
+            this.PasteStructureButton.Text = "Вставить значения из буфера";
+            this.PasteStructureButton.UseVisualStyleBackColor = true;
+            this.PasteStructureButton.Click += new System.EventHandler(this.PasteStructureButton_Click);
             // 
             // postText
             // 
@@ -154,22 +154,22 @@
             "Без фильтра",
             "Инверсия цветов",
             "Оттенки серого",
-            "Повышенная контрастность"});
+            "Увеличение яркости"});
             this.comboBox1.Location = new System.Drawing.Point(38, 380);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(189, 21);
             this.comboBox1.TabIndex = 11;
             this.comboBox1.Text = "Без фильтра";
             // 
-            // button2
+            // ApplyFilterButton
             // 
-            this.button2.Location = new System.Drawing.Point(233, 364);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(159, 37);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Применить фильтр";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ApplyFilterButton.Location = new System.Drawing.Point(233, 364);
+            this.ApplyFilterButton.Name = "ApplyFilterButton";
+            this.ApplyFilterButton.Size = new System.Drawing.Size(159, 37);
+            this.ApplyFilterButton.TabIndex = 12;
+            this.ApplyFilterButton.Text = "Применить фильтр";
+            this.ApplyFilterButton.UseVisualStyleBackColor = true;
+            this.ApplyFilterButton.Click += new System.EventHandler(this.ApplyFilterButton_Click);
             // 
             // label6
             // 
@@ -183,7 +183,7 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(410, 388);
+            this.timeLabel.Location = new System.Drawing.Point(398, 388);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(188, 13);
             this.timeLabel.TabIndex = 14;
@@ -193,7 +193,7 @@
             // 
             this.logTextBox.Location = new System.Drawing.Point(1022, 25);
             this.logTextBox.Name = "logTextBox";
-            this.logTextBox.Size = new System.Drawing.Size(332, 329);
+            this.logTextBox.Size = new System.Drawing.Size(332, 376);
             this.logTextBox.TabIndex = 15;
             this.logTextBox.Text = "";
             // 
@@ -215,11 +215,11 @@
             this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.ApplyFilterButton);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.postText);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.PasteStructureButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.ThirdNameTextBox);
             this.Controls.Add(this.label4);
@@ -251,11 +251,11 @@
         private System.Windows.Forms.TextBox FirstNameTextBox;
         private System.Windows.Forms.TextBox ThirdNameTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button PasteStructureButton;
         private System.Windows.Forms.Label postText;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ApplyFilterButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.RichTextBox logTextBox;
