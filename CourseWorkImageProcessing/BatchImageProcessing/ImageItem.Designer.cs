@@ -29,27 +29,29 @@ namespace BatchImageProcessing
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.processProgressBar = new System.Windows.Forms.ProgressBar();
+            this.imagePictureBox = new System.Windows.Forms.PictureBox();
             this.closeButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.imageName = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // processProgressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(3, 148);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(179, 20);
-            this.progressBar1.TabIndex = 7;
+            this.processProgressBar.Location = new System.Drawing.Point(3, 148);
+            this.processProgressBar.Name = "processProgressBar";
+            this.processProgressBar.Size = new System.Drawing.Size(179, 20);
+            this.processProgressBar.TabIndex = 7;
             // 
-            // pictureBox1
+            // imagePictureBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(179, 112);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.imagePictureBox.Location = new System.Drawing.Point(3, 35);
+            this.imagePictureBox.Name = "imagePictureBox";
+            this.imagePictureBox.Size = new System.Drawing.Size(179, 112);
+            this.imagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imagePictureBox.TabIndex = 6;
+            this.imagePictureBox.TabStop = false;
+            this.imagePictureBox.Click += new System.EventHandler(this.imagePictureBox_Click);
             // 
             // closeButton
             // 
@@ -59,27 +61,29 @@ namespace BatchImageProcessing
             this.closeButton.TabIndex = 5;
             this.closeButton.Text = "x";
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
-            // label1
+            // imageName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "1. image_name.png";
+            this.imageName.AutoSize = true;
+            this.imageName.Location = new System.Drawing.Point(3, 11);
+            this.imageName.Name = "imageName";
+            this.imageName.Size = new System.Drawing.Size(111, 15);
+            this.imageName.TabIndex = 4;
+            this.imageName.Text = "1. image_name.png";
             // 
             // ImageItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.pictureBox1);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.processProgressBar);
+            this.Controls.Add(this.imagePictureBox);
             this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.imageName);
             this.Name = "ImageItem";
-            this.Size = new System.Drawing.Size(185, 177);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Size = new System.Drawing.Size(183, 175);
+            ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,9 +91,9 @@ namespace BatchImageProcessing
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ProgressBar processProgressBar;
+        private System.Windows.Forms.PictureBox imagePictureBox;
         private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label imageName;
     }
 }

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace BatchImageProcessing
 {
-    public partial class UserControl1 : UserControl
+    public partial class FiltersForm : Form
     {
-        public UserControl1()
+        public FiltersForm()
         {
             InitializeComponent();
+        }
+
+        private void FiltersForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
