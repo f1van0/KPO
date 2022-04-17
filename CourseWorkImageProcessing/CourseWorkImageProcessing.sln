@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchImageProcessing", "BatchImageProcessing\BatchImageProcessing.csproj", "{AE1ED1AC-AB2B-4D04-A27F-8BC161F94792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchImageProcessing", "BatchImageProcessing\BatchImageProcessing.csproj", "{AE1ED1AC-AB2B-4D04-A27F-8BC161F94792}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DL", "DL\DL.csproj", "{89454BEA-73B4-4D1D-BE70-FA778FF44D9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvertColorsPlugin", "InvertColorsPlugin\InvertColorsPlugin.csproj", "{ACDB6D47-52AC-4221-B6EB-6D6212A9F06B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{03682F20-17D2-4727-A3D5-6F2BE880EECB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightnessFilter", "Plugins\BrightnessFilter\BrightnessFilter.csproj", "{6C4E928B-14AC-4FBF-AEF4-F9B073126E41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpnessFilter", "Plugins\SharpnessFilter\SharpnessFilter.csproj", "{7AF2511E-0367-4208-932B-D4D051500940}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundRemovalFilter", "Plugins\BackgroundRemovalFilter\BackgroundRemovalFilter.csproj", "{134AAC4F-B55F-4B10-B59A-F854F0662D59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianFilter", "Plugins\MedianFilter\MedianFilter.csproj", "{5C92A602-BC70-4F43-90EA-959406F0E078}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,39 @@ Global
 		{AE1ED1AC-AB2B-4D04-A27F-8BC161F94792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE1ED1AC-AB2B-4D04-A27F-8BC161F94792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE1ED1AC-AB2B-4D04-A27F-8BC161F94792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89454BEA-73B4-4D1D-BE70-FA778FF44D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89454BEA-73B4-4D1D-BE70-FA778FF44D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89454BEA-73B4-4D1D-BE70-FA778FF44D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89454BEA-73B4-4D1D-BE70-FA778FF44D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDB6D47-52AC-4221-B6EB-6D6212A9F06B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDB6D47-52AC-4221-B6EB-6D6212A9F06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDB6D47-52AC-4221-B6EB-6D6212A9F06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDB6D47-52AC-4221-B6EB-6D6212A9F06B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4E928B-14AC-4FBF-AEF4-F9B073126E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4E928B-14AC-4FBF-AEF4-F9B073126E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4E928B-14AC-4FBF-AEF4-F9B073126E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4E928B-14AC-4FBF-AEF4-F9B073126E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF2511E-0367-4208-932B-D4D051500940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF2511E-0367-4208-932B-D4D051500940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF2511E-0367-4208-932B-D4D051500940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF2511E-0367-4208-932B-D4D051500940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{134AAC4F-B55F-4B10-B59A-F854F0662D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{134AAC4F-B55F-4B10-B59A-F854F0662D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{134AAC4F-B55F-4B10-B59A-F854F0662D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{134AAC4F-B55F-4B10-B59A-F854F0662D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C92A602-BC70-4F43-90EA-959406F0E078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C92A602-BC70-4F43-90EA-959406F0E078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C92A602-BC70-4F43-90EA-959406F0E078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C92A602-BC70-4F43-90EA-959406F0E078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C4E928B-14AC-4FBF-AEF4-F9B073126E41} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
+		{7AF2511E-0367-4208-932B-D4D051500940} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
+		{134AAC4F-B55F-4B10-B59A-F854F0662D59} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
+		{5C92A602-BC70-4F43-90EA-959406F0E078} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1599B476-1B1B-4F98-8DAC-F77D41CC3458}
