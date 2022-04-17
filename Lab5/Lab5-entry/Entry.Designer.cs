@@ -56,10 +56,10 @@
             // 
             // SetImageButton
             // 
-            this.SetImageButton.Location = new System.Drawing.Point(433, 314);
-            this.SetImageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SetImageButton.Location = new System.Drawing.Point(577, 386);
+            this.SetImageButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SetImageButton.Name = "SetImageButton";
-            this.SetImageButton.Size = new System.Drawing.Size(94, 54);
+            this.SetImageButton.Size = new System.Drawing.Size(125, 103);
             this.SetImageButton.TabIndex = 0;
             this.SetImageButton.Text = "Изменить изображение";
             this.SetImageButton.UseVisualStyleBackColor = true;
@@ -71,10 +71,10 @@
             // 
             // postTextWM
             // 
-            this.postTextWM.Location = new System.Drawing.Point(260, 343);
-            this.postTextWM.Margin = new System.Windows.Forms.Padding(2);
+            this.postTextWM.Location = new System.Drawing.Point(347, 422);
+            this.postTextWM.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.postTextWM.Name = "postTextWM";
-            this.postTextWM.Size = new System.Drawing.Size(142, 25);
+            this.postTextWM.Size = new System.Drawing.Size(189, 31);
             this.postTextWM.TabIndex = 3;
             this.postTextWM.Text = "Отправить текст с WM";
             this.postTextWM.UseVisualStyleBackColor = true;
@@ -82,10 +82,10 @@
             // 
             // SendImageSocketButton
             // 
-            this.SendImageSocketButton.Location = new System.Drawing.Point(531, 343);
-            this.SendImageSocketButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SendImageSocketButton.Location = new System.Drawing.Point(708, 422);
+            this.SendImageSocketButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SendImageSocketButton.Name = "SendImageSocketButton";
-            this.SendImageSocketButton.Size = new System.Drawing.Size(195, 25);
+            this.SendImageSocketButton.Size = new System.Drawing.Size(260, 31);
             this.SendImageSocketButton.TabIndex = 4;
             this.SendImageSocketButton.Text = "Отправить изображение с Socket";
             this.SendImageSocketButton.UseVisualStyleBackColor = true;
@@ -93,17 +93,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 348);
+            this.textBox1.Location = new System.Drawing.Point(16, 428);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(246, 20);
+            this.textBox1.Size = new System.Drawing.Size(327, 22);
             this.textBox1.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 332);
+            this.label1.Location = new System.Drawing.Point(16, 409);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 13);
+            this.label1.Size = new System.Drawing.Size(184, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Передаваемое сообщение";
             // 
@@ -112,9 +114,10 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(613, 297);
+            this.pictureBox1.Size = new System.Drawing.Size(817, 365);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -122,66 +125,73 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(628, 133);
+            this.label5.Location = new System.Drawing.Point(837, 164);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.Size = new System.Drawing.Size(71, 17);
             this.label5.TabIndex = 15;
             this.label5.Text = "Отчество";
             // 
             // ThirdNameTextBox
             // 
-            this.ThirdNameTextBox.Location = new System.Drawing.Point(631, 149);
+            this.ThirdNameTextBox.Location = new System.Drawing.Point(841, 183);
+            this.ThirdNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ThirdNameTextBox.Name = "ThirdNameTextBox";
-            this.ThirdNameTextBox.Size = new System.Drawing.Size(233, 20);
+            this.ThirdNameTextBox.Size = new System.Drawing.Size(309, 22);
             this.ThirdNameTextBox.TabIndex = 14;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(628, 94);
+            this.label4.Location = new System.Drawing.Point(837, 116);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 13;
             this.label4.Text = "Имя";
             // 
             // FirstNameTextBox
             // 
-            this.FirstNameTextBox.Location = new System.Drawing.Point(631, 110);
+            this.FirstNameTextBox.Location = new System.Drawing.Point(841, 135);
+            this.FirstNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.FirstNameTextBox.Name = "FirstNameTextBox";
-            this.FirstNameTextBox.Size = new System.Drawing.Size(233, 20);
+            this.FirstNameTextBox.Size = new System.Drawing.Size(309, 22);
             this.FirstNameTextBox.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(628, 52);
+            this.label3.Location = new System.Drawing.Point(837, 64);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(70, 17);
             this.label3.TabIndex = 11;
             this.label3.Text = "Фамилия";
             // 
             // SecondNameTextBox
             // 
-            this.SecondNameTextBox.Location = new System.Drawing.Point(631, 68);
+            this.SecondNameTextBox.Location = new System.Drawing.Point(841, 84);
+            this.SecondNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SecondNameTextBox.Name = "SecondNameTextBox";
-            this.SecondNameTextBox.Size = new System.Drawing.Size(233, 20);
+            this.SecondNameTextBox.Size = new System.Drawing.Size(309, 22);
             this.SecondNameTextBox.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(628, 14);
+            this.label2.Location = new System.Drawing.Point(837, 17);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 13);
+            this.label2.Size = new System.Drawing.Size(233, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "Копируемая структура структура:";
             // 
             // CopyStructureButton
             // 
-            this.CopyStructureButton.Location = new System.Drawing.Point(711, 185);
-            this.CopyStructureButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyStructureButton.Location = new System.Drawing.Point(948, 228);
+            this.CopyStructureButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CopyStructureButton.Name = "CopyStructureButton";
-            this.CopyStructureButton.Size = new System.Drawing.Size(85, 25);
+            this.CopyStructureButton.Size = new System.Drawing.Size(113, 31);
             this.CopyStructureButton.TabIndex = 16;
             this.CopyStructureButton.Text = "Скопировать";
             this.CopyStructureButton.UseVisualStyleBackColor = true;
@@ -189,10 +199,10 @@
             // 
             // PasteStructureButton
             // 
-            this.PasteStructureButton.Location = new System.Drawing.Point(711, 214);
-            this.PasteStructureButton.Margin = new System.Windows.Forms.Padding(2);
+            this.PasteStructureButton.Location = new System.Drawing.Point(948, 263);
+            this.PasteStructureButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PasteStructureButton.Name = "PasteStructureButton";
-            this.PasteStructureButton.Size = new System.Drawing.Size(85, 25);
+            this.PasteStructureButton.Size = new System.Drawing.Size(113, 31);
             this.PasteStructureButton.TabIndex = 17;
             this.PasteStructureButton.Text = "Вставить";
             this.PasteStructureButton.UseVisualStyleBackColor = true;
@@ -200,10 +210,10 @@
             // 
             // CopyImageButton
             // 
-            this.CopyImageButton.Location = new System.Drawing.Point(531, 314);
-            this.CopyImageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyImageButton.Location = new System.Drawing.Point(708, 386);
+            this.CopyImageButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CopyImageButton.Name = "CopyImageButton";
-            this.CopyImageButton.Size = new System.Drawing.Size(195, 25);
+            this.CopyImageButton.Size = new System.Drawing.Size(260, 31);
             this.CopyImageButton.TabIndex = 19;
             this.CopyImageButton.Text = "Скопировать изображение";
             this.CopyImageButton.UseVisualStyleBackColor = true;
@@ -211,10 +221,10 @@
             // 
             // CopyText
             // 
-            this.CopyText.Location = new System.Drawing.Point(260, 314);
-            this.CopyText.Margin = new System.Windows.Forms.Padding(2);
+            this.CopyText.Location = new System.Drawing.Point(347, 386);
+            this.CopyText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CopyText.Name = "CopyText";
-            this.CopyText.Size = new System.Drawing.Size(142, 25);
+            this.CopyText.Size = new System.Drawing.Size(189, 31);
             this.CopyText.TabIndex = 20;
             this.CopyText.Text = "Скопировать текст";
             this.CopyText.UseVisualStyleBackColor = true;
@@ -222,9 +232,10 @@
             // 
             // SendStructureWMButton
             // 
-            this.SendStructureWMButton.Location = new System.Drawing.Point(631, 185);
+            this.SendStructureWMButton.Location = new System.Drawing.Point(841, 228);
+            this.SendStructureWMButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SendStructureWMButton.Name = "SendStructureWMButton";
-            this.SendStructureWMButton.Size = new System.Drawing.Size(75, 39);
+            this.SendStructureWMButton.Size = new System.Drawing.Size(100, 48);
             this.SendStructureWMButton.TabIndex = 21;
             this.SendStructureWMButton.Text = "Отправить с WM";
             this.SendStructureWMButton.UseVisualStyleBackColor = true;
@@ -232,9 +243,10 @@
             // 
             // SendStructureSocketButton
             // 
-            this.SendStructureSocketButton.Location = new System.Drawing.Point(801, 185);
+            this.SendStructureSocketButton.Location = new System.Drawing.Point(1068, 228);
+            this.SendStructureSocketButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SendStructureSocketButton.Name = "SendStructureSocketButton";
-            this.SendStructureSocketButton.Size = new System.Drawing.Size(75, 39);
+            this.SendStructureSocketButton.Size = new System.Drawing.Size(100, 48);
             this.SendStructureSocketButton.TabIndex = 22;
             this.SendStructureSocketButton.Text = "Отправить с Socket";
             this.SendStructureSocketButton.UseVisualStyleBackColor = true;
@@ -242,10 +254,10 @@
             // 
             // SendTextSocketButton
             // 
-            this.SendTextSocketButton.Location = new System.Drawing.Point(260, 373);
-            this.SendTextSocketButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SendTextSocketButton.Location = new System.Drawing.Point(347, 459);
+            this.SendTextSocketButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SendTextSocketButton.Name = "SendTextSocketButton";
-            this.SendTextSocketButton.Size = new System.Drawing.Size(142, 45);
+            this.SendTextSocketButton.Size = new System.Drawing.Size(189, 55);
             this.SendTextSocketButton.TabIndex = 23;
             this.SendTextSocketButton.Text = "Отправить текст с Socket";
             this.SendTextSocketButton.UseVisualStyleBackColor = true;
@@ -253,10 +265,10 @@
             // 
             // SendImageWMButton
             // 
-            this.SendImageWMButton.Location = new System.Drawing.Point(529, 372);
-            this.SendImageWMButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SendImageWMButton.Location = new System.Drawing.Point(705, 458);
+            this.SendImageWMButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SendImageWMButton.Name = "SendImageWMButton";
-            this.SendImageWMButton.Size = new System.Drawing.Size(197, 25);
+            this.SendImageWMButton.Size = new System.Drawing.Size(263, 31);
             this.SendImageWMButton.TabIndex = 24;
             this.SendImageWMButton.Text = "Отправить изображение с WM";
             this.SendImageWMButton.UseVisualStyleBackColor = true;
@@ -264,9 +276,9 @@
             // 
             // Entry
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 429);
+            this.ClientSize = new System.Drawing.Size(1205, 528);
             this.Controls.Add(this.SendImageWMButton);
             this.Controls.Add(this.SendTextSocketButton);
             this.Controls.Add(this.SendStructureSocketButton);
@@ -289,7 +301,7 @@
             this.Controls.Add(this.postTextWM);
             this.Controls.Add(this.SetImageButton);
             this.Location = new System.Drawing.Point(100, 40);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Entry";
             this.ShowIcon = false;

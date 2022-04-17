@@ -69,7 +69,7 @@ namespace Lab5_image_preview
             NativeMethods.ChangeClipboardChain(this.Handle, _ClipboardViewerNext);
         }
 
-        private DBRow GetClipboardData()
+        private void GetClipboardData()
         {
             DateTime startTime = DateTime.Now;
             IDataObject iData = new DataObject();
@@ -83,7 +83,7 @@ namespace Lab5_image_preview
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "CLIPBOARD", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new DBRow(command, "ошибка определение содержимого буфера обмена", new TimeSpan(0));
+                return;
             }
 
             DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
@@ -106,19 +106,15 @@ namespace Lab5_image_preview
                 context = "Невозможно отобразить скопированное содержимое";
             }
 
-            return new DBRow(command, context, DateTime.Now - startTime);
+            InsertNewEntry(command, context, DateTime.Now - startTime);
         }
 
         protected override void WndProc(ref Message m)
         {
-            DBRow newRow;
-
             switch ((NativeMethods.Msgs)m.Msg)
             {
                 case NativeMethods.Msgs.WM_COPYDATA:
                     {
-                        DateTime now = DateTime.Now;
-                        // Extract the file name
                         NativeMethods.COPYDATASTRUCT copyData = (NativeMethods.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.COPYDATASTRUCT));
                         int dataType = (int)copyData.dwData;
 
@@ -138,82 +134,16 @@ namespace Lab5_image_preview
                         Receive(mydata.DataType, mydata.Data);
                         return;
                     }
+                case NativeMethods.Msgs.WM_DRAWCLIPBOARD:
+                    {
+                        GetClipboardData();
+                        //NativeMethods.SendMessage(_ClipboardViewerNext, (uint)m.Msg, m.WParam, m.LParam);
+                        return;
+                    }
                 default:
                     base.WndProc(ref m);
                     break;
             }
-
-            /*
-			switch ((NativeMethods.Msgs)m.Msg)
-			{
-				case NativeMethods.Msgs.WM_DRAWCLIPBOARD:
-					{
-						newRow = GetClipboardData();
-						InsertNewEntry(newRow);
-						NativeMethods.SendMessage(_ClipboardViewerNext, (uint)m.Msg, m.WParam, m.LParam);
-						break;
-					}
-
-				case NativeMethods.Msgs.WM_COPYDATA:
-					{
-						DateTime now = DateTime.Now;
-						// Extract the file name
-						NativeMethods.COPYDATASTRUCT copyData = (NativeMethods.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.COPYDATASTRUCT));
-						int dataType = (int)copyData.dwData;
-
-						if (dataType == 2)
-						{
-							string text = Marshal.PtrToStringAnsi(copyData.lpData);
-							if (text != "")
-							{
-								postText.Text = text;
-								InsertNewEntry("WM_CopyData", "Приём строки", DateTime.Now - now);
-							}
-						}
-						else
-						{
-							MessageBox.Show(String.Format("Unrecognized data type = {0}.", dataType), "WM_COPYDATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						}
-						break;
-					}
-				default:
-					base.WndProc(ref m);
-					break;
-			}
-			*/
-            /*
-			if (m.Msg == NativeMethods.WM_DRAWCLIPBOARD)
-			{
-				string newMessage = GetClipboardData();
-				textBox1.Text += newMessage + "\r\n";
-				NativeMethods.SendMessage(_ClipboardViewerNext, (uint)m.Msg, m.WParam, m.LParam);
-				break;
-			}
-			if (m.Msg == NativeMethods.WM_COPYDATA)
-			{
-				DateTime now = DateTime.Now;
-				// Extract the file name
-				NativeMethods.COPYDATASTRUCT copyData = (NativeMethods.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.COPYDATASTRUCT));
-				int dataType = (int)copyData.dwData;
-				if (dataType == 2)
-				{
-					string text = Marshal.PtrToStringAnsi(copyData.lpData);
-					if (text != "")
-					{
-						postText.Text = text;
-						db.Insert(new DBRow("WM_CopyData", "Приём строки", DateTime.Now - now));
-					}
-				}
-				else
-				{
-					MessageBox.Show(String.Format("Unrecognized data type = {0}.", dataType), "SendMessageDemo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-			else
-			{
-				base.WndProc(ref m);
-			}
-			*/
         }
 
         void SetImage(Image img)
@@ -246,6 +176,7 @@ namespace Lab5_image_preview
                         Thread.Sleep(delay += 20);
 
                     DateTime startTime = DateTime.Now;
+                    string context = "";
                     MemoryStream memoryStream = new MemoryStream();
                     client.GetStream().CopyTo(memoryStream);
                     
@@ -258,20 +189,23 @@ namespace Lab5_image_preview
                     {
                         case DataType.Image:
                             SetImage(Bitmap.FromStream(new MemoryStream(data.Data)));
+                            context = "Пришло изображение";
                             break;
                         case DataType.Text:
                             var text = Encoding.UTF8.GetString(data.Data);
                             postText?.Invoke((Action)delegate () { postText.Text = text; });
+                            context = "Пришел текст";
                             break;
                         case DataType.Struct:
                             var fullName = Communications.StructFromBytes<FullName>(data.Data);
-                            postText?.Invoke((Action)delegate () { setFullName(fullName); }); 
+                            postText?.Invoke((Action)delegate () { setFullName(fullName); });
+                            context = "Пришла структура";
                             break;
                         default:
                             break;
                     }
 
-                    InsertNewEntry("Socket TCP", "Получение изображения", DateTime.Now - startTime);
+                    InsertNewEntry("Socket TCP", context, DateTime.Now - startTime);
                 }
             }
         }
@@ -289,17 +223,6 @@ namespace Lab5_image_preview
 
             imageServerListener.Stop();
             thread.Abort();
-        }
-
-        private void PasteStructureButton_Click(object sender, EventArgs e)
-        {
-            DateTime timeStart = DateTime.Now;
-            DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
-            IDataObject retrievedObject = Clipboard.GetDataObject();
-            FullName receivedFullName = (FullName)retrievedObject.GetData(fullnameFormat.Name);
-
-            setFullName(receivedFullName);
-            InsertNewEntry("Вставка из буфера обмена", "Вставка структуры FullName", DateTime.Now - timeStart);
         }
 
         public void setFullName(FullName fullName)
@@ -477,21 +400,36 @@ namespace Lab5_image_preview
                 return;
 
             pictureBox1.Image = img;
-            InsertNewEntry("Вставка из буфера обмена", "Вставка изображения", DateTime.Now - timeStart);
+            InsertNewEntry("Буфер обмена", "Вставка изображения", DateTime.Now - timeStart);
         }
 
         private void PasteTextButton_Click(object sender, EventArgs e)
         {
+            DateTime timeStart = DateTime.Now;
             string receivedString = Clipboard.GetText();
 
             if (receivedString == null)
                 return;
 
             postText.Text = receivedString;
+            InsertNewEntry("Буфер обмена", "Вставка текста", DateTime.Now - timeStart);
+        }
+
+        private void PasteStructureButton_Click(object sender, EventArgs e)
+        {
+            DateTime timeStart = DateTime.Now;
+            DataFormats.Format fullnameFormat = DataFormats.GetFormat("FullName");
+            IDataObject retrievedObject = Clipboard.GetDataObject();
+            FullName receivedFullName = (FullName)retrievedObject.GetData(fullnameFormat.Name);
+
+            setFullName(receivedFullName);
+            InsertNewEntry("Вставка из буфера обмена", "Вставка структуры FullName", DateTime.Now - timeStart);
         }
 
         private void Receive(DataType dataType, byte[] bytes)
         {
+            DateTime timeStart = DateTime.Now;
+            string context;
             switch (dataType)
             {
                 case DataType.Image:
@@ -502,11 +440,12 @@ namespace Lab5_image_preview
                         var bitmap = Bitmap.FromStream(mstream);
                         pictureBox1?.Invoke((Action)delegate () { pictureBox1.Image = bitmap; });
                     }
-
+                    context = "Прислано изображение";
                     break;
                 case DataType.Text:
                     string text = Encoding.UTF8.GetString(bytes);
                     postText?.Invoke((Action)delegate () { postText.Text = text; });
+                    context = "Прислан текст";
                     break;
                 case DataType.Struct:
                     using (var mstream = new MemoryStream(bytes))
@@ -515,11 +454,13 @@ namespace Lab5_image_preview
                         FullName obj = (FullName)bformatter.Deserialize(mstream);
                         postText?.Invoke((Action)delegate () { setFullName(obj); });
                     }
-
+                    context = "Прислана структура";
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            InsertNewEntry("WM_CopyData", context, DateTime.Now - timeStart);
         }
     }
 }
