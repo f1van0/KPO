@@ -9,21 +9,45 @@ using DL;
 
 namespace BatchImageProcessing
 {
-    class PluginLoader
+	public class FilterPlugin
     {
-		public List<IFilterDynamicLibrary> ImageFiltersPlugins;
+		public IFilterDynamicLibrary Filter { get; }
+		public bool IsActive { get; set; }
+
+		public FilterPlugin(IFilterDynamicLibrary filter)
+        {
+			Filter = filter;
+			IsActive = true;
+		}
+
+		public FilterPlugin(IFilterDynamicLibrary filter, bool isActive)
+		{
+			Filter = filter;
+			IsActive = isActive;
+		}
+
+		public override string ToString()
+        {
+			return Filter.Name;
+		}
+    }
+
+    public class PluginLoader
+    {
+		public List<FilterPlugin> ImageFiltersPlugins;
 		private static FileInfo[] _pluginsFiles;
 		private PluginFoldersManager _pluginFoldersManager;
 
 		public PluginLoader(PluginFoldersManager foldersManager)
         {
-			ImageFiltersPlugins = new List<IFilterDynamicLibrary>();
+			ImageFiltersPlugins = new List<FilterPlugin>();
 			_pluginFoldersManager = foldersManager;
+			LoadPlugins();
 		}
 
         public void LoadPlugins()
         {
-			ImageFiltersPlugins = new List<IFilterDynamicLibrary>();
+			ImageFiltersPlugins = new List<FilterPlugin>();
 			if (!Directory.Exists("Plugins"))
 				return;
 
@@ -47,7 +71,10 @@ namespace BatchImageProcessing
 
 			//Create a new instance of all found types
 			foreach (Type type in types)
-				ImageFiltersPlugins.Add((IFilterDynamicLibrary)Activator.CreateInstance(type));
+            {
+				IFilterDynamicLibrary newFilter = (IFilterDynamicLibrary)Activator.CreateInstance(type);
+				ImageFiltersPlugins.Add(new FilterPlugin(newFilter));
+			}
 		}
 
 		private Assembly ResolveAssembly(object sender, ResolveEventArgs args)

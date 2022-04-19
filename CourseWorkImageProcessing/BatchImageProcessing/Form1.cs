@@ -52,8 +52,8 @@ namespace BatchImageProcessing
                 string[] selectedImages = openImagesDialog.FileNames;
                 for (int i = 0; i < selectedImages.Length; i++)
                 {
-                    ImageItem newImageItem = new ImageItem(selectedImages[i], i, _pluginLoader.ImageFiltersPlugins);
-                    newImageItem.OnSelectImage += ImageSelected;
+                    ImageItem newImageItem = new ImageItem(selectedImages[i], i, _pluginLoader);
+                    newImageItem.SelectImage += ImageSelected;
                     uploadImagesList.Controls.Add(newImageItem);
                 }
 
@@ -70,6 +70,12 @@ namespace BatchImageProcessing
         {
             _selectedImageItem = imageItem;
             pictureBox1.Image = _selectedImageItem.GetCurrentImage;
+            imageItem.UpdateSelectedImage += UpdateSelected;
+        }
+
+        public void UpdateSelected()
+        {
+            pictureBox1.Image = _selectedImageItem.GetCurrentImage;
         }
 
         private void ProcessImagesButton_Click(object sender, EventArgs e)
@@ -82,7 +88,7 @@ namespace BatchImageProcessing
 
         private void ФильрыStripMenuItem_Click(object sender, EventArgs e)
         {
-            FiltersForm filtersForm = new FiltersForm();
+            FiltersForm filtersForm = new FiltersForm(_pluginLoader);
             filtersForm.ShowDialog();
         }
 

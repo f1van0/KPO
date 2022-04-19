@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpnessFilter", "Plugins\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundRemovalFilter", "Plugins\BackgroundRemovalFilter\BackgroundRemovalFilter.csproj", "{134AAC4F-B55F-4B10-B59A-F854F0662D59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianFilter", "Plugins\MedianFilter\MedianFilter.csproj", "{5C92A602-BC70-4F43-90EA-959406F0E078}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedianFilter", "Plugins\MedianFilter\MedianFilter.csproj", "{5C92A602-BC70-4F43-90EA-959406F0E078}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

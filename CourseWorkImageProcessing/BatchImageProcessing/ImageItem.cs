@@ -19,13 +19,23 @@ namespace BatchImageProcessing
 
         //Stack<Bitmap>
         private List<Bitmap> _processedImages;
-
-        private List<IFilterDynamicLibrary> _plugins;
+        private PluginLoader _pluginLoader;
 
         public delegate void SelectImageHandler(ImageItem imageItem);
-        public event SelectImageHandler OnSelectImage;
+        public event SelectImageHandler SelectImage;
 
-        public Bitmap GetCurrentImage { get => _processedImages[_currentStep]; }
+        public delegate void UpdateSelectedImageHandler();
+        public event UpdateSelectedImageHandler UpdateSelectedImage;
+
+        public Bitmap GetCurrentImage {
+            get
+            {
+                if (_processedImages != null && _processedImages.Count > 0)
+                    return _processedImages[_currentStep];
+                else
+                    return new Bitmap(1, 1);
+            }
+        }
         public Bitmap GetSourceImage { get => _processedImages[0]; }
 
         public ImageItem()
@@ -33,7 +43,7 @@ namespace BatchImageProcessing
             InitializeComponent();
         }
 
-        public ImageItem(string path, int id, List<IFilterDynamicLibrary> plugins)
+        public ImageItem(string path, int id, PluginLoader pluginLoader)
         {
             InitializeComponent();
             _fileName = GetFileName(path);
@@ -45,9 +55,9 @@ namespace BatchImageProcessing
             Bitmap sourceImage = (Bitmap)Image.FromFile(path);
             _processedImages.Add(sourceImage);
 
-            _plugins = plugins;
+            _pluginLoader = pluginLoader;
 
-            UpdateImage();
+            imagePictureBox.Image = GetCurrentImage;
         }
 
         public void GetProcessedImage(Bitmap processedImage)
@@ -71,10 +81,13 @@ namespace BatchImageProcessing
         public void UpdateImage()
         {
             imagePictureBox.Image = GetCurrentImage;
+            //UpdateSelectedImage.Invoke();
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            //_processedImages[_currentStep] = new Bitmap(1, 1);
+            //UpdateSelectedImage.Invoke();
             Dispose();
         }
 
@@ -92,21 +105,31 @@ namespace BatchImageProcessing
 
         private void imagePictureBox_Click(object sender, EventArgs e)
         {
-            OnSelectImage.Invoke(this);
+            SelectImage.Invoke(this);
         }
 
         public void ApplyFilters()
         {
-            if (_plugins.Count == 0)
+            if (_pluginLoader.ImageFiltersPlugins.Count == 0)
                 return;
 
-            foreach (var plugin in _plugins)
+            ResetImages();
+
+            foreach (var plugin in _pluginLoader.ImageFiltersPlugins)
             {
-                _processedImages.Add(plugin.Apply(GetCurrentImage));
-                _currentStep++;
+                if (plugin.IsActive)
+                    GetProcessedImage(plugin.Filter.Apply(GetCurrentImage));
             }
 
             UpdateImage();
+        }
+
+        public void ResetImages()
+        {
+            Bitmap sourceImage = GetSourceImage;
+            _processedImages.Clear();
+            _processedImages.Add(sourceImage);
+            _currentStep = 0;
         }
     }
 }
