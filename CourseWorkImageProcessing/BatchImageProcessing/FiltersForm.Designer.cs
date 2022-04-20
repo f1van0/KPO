@@ -44,18 +44,16 @@ namespace BatchImageProcessing
             "Увеличение яркости (images/dll/brightness.dll)",
             "Удаление заднего фона (images/dll/eraser.dll)",
             "Медианный фильтр (images/dll/median.dll)"});
-            this.FiltersRadioButtonList.Location = new System.Drawing.Point(14, 16);
-            this.FiltersRadioButtonList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.FiltersRadioButtonList.Location = new System.Drawing.Point(12, 12);
             this.FiltersRadioButtonList.Name = "FiltersRadioButtonList";
-            this.FiltersRadioButtonList.Size = new System.Drawing.Size(556, 400);
+            this.FiltersRadioButtonList.Size = new System.Drawing.Size(487, 292);
             this.FiltersRadioButtonList.TabIndex = 0;
             // 
             // UpButton
             // 
-            this.UpButton.Location = new System.Drawing.Point(12, 424);
-            this.UpButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.UpButton.Location = new System.Drawing.Point(10, 318);
             this.UpButton.Name = "UpButton";
-            this.UpButton.Size = new System.Drawing.Size(86, 31);
+            this.UpButton.Size = new System.Drawing.Size(75, 23);
             this.UpButton.TabIndex = 1;
             this.UpButton.Text = "Вверх";
             this.UpButton.UseVisualStyleBackColor = true;
@@ -63,10 +61,9 @@ namespace BatchImageProcessing
             // 
             // DownButton
             // 
-            this.DownButton.Location = new System.Drawing.Point(105, 424);
-            this.DownButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DownButton.Location = new System.Drawing.Point(92, 318);
             this.DownButton.Name = "DownButton";
-            this.DownButton.Size = new System.Drawing.Size(86, 31);
+            this.DownButton.Size = new System.Drawing.Size(75, 23);
             this.DownButton.TabIndex = 2;
             this.DownButton.Text = "Вниз";
             this.DownButton.UseVisualStyleBackColor = true;
@@ -74,23 +71,24 @@ namespace BatchImageProcessing
             // 
             // OptionsButton
             // 
-            this.OptionsButton.Location = new System.Drawing.Point(404, 426);
+            this.OptionsButton.Location = new System.Drawing.Point(354, 320);
+            this.OptionsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OptionsButton.Name = "OptionsButton";
-            this.OptionsButton.Size = new System.Drawing.Size(166, 29);
+            this.OptionsButton.Size = new System.Drawing.Size(145, 22);
             this.OptionsButton.TabIndex = 3;
             this.OptionsButton.Text = "Настройки плагина";
             this.OptionsButton.UseVisualStyleBackColor = true;
+            this.OptionsButton.Click += new System.EventHandler(this.OptionsButton_Click);
             // 
             // FiltersForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 481);
+            this.ClientSize = new System.Drawing.Size(511, 361);
             this.Controls.Add(this.OptionsButton);
             this.Controls.Add(this.DownButton);
             this.Controls.Add(this.UpButton);
             this.Controls.Add(this.FiltersRadioButtonList);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FiltersForm";
             this.Text = "FiltersForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FiltersForm_FormClosing);

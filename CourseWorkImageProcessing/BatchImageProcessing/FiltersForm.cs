@@ -81,5 +81,18 @@ namespace BatchImageProcessing
                 _pluginLoader.ImageFiltersPlugins.Add(plugin);
             }
         }
+
+        private void OptionsButton_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = FiltersRadioButtonList.SelectedIndex;
+            if (selectedIndex == -1)
+                return;
+
+            FilterPlugin plugin = (FilterPlugin)FiltersRadioButtonList.Items[selectedIndex];
+            FilterOptionsForm filterOptions = new FilterOptionsForm(plugin);
+            
+            if (filterOptions.ShowDialog() == DialogResult.OK)
+                FiltersRadioButtonList.Items[selectedIndex] = plugin;
+        }
     }
 }

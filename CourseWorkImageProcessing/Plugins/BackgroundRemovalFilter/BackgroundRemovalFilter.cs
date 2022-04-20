@@ -11,6 +11,9 @@ namespace BackgroundRemovalFilter
     {
         public string Name => "Фильтр удаления фона";
 
+		private int i;
+		public int I { get => i; set => i = value; }
+
 		public Double InputFloodFillTolerance { get; set; }
 		public Int32 InputMaskBlurFactor { get; set; }
 

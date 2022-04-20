@@ -8,6 +8,9 @@ namespace SharpnessFilter
     {
         public string Name => "Изменение резкости";
 
+        private int i;
+        public int I { get => i; set => i = value; }
+
         public Bitmap Apply(Bitmap sourceImage)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
