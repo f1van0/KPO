@@ -25,6 +25,10 @@ namespace BatchImageProcessing
         private void ShowOptions()
         {
             FilterNameLabel.Text = "Название фильтра: " + Plugin.Filter.Name;
+            VersionLabel.Text = "Версия: " + Plugin.Filter.Version;
+            AuthorLabel.Text = "Автор: " + Plugin.Filter.Author;
+
+            
             OptionsPanel.Controls.Clear();
             OptionsVariable[] optionsVariables = Plugin.Filter.Options;
             OptionsControl[] optionsControls = new OptionsControl[optionsVariables.Length];
