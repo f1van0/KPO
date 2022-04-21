@@ -52,7 +52,9 @@ namespace BatchImageProcessing
 				return;
 
 			//Load the DLLs from the Plugins directory
-			AssemblyName[] assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
+			//AppDomain.CurrentDomain.ClearPrivatePath();
+			
+			AssemblyName[] assemblies = Assembly.GetEntryAssembly().GetReferencedAssemblies();//Assembly.GetExecutingAssembly().GetReferencedAssemblies();
 			AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
 			foreach (var folder in _pluginFoldersManager.ActiveFolders)
@@ -61,7 +63,7 @@ namespace BatchImageProcessing
 				foreach (var file in _pluginsFiles)
 					Assembly.LoadFile(file.FullName);
 			}
-
+			
 			Type interfaceType = typeof(IFilterDynamicLibrary);
 			//Fetch all types that implement the interface IPlugin and are a class
 			Type[] types = AppDomain.CurrentDomain.GetAssemblies()

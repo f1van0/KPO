@@ -10,24 +10,33 @@ namespace BackgroundRemovalFilter
     public class BackgroundRemovalFilter : IFilterDynamicLibrary
     {
         public string Name => "Фильтр удаления фона";
+		public string Version => "1.1";
+		public string Author => "Фролов Иван";
 
-		private int i;
-		public int I { get => i; set => i = value; }
+		//Чувствительность заливки
+		private double inputFloodFillTolerance { get; set; }
+		//Коэффициент размытия маски
+		private int inputMaskBlurFactor { get; set; }
+        public OptionsVariable[] Options { get; set; }
 
-		public Double InputFloodFillTolerance { get; set; }
-		public Int32 InputMaskBlurFactor { get; set; }
+        public BackgroundRemovalFilter()
+        {
+			Options = new OptionsVariable[2];
+			Options[0] = new OptionsVariable(10, 1, 100, "Чувствительность заливки", VariableType.Double);
+			Options[1] = new OptionsVariable(5, 1, 10, "Коэффициент размытия маски", VariableType.Int);
+		}
 
 		public Bitmap Apply(Bitmap sourceImage)
         {
-			InputFloodFillTolerance = 0.01f;
-			InputMaskBlurFactor = 5;
+			inputFloodFillTolerance = Options[0].Value / 1000;
+			inputMaskBlurFactor = Options[1].Value % 2 == 1 ? Options[1].Value : ++Options[1].Value;
 
 			Mat img = BitmapConverter.ToMat(sourceImage);
 
 			var filter = new RemoveBackgroundOpenCvFilter
 			{
-				FloodFillTolerance = InputFloodFillTolerance,
-				MaskBlurFactor = InputMaskBlurFactor
+				FloodFillTolerance = inputFloodFillTolerance,
+				MaskBlurFactor = inputMaskBlurFactor
 			};
 
 			using (var result = filter.Apply(img))

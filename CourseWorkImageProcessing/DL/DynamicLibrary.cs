@@ -10,7 +10,10 @@ namespace DL
     public interface IFilterDynamicLibrary
     {
         public string Name { get; }
-        public int I { get; set; }
+        public string Version { get; }
+        public string Author { get; }
+
+        public OptionsVariable[] Options { get; set; }
 
         public Bitmap Apply(Bitmap sourceImage);
     }

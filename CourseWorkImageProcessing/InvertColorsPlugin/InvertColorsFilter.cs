@@ -8,6 +8,8 @@ namespace InvertColorsPlugin
     {
         public string Name => "Инвертирование цветов";
 
+        public OptionsVariable[] Options { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Bitmap Apply(Bitmap sourceImage)
         {
             Color invertedColor;

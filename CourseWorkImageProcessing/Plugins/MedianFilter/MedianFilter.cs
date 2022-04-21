@@ -6,15 +6,26 @@ namespace MedianFilter
 {
     public class MedianFilter : IFilterDynamicLibrary
     {
-        private int radius = 4;
-
         public string Name => "Мудианный фильтр";
+        public string Version => "1.0";
+        public string Author => "Фролов Иван";
 
-        private int i;
-        public int I { get => i; set => i = value; }
+        //Радиус
+        private int _radius;
+
+        public OptionsVariable[] Options { get; set; }
+
+        public MedianFilter()
+        {
+            Options = new OptionsVariable[1];
+            Options[0] = new OptionsVariable(4, 1, 10, "Радиус", VariableType.Int);
+        }
+
+
 
         public Bitmap Apply(Bitmap sourceImage)
         {
+            _radius = Options[0].Value;
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int j = 0; j < resultImage.Height; j++)
             {
@@ -29,7 +40,7 @@ namespace MedianFilter
 
         public Color GetMedianPixelColor(int x, int y, Bitmap sourceImage)
         {
-            if (x < radius || y < radius)
+            if (x < _radius || y < _radius)
             {
                 Color sourceColor = sourceImage.GetPixel(x, y);
                 return Color.FromArgb(sourceColor.R, sourceColor.G, sourceColor.B);
@@ -37,7 +48,7 @@ namespace MedianFilter
 
             int cR_, cB_, cG_;      // Выходные цвета
             int k = 1;              // Счётчик для цикла
-            int rad = radius;       // 1 = 3*3, 2 = 5*5, 3 = 7*7, 4 = 9*9        
+            int rad = _radius;       // 1 = 3*3, 2 = 5*5, 3 = 7*7, 4 = 9*9        
             int size = (2 * rad + 1) * (2 * rad + 1); // Размер матрицы
 
             int[] cR = new int[size + 1];

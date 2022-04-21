@@ -47,7 +47,7 @@ namespace BatchImageProcessing
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(245, 310);
+            this.AddButton.Location = new System.Drawing.Point(875, 308);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 2;
@@ -57,7 +57,7 @@ namespace BatchImageProcessing
             // 
             // RemoveButton
             // 
-            this.RemoveButton.Location = new System.Drawing.Point(329, 310);
+            this.RemoveButton.Location = new System.Drawing.Point(959, 308);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(75, 23);
             this.RemoveButton.TabIndex = 3;
@@ -71,14 +71,14 @@ namespace BatchImageProcessing
             this.foldersList.ItemHeight = 15;
             this.foldersList.Location = new System.Drawing.Point(13, 47);
             this.foldersList.Name = "foldersList";
-            this.foldersList.Size = new System.Drawing.Size(391, 244);
+            this.foldersList.Size = new System.Drawing.Size(1021, 244);
             this.foldersList.TabIndex = 4;
             // 
             // FoldersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 343);
+            this.ClientSize = new System.Drawing.Size(1046, 343);
             this.Controls.Add(this.foldersList);
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.AddButton);

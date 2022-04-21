@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundRemovalFilter", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedianFilter", "Plugins\MedianFilter\MedianFilter.csproj", "{5C92A602-BC70-4F43-90EA-959406F0E078}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResizeFilter", "Plugins\ResizeFilter\ResizeFilter.csproj", "{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{5C92A602-BC70-4F43-90EA-959406F0E078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C92A602-BC70-4F43-90EA-959406F0E078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C92A602-BC70-4F43-90EA-959406F0E078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{7AF2511E-0367-4208-932B-D4D051500940} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 		{134AAC4F-B55F-4B10-B59A-F854F0662D59} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 		{5C92A602-BC70-4F43-90EA-959406F0E078} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
+		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1599B476-1B1B-4F98-8DAC-F77D41CC3458}

@@ -7,12 +7,27 @@ namespace SharpnessFilter
     public class SharpnessFilter : IFilterDynamicLibrary
     {
         public string Name => "Изменение резкости";
+        public string Version => "1.2";
+        public string Author => "Фролов Иван";
 
-        private int i;
-        public int I { get => i; set => i = value; }
+        private static int _size = 3;
+        private float[,] _kernel;
+
+        //Коэффициент резкости
+        private int _sharpness;
+
+        public OptionsVariable[] Options { get; set; }
+
+        public SharpnessFilter()
+        {
+            Options = new OptionsVariable[1];
+            Options[0] = new OptionsVariable(5, 1, 10, "Коэффициент резкости", VariableType.Int);
+        }
 
         public Bitmap Apply(Bitmap sourceImage)
         {
+            _sharpness = Options[0].Value;
+            InitializeMatrix();
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int j = 0; j < resultImage.Height; j++)
             {
@@ -25,24 +40,23 @@ namespace SharpnessFilter
             return resultImage;
         }
 
-        public Color CalculatePixel(int x, int y, Bitmap sourceImage)
+        private void InitializeMatrix()
         {
-            int sizeX = 3;
-            int sizeY = 3;
-            float[,] kernel = new float[sizeX, sizeY];
-            kernel[0, 0] = 0;
-            kernel[0, 1] = -1;
-            kernel[0, 2] = 0;
-            kernel[1, 0] = -1;
-            kernel[1, 1] = 5;
-            kernel[1, 2] = -1;
-            kernel[2, 0] = 0;
-            kernel[2, 1] = -1;
-            kernel[2, 2] = 0;
-
-
-            int radiusX = kernel.GetLength(0) / 2;
-            int radiusY = kernel.GetLength(1) / 2;
+            _kernel = new float[_size, _size];
+            _kernel[0, 0] = 0;
+            _kernel[0, 1] = -1;
+            _kernel[0, 2] = 0;
+            _kernel[1, 0] = -1;
+            _kernel[1, 1] = _sharpness;
+            _kernel[1, 2] = -1;
+            _kernel[2, 0] = 0;
+            _kernel[2, 1] = -1;
+            _kernel[2, 2] = 0;
+        }
+        private Color CalculatePixel(int x, int y, Bitmap sourceImage)
+        {
+            int radiusX = _kernel.GetLength(0) / 2;
+            int radiusY = _kernel.GetLength(1) / 2;
 
             float resultR = 0;
             float resultG = 0;
@@ -56,9 +70,9 @@ namespace SharpnessFilter
                     int idY = Clamp(y + l, 0, sourceImage.Height - 1);
 
                     Color neighborColor = sourceImage.GetPixel(idX, idY);
-                    resultR += neighborColor.R * kernel[k + radiusX, l + radiusY];
-                    resultG += neighborColor.G * kernel[k + radiusX, l + radiusY];
-                    resultB += neighborColor.B * kernel[k + radiusX, l + radiusY];
+                    resultR += neighborColor.R * _kernel[k + radiusX, l + radiusY];
+                    resultG += neighborColor.G * _kernel[k + radiusX, l + radiusY];
+                    resultB += neighborColor.B * _kernel[k + radiusX, l + radiusY];
                 }
             }
 

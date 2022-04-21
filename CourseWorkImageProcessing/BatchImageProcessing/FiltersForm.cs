@@ -92,7 +92,7 @@ namespace BatchImageProcessing
             FilterOptionsForm filterOptions = new FilterOptionsForm(plugin);
             
             if (filterOptions.ShowDialog() == DialogResult.OK)
-                FiltersRadioButtonList.Items[selectedIndex] = plugin;
+                FiltersRadioButtonList.Items[selectedIndex] = filterOptions.Plugin;
         }
     }
 }
