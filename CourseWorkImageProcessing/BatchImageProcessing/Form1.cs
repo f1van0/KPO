@@ -100,5 +100,16 @@ namespace BatchImageProcessing
                 _pluginLoader.LoadPlugins();
             }
         }
+
+        private void сохранитьИзображенияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageItem[] imageItems = new ImageItem[uploadImagesList.Controls.Count];
+            for (int i = 0; i < uploadImagesList.Controls.Count; i++)
+            {
+                imageItems[i] = (ImageItem)uploadImagesList.Controls[i];
+            }
+            ExportImagesForm exportImagesForm = new ExportImagesForm(imageItems);
+            exportImagesForm.ShowDialog();
+        }
     }
 }

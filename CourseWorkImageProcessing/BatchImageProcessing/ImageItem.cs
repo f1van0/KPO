@@ -131,5 +131,15 @@ namespace BatchImageProcessing
             _processedImages.Add(sourceImage);
             _currentStep = 0;
         }
+
+        public void Save(string path)
+        {
+            GetCurrentImage.Save(path + '\\' + Name+ ".jpg");
+        }
+
+        public void Save(string path, string name)
+        {
+            GetCurrentImage.Save(path + '\\' + name + ".jpg");
+        }
     }
 }
