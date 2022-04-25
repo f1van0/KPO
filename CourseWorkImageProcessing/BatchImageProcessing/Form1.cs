@@ -17,11 +17,15 @@ namespace BatchImageProcessing
         private PluginLoader _pluginLoader;
         private ImageItem _selectedImageItem;
 
+        private int _currentStep;
+        private int _maxSteps;
+
         public Form1()
         {
             InitializeComponent();
             _foldersManager = new PluginFoldersManager();
             _pluginLoader = new PluginLoader(_foldersManager);
+            UpdateUndoRedoButtons();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,6 +72,11 @@ namespace BatchImageProcessing
 
         public void ImageSelected(ImageItem imageItem)
         {
+            foreach (var item in uploadImagesList.Controls)
+            {
+                ((ImageItem)item).UpdateSelectedImage -= UpdateSelected;
+            }
+
             _selectedImageItem = imageItem;
             pictureBox1.Image = _selectedImageItem.GetCurrentImage;
             imageItem.UpdateSelectedImage += UpdateSelected;
@@ -75,14 +84,17 @@ namespace BatchImageProcessing
 
         public void UpdateSelected()
         {
+            _maxSteps = _selectedImageItem.MaxSteps;
+            _currentStep = _maxSteps;
             pictureBox1.Image = _selectedImageItem.GetCurrentImage;
+            UpdateUndoRedoButtons();
         }
 
         private void ProcessImagesButton_Click(object sender, EventArgs e)
         {
             foreach(var item in uploadImagesList.Controls)
             {
-                ((ImageItem)item).ApplyFilters();
+                Task.Factory.StartNew(((ImageItem)item).ApplyFilters);
             }
         }
 
@@ -110,6 +122,50 @@ namespace BatchImageProcessing
             }
             ExportImagesForm exportImagesForm = new ExportImagesForm(imageItems);
             exportImagesForm.ShowDialog();
+        }
+
+        private void отменитьДействиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(var item in uploadImagesList.Controls)
+            {
+                ((ImageItem)item).UndoStep();
+            }
+            _currentStep--;
+
+            UpdateUndoRedoButtons();
+        }
+
+        private void повторитьДействиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in uploadImagesList.Controls)
+            {
+                ((ImageItem)item).RedoStep();
+            }
+            _currentStep++;
+
+            UpdateUndoRedoButtons();
+        }
+
+        private void UpdateUndoRedoButtons()
+        {
+            UpdateAvailabilityOfUndoButton();
+            UpdateAvailabilityOfRedoButton();
+        }
+
+        private void UpdateAvailabilityOfUndoButton()
+        {
+            if (_currentStep <= 0)
+                отменитьДействиеToolStripMenuItem.Available = false;
+            else if (_currentStep <= _maxSteps)
+                отменитьДействиеToolStripMenuItem.Available = true;
+        }
+
+        private void UpdateAvailabilityOfRedoButton()
+        {
+            if (_currentStep >= _maxSteps)
+                повторитьДействиеToolStripMenuItem.Available = false;
+            else
+                повторитьДействиеToolStripMenuItem.Available = true;
         }
     }
 }

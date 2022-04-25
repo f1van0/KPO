@@ -71,8 +71,7 @@ namespace BatchImageProcessing
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(914, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -83,26 +82,26 @@ namespace BatchImageProcessing
             this.очиститьСписокИзображенийToolStripMenuItem,
             this.сохранитьИзображенияToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // отрытьИзображенияToolStripMenuItem
             // 
             this.отрытьИзображенияToolStripMenuItem.Name = "отрытьИзображенияToolStripMenuItem";
-            this.отрытьИзображенияToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
+            this.отрытьИзображенияToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.отрытьИзображенияToolStripMenuItem.Text = "Отрыть изображения";
             this.отрытьИзображенияToolStripMenuItem.Click += new System.EventHandler(this.отрытьИзображенияToolStripMenuItem_Click);
             // 
             // очиститьСписокИзображенийToolStripMenuItem
             // 
             this.очиститьСписокИзображенийToolStripMenuItem.Name = "очиститьСписокИзображенийToolStripMenuItem";
-            this.очиститьСписокИзображенийToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
+            this.очиститьСписокИзображенийToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.очиститьСписокИзображенийToolStripMenuItem.Text = "Очистить список изображений";
             // 
             // сохранитьИзображенияToolStripMenuItem
             // 
             this.сохранитьИзображенияToolStripMenuItem.Name = "сохранитьИзображенияToolStripMenuItem";
-            this.сохранитьИзображенияToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
+            this.сохранитьИзображенияToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.сохранитьИзображенияToolStripMenuItem.Text = "Сохранить изображения";
             this.сохранитьИзображенияToolStripMenuItem.Click += new System.EventHandler(this.сохранитьИзображенияToolStripMenuItem_Click);
             // 
@@ -112,20 +111,20 @@ namespace BatchImageProcessing
             this.ПапкиСПлагаминамиToolStripMenuItem,
             this.СписокПлагиновStripMenuItem});
             this.фильтрToolStripMenuItem.Name = "фильтрToolStripMenuItem";
-            this.фильтрToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.фильтрToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.фильтрToolStripMenuItem.Text = "Фильтр";
             // 
             // ПапкиСПлагаминамиToolStripMenuItem
             // 
             this.ПапкиСПлагаминамиToolStripMenuItem.Name = "ПапкиСПлагаминамиToolStripMenuItem";
-            this.ПапкиСПлагаминамиToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
+            this.ПапкиСПлагаминамиToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.ПапкиСПлагаминамиToolStripMenuItem.Text = "Папки с плагинами";
             this.ПапкиСПлагаминамиToolStripMenuItem.Click += new System.EventHandler(this.ПапкиСПлагаминамиToolStripMenuItem_Click);
             // 
             // СписокПлагиновStripMenuItem
             // 
             this.СписокПлагиновStripMenuItem.Name = "СписокПлагиновStripMenuItem";
-            this.СписокПлагиновStripMenuItem.Size = new System.Drawing.Size(228, 26);
+            this.СписокПлагиновStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.СписокПлагиновStripMenuItem.Text = "Список плагинов";
             this.СписокПлагиновStripMenuItem.Click += new System.EventHandler(this.ФильрыStripMenuItem_Click);
             // 
@@ -135,77 +134,76 @@ namespace BatchImageProcessing
             this.отменитьДействиеToolStripMenuItem,
             this.повторитьДействиеToolStripMenuItem});
             this.изображениеToolStripMenuItem.Name = "изображениеToolStripMenuItem";
-            this.изображениеToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.изображениеToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.изображениеToolStripMenuItem.Text = "Правка";
             // 
             // отменитьДействиеToolStripMenuItem
             // 
             this.отменитьДействиеToolStripMenuItem.Name = "отменитьДействиеToolStripMenuItem";
-            this.отменитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.отменитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.отменитьДействиеToolStripMenuItem.Text = "Отменить действие";
+            this.отменитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.отменитьДействиеToolStripMenuItem_Click);
             // 
             // повторитьДействиеToolStripMenuItem
             // 
             this.повторитьДействиеToolStripMenuItem.Name = "повторитьДействиеToolStripMenuItem";
-            this.повторитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.повторитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.повторитьДействиеToolStripMenuItem.Text = "Повторить действие";
+            this.повторитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.повторитьДействиеToolStripMenuItem_Click);
             // 
             // отчетToolStripMenuItem
             // 
             this.отчетToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.статистикаToolStripMenuItem});
             this.отчетToolStripMenuItem.Name = "отчетToolStripMenuItem";
-            this.отчетToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.отчетToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.отчетToolStripMenuItem.Text = "Отчет";
             // 
             // статистикаToolStripMenuItem
             // 
             this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
-            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.статистикаToolStripMenuItem.Text = "Статистика";
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // uploadImagesList
             // 
             this.uploadImagesList.AutoScroll = true;
             this.uploadImagesList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.uploadImagesList.Location = new System.Drawing.Point(0, 59);
-            this.uploadImagesList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.uploadImagesList.Location = new System.Drawing.Point(0, 44);
             this.uploadImagesList.Name = "uploadImagesList";
-            this.uploadImagesList.Size = new System.Drawing.Size(230, 524);
+            this.uploadImagesList.Size = new System.Drawing.Size(202, 394);
             this.uploadImagesList.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 35);
+            this.label1.Location = new System.Drawing.Point(0, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 20);
+            this.label1.Size = new System.Drawing.Size(129, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Список изображений:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(238, 59);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(208, 44);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(662, 465);
+            this.pictureBox1.Size = new System.Drawing.Size(580, 350);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
             // UploadImagesButton
             // 
-            this.UploadImagesButton.Location = new System.Drawing.Point(487, 251);
-            this.UploadImagesButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.UploadImagesButton.Location = new System.Drawing.Point(426, 188);
             this.UploadImagesButton.Name = "UploadImagesButton";
-            this.UploadImagesButton.Size = new System.Drawing.Size(195, 51);
+            this.UploadImagesButton.Size = new System.Drawing.Size(171, 38);
             this.UploadImagesButton.TabIndex = 5;
             this.UploadImagesButton.Text = "Загрузить изображения";
             this.UploadImagesButton.UseVisualStyleBackColor = true;
@@ -213,10 +211,9 @@ namespace BatchImageProcessing
             // 
             // ProcessImagesButton
             // 
-            this.ProcessImagesButton.Location = new System.Drawing.Point(693, 533);
-            this.ProcessImagesButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ProcessImagesButton.Location = new System.Drawing.Point(606, 400);
             this.ProcessImagesButton.Name = "ProcessImagesButton";
-            this.ProcessImagesButton.Size = new System.Drawing.Size(208, 51);
+            this.ProcessImagesButton.Size = new System.Drawing.Size(182, 38);
             this.ProcessImagesButton.TabIndex = 6;
             this.ProcessImagesButton.Text = "Обработать изображения";
             this.ProcessImagesButton.UseVisualStyleBackColor = true;
@@ -225,18 +222,18 @@ namespace BatchImageProcessing
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(693, 588);
+            this.label4.Location = new System.Drawing.Point(606, 441);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(226, 20);
+            this.label4.Size = new System.Drawing.Size(176, 15);
             this.label4.TabIndex = 7;
             this.label4.Text = "Обработано изображений: 0/0";
             // 
             // numberOfUploadedImagesLabel
             // 
             this.numberOfUploadedImagesLabel.AutoSize = true;
-            this.numberOfUploadedImagesLabel.Location = new System.Drawing.Point(0, 588);
+            this.numberOfUploadedImagesLabel.Location = new System.Drawing.Point(0, 441);
             this.numberOfUploadedImagesLabel.Name = "numberOfUploadedImagesLabel";
-            this.numberOfUploadedImagesLabel.Size = new System.Drawing.Size(200, 20);
+            this.numberOfUploadedImagesLabel.Size = new System.Drawing.Size(157, 15);
             this.numberOfUploadedImagesLabel.TabIndex = 8;
             this.numberOfUploadedImagesLabel.Text = "Загружено изображений: 0";
             // 
@@ -250,9 +247,9 @@ namespace BatchImageProcessing
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 609);
+            this.ClientSize = new System.Drawing.Size(800, 457);
             this.Controls.Add(this.numberOfUploadedImagesLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ProcessImagesButton);
@@ -262,7 +259,6 @@ namespace BatchImageProcessing
             this.Controls.Add(this.uploadImagesList);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Пакетная обработка изображений";
             this.Load += new System.EventHandler(this.Form1_Load);

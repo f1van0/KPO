@@ -20,8 +20,7 @@ namespace SharpnessFilter
 
         public SharpnessFilter()
         {
-            Options = new OptionsVariable[1];
-            Options[0] = new OptionsVariable(5, 1, 10, "Коэффициент резкости", VariableType.Int);
+            Options = new OptionsVariable[0];
         }
 
         public Bitmap Apply(Bitmap sourceImage)
@@ -47,7 +46,7 @@ namespace SharpnessFilter
             _kernel[0, 1] = -1;
             _kernel[0, 2] = 0;
             _kernel[1, 0] = -1;
-            _kernel[1, 1] = _sharpness;
+            _kernel[1, 1] = 9;
             _kernel[1, 2] = -1;
             _kernel[2, 0] = 0;
             _kernel[2, 1] = -1;
