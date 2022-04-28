@@ -124,28 +124,6 @@ namespace BatchImageProcessing
             exportImagesForm.ShowDialog();
         }
 
-        private void отменитьДействиеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach(var item in uploadImagesList.Controls)
-            {
-                ((ImageItem)item).UndoStep();
-            }
-            _currentStep--;
-
-            UpdateUndoRedoButtons();
-        }
-
-        private void повторитьДействиеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (var item in uploadImagesList.Controls)
-            {
-                ((ImageItem)item).RedoStep();
-            }
-            _currentStep++;
-
-            UpdateUndoRedoButtons();
-        }
-
         private void UpdateUndoRedoButtons()
         {
             UpdateAvailabilityOfUndoButton();
@@ -155,17 +133,51 @@ namespace BatchImageProcessing
         private void UpdateAvailabilityOfUndoButton()
         {
             if (_currentStep <= 0)
-                отменитьДействиеToolStripMenuItem.Available = false;
+                SetUndoAvailability(false);
             else if (_currentStep <= _maxSteps)
-                отменитьДействиеToolStripMenuItem.Available = true;
+                SetUndoAvailability(true);
         }
 
         private void UpdateAvailabilityOfRedoButton()
         {
             if (_currentStep >= _maxSteps)
-                повторитьДействиеToolStripMenuItem.Available = false;
+                SetRedoAvailability(false);
             else
-                повторитьДействиеToolStripMenuItem.Available = true;
+                SetRedoAvailability(true);
+        }
+
+        private void SetUndoAvailability(bool isAvailable)
+        {
+            отменитьДействиеToolStripMenuItem.Enabled = isAvailable;
+            UndoButton.Enabled = isAvailable;
+        }
+
+        private void SetRedoAvailability(bool isAvailable)
+        {
+            повторитьДействиеToolStripMenuItem.Enabled = isAvailable;
+            RedoButton.Enabled = isAvailable;
+        }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in uploadImagesList.Controls)
+            {
+                ((ImageItem)item).UndoStep();
+            }
+            _currentStep--;
+
+            UpdateUndoRedoButtons();
+        }
+
+        private void RedoButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in uploadImagesList.Controls)
+            {
+                ((ImageItem)item).RedoStep();
+            }
+            _currentStep++;
+
+            UpdateUndoRedoButtons();
         }
     }
 }

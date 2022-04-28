@@ -55,6 +55,8 @@ namespace BatchImageProcessing
             this.openImagesDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveImagesDialog = new System.Windows.Forms.SaveFileDialog();
             this.openPluginDialog = new System.Windows.Forms.OpenFileDialog();
+            this.UndoButton = new System.Windows.Forms.Button();
+            this.RedoButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -142,14 +144,14 @@ namespace BatchImageProcessing
             this.отменитьДействиеToolStripMenuItem.Name = "отменитьДействиеToolStripMenuItem";
             this.отменитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.отменитьДействиеToolStripMenuItem.Text = "Отменить действие";
-            this.отменитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.отменитьДействиеToolStripMenuItem_Click);
+            this.отменитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.UndoButton_Click);
             // 
             // повторитьДействиеToolStripMenuItem
             // 
             this.повторитьДействиеToolStripMenuItem.Name = "повторитьДействиеToolStripMenuItem";
             this.повторитьДействиеToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.повторитьДействиеToolStripMenuItem.Text = "Повторить действие";
-            this.повторитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.повторитьДействиеToolStripMenuItem_Click);
+            this.повторитьДействиеToolStripMenuItem.Click += new System.EventHandler(this.RedoButton_Click);
             // 
             // отчетToolStripMenuItem
             // 
@@ -245,11 +247,33 @@ namespace BatchImageProcessing
             // 
             this.openPluginDialog.FileName = "openFileDialog1";
             // 
+            // UndoButton
+            // 
+            this.UndoButton.Location = new System.Drawing.Point(208, 400);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(147, 38);
+            this.UndoButton.TabIndex = 9;
+            this.UndoButton.Text = "Отменить действие";
+            this.UndoButton.UseVisualStyleBackColor = true;
+            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
+            // 
+            // RedoButton
+            // 
+            this.RedoButton.Location = new System.Drawing.Point(361, 400);
+            this.RedoButton.Name = "RedoButton";
+            this.RedoButton.Size = new System.Drawing.Size(147, 38);
+            this.RedoButton.TabIndex = 10;
+            this.RedoButton.Text = "Повторить действие";
+            this.RedoButton.UseVisualStyleBackColor = true;
+            this.RedoButton.Click += new System.EventHandler(this.RedoButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 457);
+            this.Controls.Add(this.RedoButton);
+            this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.numberOfUploadedImagesLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ProcessImagesButton);
@@ -298,6 +322,8 @@ namespace BatchImageProcessing
         private System.Windows.Forms.OpenFileDialog openImagesDialog;
         private System.Windows.Forms.SaveFileDialog saveImagesDialog;
         private System.Windows.Forms.OpenFileDialog openPluginDialog;
+        private System.Windows.Forms.Button UndoButton;
+        private System.Windows.Forms.Button RedoButton;
     }
 }
 

@@ -17,12 +17,8 @@ namespace BatchImageProcessing
         private int _id;
 
         //Stack<Bitmap>
-        private List<Bitmap> _processedImages;
+        private ProcessingImagesList _processedImages;
         private PluginLoader _pluginLoader;
-
-        public int CurrentStep;
-        public int MaxSteps;
-        public bool IsProcessing;
 
         public delegate void SelectImageHandler(ImageItem imageItem);
         public event SelectImageHandler SelectImage;
@@ -91,8 +87,7 @@ namespace BatchImageProcessing
         {
             imagePictureBox?.Invoke((Action)delegate () { imagePictureBox.Image = GetCurrentImage; });
 
-            if (UpdateSelectedImage != null)
-                UpdateSelectedImage.Invoke();
+            UpdateSelectedImage?.Invoke();
 
             IsProcessing = false;
         }
