@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Management;
 using System.Threading;
+using System.Diagnostics;
 
 namespace MainProgram
 {
@@ -32,7 +33,7 @@ namespace MainProgram
 	{
 		public List<USBFlash> Devices;
 		public event Action<List<USBFlash>> UpdateDevices;
-		public bool inAutoupdate => Updater?.IsAlive ?? false;
+		public bool inRunning;
 		Thread Updater;
 
 		static USBObserver instance;
@@ -60,13 +61,14 @@ namespace MainProgram
 			{
 				try
 				{
+
 					string volumeName = currentObject["VolumeName"].ToString();
 					string description = currentObject["Description"].ToString();
 
 					string name = volumeName.Length > 2 ? volumeName : description;
 
 					string driveName = currentObject["Caption"].ToString();
-					string serial = currentObject["VolumeSerialNumber"].ToString();
+					string serial = (new USBSerialNumber()).getSerialNumberFromDriveLetter(driveName);
 
 					devices.Add(new USBFlash(driveName, name, serial));
 				}
@@ -82,14 +84,22 @@ namespace MainProgram
 		{
 			if (Updater != null && Updater.IsAlive)
 				return;
+
 			Updater = new Thread(AutoUpdate);
+			inRunning = true;
 			Updater.Start();
 		}
 
 		public void stopAutoUpdate()
 		{
 			if (Updater != null && Updater.IsAlive)
-				Updater.Abort();
+			{
+				inRunning = false;
+				if (!Updater.Join(2000))
+				{ // or an agreed resonable time
+					Updater.Abort();
+				}
+			}
 		}
 
 		void AutoUpdate()
@@ -98,6 +108,8 @@ namespace MainProgram
 			{
 				refreshDevices();
 				Thread.Sleep(700);
+				if (!inRunning)
+					break;
 			}
 		}
 

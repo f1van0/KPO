@@ -53,18 +53,21 @@ namespace Lab6
 		List<USBFlash> loadUsbDevices ()
 			{
 			ManagementObjectSearcher theSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DriveType=2");
+			//ManagementObjectSearcher theSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE InterfaceType='USB'");
 			List<USBFlash> devices = new List<USBFlash>();
 			foreach ( ManagementObject currentObject in theSearcher.Get() )
 				{
 				try
 					{
 					string volumeName = currentObject["VolumeName"].ToString();
+					
 					string description = currentObject["Description"].ToString();
 
 					string name = volumeName.Length > 2 ? volumeName : description;
 
 					string driveName = currentObject["Caption"].ToString();
-					string serial = currentObject["VolumeSerialNumber"].ToString();
+
+					string serial = (new USBSerialNumber()).getSerialNumberFromDriveLetter(driveName);
 
 					devices.Add(new USBFlash(driveName, name, serial));
 					}
