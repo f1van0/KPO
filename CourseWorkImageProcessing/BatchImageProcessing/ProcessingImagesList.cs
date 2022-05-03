@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace BatchImageProcessing
 {
-    class ProcessingImagesList
+    public class ProcessingImagesList
     {
         private List<ImageDetails> _processedImages;
 
         public int CurrentStep;
         public bool IsProcessing;
 
-        public Bitmap GetCurrentImage { get => _processedImages[CurrentStep].Image; }
-        public Bitmap GetSourcetImage { get => _processedImages.Count > 0 ? _processedImages [CurrentStep].Image : new Bitmap(1, 1); }
+        public ImageDetails GetCurrentImage { get => _processedImages[CurrentStep]; }
+        public ImageDetails GetSourceImage { get => _processedImages.Count > 0 ? _processedImages[CurrentStep] : null; }
+        public ImageDetails GetResultImage { get => _processedImages.Count > 0 ? _processedImages[_processedImages.Count - 1] : null; }
 
         public ProcessingImagesList()
         {
             _processedImages = new List<ImageDetails>();
-            CurrentStep = 0;
+            CurrentStep = -1;
             IsProcessing = false;
         }
 
@@ -29,7 +30,7 @@ namespace BatchImageProcessing
             _processedImages = new List<ImageDetails>();
             ImageDetails sourceImageDetails = new ImageDetails("Исходное изображение", sourceImage);
             _processedImages.Add(sourceImageDetails);
-            CurrentStep = 1;
+            CurrentStep = 0;
             IsProcessing = false;
         }
 
@@ -44,8 +45,21 @@ namespace BatchImageProcessing
         {
             if (_processedImages.Count > 0)
             {
-                ImageDetails sourceImageDetails = GetSourcetImage;
+                ImageDetails sourceImageDetails = GetSourceImage;
             }
+        }
+
+        public ImageDetails GetImageInStep(int step)
+        {
+            if (_processedImages.Count <= 0)
+                return null;
+
+            CurrentStep = step;
+
+            if (_processedImages.Count < CurrentStep)
+                return GetResultImage;
+            else
+                return GetCurrentImage;
         }
     }
 }

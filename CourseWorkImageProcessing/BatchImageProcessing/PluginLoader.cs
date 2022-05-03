@@ -90,5 +90,10 @@ namespace BatchImageProcessing
 
 			return Assembly.LoadFrom(dllFile.FullName);
 		}
+
+		public FilterPlugin[] GetActiveFilters()
+        {
+			return ImageFiltersPlugins.Where(x => x.IsActive).ToArray();
+		}
 	}
 }

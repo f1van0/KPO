@@ -14,88 +14,54 @@ namespace BatchImageProcessing
     public partial class ImageItem : UserControl
     {
         private string _fileName;
-        private int _id;
 
-        //Stack<Bitmap>
-        private ProcessingImagesList _processedImages;
-        private PluginLoader _pluginLoader;
+        public ProcessingImagesList ProcessedImages { get; private set; }
 
         public delegate void SelectImageHandler(ImageItem imageItem);
         public event SelectImageHandler SelectImage;
 
-        public delegate void UpdateSelectedImageHandler();
-        public event UpdateSelectedImageHandler UpdateSelectedImage;
+        public delegate void UpdateImageHandler();
+        public event UpdateImageHandler ProcessedImage;
 
-        public Bitmap GetCurrentImage {
-            get
-            {
-                if (_processedImages != null && _processedImages.Count > 0)
-                    return _processedImages[CurrentStep];
-                else
-                    return new Bitmap(1, 1);
-            }
-        }
-        public Bitmap GetSourceImage { get => _processedImages[0]; }
+        public bool IsProcessing;
+        public FilterPlugin[] FilterPlugins;
 
         public ImageItem()
         {
             InitializeComponent();
         }
 
-        public ImageItem(string path, int id, PluginLoader pluginLoader)
+        public ImageItem(string path)
         {
             InitializeComponent();
+
             _fileName = GetFileName(path);
-            imageName.Text = $"[{_id}] {_fileName}";
+            imageName.Text = _fileName;
 
-            _id = id;
-
-            _processedImages = new List<Bitmap>();
             Bitmap sourceImage = (Bitmap)Image.FromFile(path);
-            _processedImages.Add(sourceImage);
+            ProcessedImages = new ProcessingImagesList(sourceImage);
 
-            _pluginLoader = pluginLoader;
-
-            imagePictureBox.Image = GetCurrentImage;
+            imagePictureBox.Image = sourceImage;
+            IsProcessing = false;
         }
 
-        public void GetProcessedImage(Bitmap processedImage)
+        public void AddProcessedImage(string filterName, Bitmap processedImage)
         {
-            _processedImages.Add(processedImage);
-            CurrentStep++;
-        }
-
-        public void UndoStep()
-        {
-            if (CurrentStep <= 0)
-                return;
-
-            CurrentStep--;
-            UpdateImage();
-        }
-
-        public void RedoStep()
-        {
-            if (CurrentStep >= MaxSteps)
-                return;
-            
-            CurrentStep++;
-            UpdateImage();
+            ProcessedImages.Add(filterName, processedImage);
         }
 
         public void UpdateImage()
         {
-            imagePictureBox?.Invoke((Action)delegate () { imagePictureBox.Image = GetCurrentImage; });
-
-            UpdateSelectedImage?.Invoke();
-
-            IsProcessing = false;
+            imagePictureBox?.Invoke((Action)delegate () {
+                imagePictureBox.Image = new Bitmap(1, 1);
+                IsProcessing = false;
+                ProcessedImage?.Invoke();
+                //processProgressBar.Visible = false;
+            });
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            //_processedImages[_currentStep] = new Bitmap(1, 1);
-            //UpdateSelectedImage.Invoke();
             Dispose();
         }
 
@@ -117,42 +83,53 @@ namespace BatchImageProcessing
                 SelectImage.Invoke(this);
         }
 
-        public async Task ApplyFilters()
+        public void ApplyFilters()
         {
-            if (_pluginLoader.ImageFiltersPlugins.Count == 0)
+            if (FilterPlugins.Length == 0)
                 return;
 
             ResetImages();
 
-            foreach (var plugin in _pluginLoader.ImageFiltersPlugins)
+            int processCompletedProcentes = 1;
+            imagePictureBox?.Invoke((Action)delegate () {
+                //processProgressBar.Visible = true;
+                processProgressBar.Value = processCompletedProcentes;
+            });
+            for (int i = 0; i < FilterPlugins.Length; i++)
             {
-                if (plugin.IsActive)
-                    GetProcessedImage(plugin.Filter.Apply(GetCurrentImage));
-            }
+                Bitmap filteredImage = FilterPlugins[i].Filter.Apply(ProcessedImages.GetResultImage.Image);
+                AddProcessedImage(FilterPlugins[i].Filter.Name, filteredImage);
 
-            MaxSteps = CurrentStep;
+                processCompletedProcentes = (int)((float)(i + 1) / FilterPlugins.Length * 100);
+                if (processCompletedProcentes > 100) processCompletedProcentes = 100;
+                imagePictureBox?.Invoke((Action)delegate () { processProgressBar.Value = processCompletedProcentes; });
+            }
+            //imagePictureBox?.Invoke((Action)delegate () { processProgressBar.Value = 100; });
 
             UpdateImage();
-            return;
         }
 
         public void ResetImages()
         {
             IsProcessing = true;
-            Bitmap sourceImage = GetSourceImage;
-            _processedImages.Clear();
-            _processedImages.Add(sourceImage);
-            CurrentStep = 0;
+            ProcessedImages.Reset();
+        }
+
+        public void SetImageInStep(int step)
+        {
+            imagePictureBox?.Invoke((Action)delegate () {
+                imagePictureBox.Image = ProcessedImages.GetImageInStep(step).Image;
+            });
         }
 
         public void Save(string path)
         {
-            GetCurrentImage.Save(path + '\\' + Name+ ".jpg");
+            ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + Name+ ".jpg");
         }
 
         public void Save(string path, string name)
         {
-            GetCurrentImage.Save(path + '\\' + name + ".jpg");
+            ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + name + ".jpg");
         }
     }
 }

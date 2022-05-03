@@ -38,16 +38,19 @@ namespace BatchImageProcessing
             // 
             // processProgressBar
             // 
-            this.processProgressBar.Location = new System.Drawing.Point(3, 148);
+            this.processProgressBar.Location = new System.Drawing.Point(0, 133);
+            this.processProgressBar.MarqueeAnimationSpeed = 100000;
             this.processProgressBar.Name = "processProgressBar";
-            this.processProgressBar.Size = new System.Drawing.Size(179, 20);
+            this.processProgressBar.Size = new System.Drawing.Size(188, 12);
+            this.processProgressBar.Step = 1;
+            this.processProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.processProgressBar.TabIndex = 7;
             // 
             // imagePictureBox
             // 
-            this.imagePictureBox.Location = new System.Drawing.Point(3, 35);
+            this.imagePictureBox.Location = new System.Drawing.Point(0, 23);
             this.imagePictureBox.Name = "imagePictureBox";
-            this.imagePictureBox.Size = new System.Drawing.Size(179, 112);
+            this.imagePictureBox.Size = new System.Drawing.Size(188, 113);
             this.imagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePictureBox.TabIndex = 6;
             this.imagePictureBox.TabStop = false;
@@ -55,7 +58,7 @@ namespace BatchImageProcessing
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(157, 4);
+            this.closeButton.Location = new System.Drawing.Point(163, -1);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(25, 25);
             this.closeButton.TabIndex = 5;
@@ -66,7 +69,7 @@ namespace BatchImageProcessing
             // imageName
             // 
             this.imageName.AutoSize = true;
-            this.imageName.Location = new System.Drawing.Point(3, 11);
+            this.imageName.Location = new System.Drawing.Point(-3, 2);
             this.imageName.Name = "imageName";
             this.imageName.Size = new System.Drawing.Size(111, 15);
             this.imageName.TabIndex = 4;
@@ -82,7 +85,7 @@ namespace BatchImageProcessing
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.imageName);
             this.Name = "ImageItem";
-            this.Size = new System.Drawing.Size(183, 175);
+            this.Size = new System.Drawing.Size(187, 144);
             ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

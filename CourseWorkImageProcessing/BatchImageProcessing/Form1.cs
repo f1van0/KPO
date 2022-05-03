@@ -16,16 +16,22 @@ namespace BatchImageProcessing
         private PluginFoldersManager _foldersManager;
         private PluginLoader _pluginLoader;
         private ImageItem _selectedImageItem;
+        private List<ImageItem> _imageItems;
+
+        private Task _processingTask;
 
         private int _currentStep;
         private int _maxSteps;
 
+        private int _processedImagesCounter;
+
         public Form1()
         {
             InitializeComponent();
+            _imageItems = new List<ImageItem>();
             _foldersManager = new PluginFoldersManager();
             _pluginLoader = new PluginLoader(_foldersManager);
-            UpdateUndoRedoButtons();
+            ResetStep();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -56,46 +62,55 @@ namespace BatchImageProcessing
                 string[] selectedImages = openImagesDialog.FileNames;
                 for (int i = 0; i < selectedImages.Length; i++)
                 {
-                    ImageItem newImageItem = new ImageItem(selectedImages[i], i, _pluginLoader);
+                    ImageItem newImageItem = new ImageItem(selectedImages[i]);
                     newImageItem.SelectImage += ImageSelected;
-                    uploadImagesList.Controls.Add(newImageItem);
+                    newImageItem.ProcessedImage += ImageProcessed;
+                    imagesList.Controls.Add(newImageItem);
                 }
 
-                if (uploadImagesList.Controls.Count > 0)
+                if (imagesList.Controls.Count > 0)
                 {
-                    ImageSelected((ImageItem)uploadImagesList.Controls[0]);
+                    ImageSelected((ImageItem)imagesList.Controls[0]);
                 }
 
-                numberOfUploadedImagesLabel.Text = "Загружено изображений: " + uploadImagesList.Controls.Count;
+                numberOfUploadedImagesLabel.Text = "Загружено изображений: " + imagesList.Controls.Count;
+                processedImagesCounterLabel.Text = $"Обработано изображений 0/{imagesList.Controls.Count}";
             }
         }
 
         public void ImageSelected(ImageItem imageItem)
         {
-            foreach (var item in uploadImagesList.Controls)
-            {
-                ((ImageItem)item).UpdateSelectedImage -= UpdateSelected;
-            }
-
             _selectedImageItem = imageItem;
-            pictureBox1.Image = _selectedImageItem.GetCurrentImage;
-            imageItem.UpdateSelectedImage += UpdateSelected;
+            pictureBox1.Image = imageItem.ProcessedImages.GetImageInStep(_currentStep).Image;
         }
 
-        public void UpdateSelected()
+        public void ImageProcessed()
         {
-            _maxSteps = _selectedImageItem.MaxSteps;
+            _processedImagesCounter++;
+            processedImagesCounterLabel.Text = $"Обработано изображений {_processedImagesCounter}/{imagesList.Controls.Count}";
+            if (_processedImagesCounter == imagesList.Controls.Count)
+                FinishProcess();
+        }
+
+        private async void ProcessImagesButton_Click(object sender, EventArgs e)
+        {
+            numberOfUploadedImagesLabel.Text = "Загружено изображений: " + imagesList.Controls.Count;
+            _processedImagesCounter = 0;
+            ProcessImagesButton.Enabled = false;
+            ResetStep();
+            FilterPlugin[] activeFilters = _pluginLoader.GetActiveFilters();
+            _maxSteps = activeFilters.Length;
+            ParallelFilteringItems.ImageItems = GetImageItems();
+            ParallelFilteringItems.Filters = activeFilters;
+            _processingTask = Task.Factory.StartNew(ParallelFilteringItems.ProcessImages, TaskCreationOptions.LongRunning);
+        }
+
+        private void FinishProcess()
+        {
+            ParallelFilteringItems.IsCompleted();
             _currentStep = _maxSteps;
-            pictureBox1.Image = _selectedImageItem.GetCurrentImage;
-            UpdateUndoRedoButtons();
-        }
-
-        private void ProcessImagesButton_Click(object sender, EventArgs e)
-        {
-            foreach(var item in uploadImagesList.Controls)
-            {
-                Task.Factory.StartNew(((ImageItem)item).ApplyFilters);
-            }
+            ProcessImagesButton.Enabled = true;
+            UpdateStep();
         }
 
         private void ФильрыStripMenuItem_Click(object sender, EventArgs e)
@@ -115,19 +130,29 @@ namespace BatchImageProcessing
 
         private void сохранитьИзображенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImageItem[] imageItems = new ImageItem[uploadImagesList.Controls.Count];
-            for (int i = 0; i < uploadImagesList.Controls.Count; i++)
+            ImageItem[] imageItems = new ImageItem[imagesList.Controls.Count];
+            for (int i = 0; i < imagesList.Controls.Count; i++)
             {
-                imageItems[i] = (ImageItem)uploadImagesList.Controls[i];
+                imageItems[i] = (ImageItem)imagesList.Controls[i];
             }
             ExportImagesForm exportImagesForm = new ExportImagesForm(imageItems);
             exportImagesForm.ShowDialog();
         }
 
-        private void UpdateUndoRedoButtons()
+        private void UpdateStep()
         {
+            pictureBox1.Image = _selectedImageItem.ProcessedImages.GetImageInStep(_currentStep).Image;
+            SetStep();
             UpdateAvailabilityOfUndoButton();
             UpdateAvailabilityOfRedoButton();
+        }
+
+        private void ResetStep()
+        {
+            _currentStep = 0;
+            //SetStep();
+            SetUndoAvailability(false);
+            SetRedoAvailability(false);
         }
 
         private void UpdateAvailabilityOfUndoButton()
@@ -160,24 +185,40 @@ namespace BatchImageProcessing
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-            foreach (var item in uploadImagesList.Controls)
-            {
-                ((ImageItem)item).UndoStep();
-            }
             _currentStep--;
-
-            UpdateUndoRedoButtons();
+            UpdateStep();
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
-            foreach (var item in uploadImagesList.Controls)
-            {
-                ((ImageItem)item).RedoStep();
-            }
             _currentStep++;
+            UpdateStep();
+        }
 
-            UpdateUndoRedoButtons();
+        private void SetStep()
+        {
+            var imageItems = GetImageItems();
+            foreach (var item in imageItems)
+            {
+                item.SetImageInStep(_currentStep);
+            }
+        }
+
+        private ImageItem[] GetImageItems()
+        {
+            ImageItem[] imageItems = new ImageItem[imagesList.Controls.Count];
+
+            for (int i = 0; i < imagesList.Controls.Count; i++)
+            {
+                imageItems[i] = (ImageItem)imagesList.Controls[i];
+            }
+
+            return imageItems;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

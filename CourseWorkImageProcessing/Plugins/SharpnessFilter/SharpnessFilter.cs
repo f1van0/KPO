@@ -21,11 +21,12 @@ namespace SharpnessFilter
         public SharpnessFilter()
         {
             Options = new OptionsVariable[0];
+            _sharpness = 5;
         }
 
         public Bitmap Apply(Bitmap sourceImage)
         {
-            _sharpness = Options[0].Value;
+            _sharpness = _sharpness;
             InitializeMatrix();
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int j = 0; j < resultImage.Height; j++)

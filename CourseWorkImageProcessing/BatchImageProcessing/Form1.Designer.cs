@@ -44,12 +44,12 @@ namespace BatchImageProcessing
             this.отчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uploadImagesList = new System.Windows.Forms.FlowLayoutPanel();
+            this.imagesList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.UploadImagesButton = new System.Windows.Forms.Button();
             this.ProcessImagesButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.processedImagesCounterLabel = new System.Windows.Forms.Label();
             this.numberOfUploadedImagesLabel = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.openImagesDialog = new System.Windows.Forms.OpenFileDialog();
@@ -173,14 +173,14 @@ namespace BatchImageProcessing
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
-            // uploadImagesList
+            // imagesList
             // 
-            this.uploadImagesList.AutoScroll = true;
-            this.uploadImagesList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.uploadImagesList.Location = new System.Drawing.Point(0, 44);
-            this.uploadImagesList.Name = "uploadImagesList";
-            this.uploadImagesList.Size = new System.Drawing.Size(202, 394);
-            this.uploadImagesList.TabIndex = 2;
+            this.imagesList.AutoScroll = true;
+            this.imagesList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imagesList.Location = new System.Drawing.Point(0, 44);
+            this.imagesList.Name = "imagesList";
+            this.imagesList.Size = new System.Drawing.Size(218, 394);
+            this.imagesList.TabIndex = 2;
             // 
             // label1
             // 
@@ -194,16 +194,17 @@ namespace BatchImageProcessing
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(208, 44);
+            this.pictureBox1.Location = new System.Drawing.Point(224, 44);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(580, 350);
+            this.pictureBox1.Size = new System.Drawing.Size(564, 350);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // UploadImagesButton
             // 
-            this.UploadImagesButton.Location = new System.Drawing.Point(426, 188);
+            this.UploadImagesButton.Location = new System.Drawing.Point(433, 200);
             this.UploadImagesButton.Name = "UploadImagesButton";
             this.UploadImagesButton.Size = new System.Drawing.Size(171, 38);
             this.UploadImagesButton.TabIndex = 5;
@@ -221,14 +222,14 @@ namespace BatchImageProcessing
             this.ProcessImagesButton.UseVisualStyleBackColor = true;
             this.ProcessImagesButton.Click += new System.EventHandler(this.ProcessImagesButton_Click);
             // 
-            // label4
+            // processedImagesCounterLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(606, 441);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(176, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Обработано изображений: 0/0";
+            this.processedImagesCounterLabel.AutoSize = true;
+            this.processedImagesCounterLabel.Location = new System.Drawing.Point(606, 441);
+            this.processedImagesCounterLabel.Name = "processedImagesCounterLabel";
+            this.processedImagesCounterLabel.Size = new System.Drawing.Size(176, 15);
+            this.processedImagesCounterLabel.TabIndex = 7;
+            this.processedImagesCounterLabel.Text = "Обработано изображений: 0/0";
             // 
             // numberOfUploadedImagesLabel
             // 
@@ -249,7 +250,7 @@ namespace BatchImageProcessing
             // 
             // UndoButton
             // 
-            this.UndoButton.Location = new System.Drawing.Point(208, 400);
+            this.UndoButton.Location = new System.Drawing.Point(224, 400);
             this.UndoButton.Name = "UndoButton";
             this.UndoButton.Size = new System.Drawing.Size(147, 38);
             this.UndoButton.TabIndex = 9;
@@ -259,7 +260,7 @@ namespace BatchImageProcessing
             // 
             // RedoButton
             // 
-            this.RedoButton.Location = new System.Drawing.Point(361, 400);
+            this.RedoButton.Location = new System.Drawing.Point(377, 400);
             this.RedoButton.Name = "RedoButton";
             this.RedoButton.Size = new System.Drawing.Size(147, 38);
             this.RedoButton.TabIndex = 10;
@@ -275,12 +276,12 @@ namespace BatchImageProcessing
             this.Controls.Add(this.RedoButton);
             this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.numberOfUploadedImagesLabel);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.processedImagesCounterLabel);
             this.Controls.Add(this.ProcessImagesButton);
             this.Controls.Add(this.UploadImagesButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.uploadImagesList);
+            this.Controls.Add(this.imagesList);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -301,12 +302,12 @@ namespace BatchImageProcessing
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem фильтрToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изображениеToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel uploadImagesList;
+        private System.Windows.Forms.FlowLayoutPanel imagesList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button UploadImagesButton;
         private System.Windows.Forms.Button ProcessImagesButton;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label processedImagesCounterLabel;
         private System.Windows.Forms.Label numberOfUploadedImagesLabel;
         private System.Windows.Forms.ToolStripMenuItem отрытьИзображенияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьСписокИзображенийToolStripMenuItem;
