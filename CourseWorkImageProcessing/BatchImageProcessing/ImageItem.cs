@@ -18,10 +18,11 @@ namespace BatchImageProcessing
         public ProcessingImagesList ProcessedImages { get; private set; }
 
         public delegate void SelectImageHandler(ImageItem imageItem);
-        public event SelectImageHandler SelectImage;
+        public event SelectImageHandler OnSelectImage;
+        public event SelectImageHandler OnDeleteImage;
 
         public delegate void UpdateImageHandler();
-        public event UpdateImageHandler ProcessedImage;
+        public event UpdateImageHandler OnProcessedImage;
 
         public bool IsProcessing;
         public FilterPlugin[] FilterPlugins;
@@ -55,13 +56,14 @@ namespace BatchImageProcessing
             imagePictureBox?.Invoke((Action)delegate () {
                 imagePictureBox.Image = new Bitmap(1, 1);
                 IsProcessing = false;
-                ProcessedImage?.Invoke();
+                OnProcessedImage?.Invoke();
                 //processProgressBar.Visible = false;
             });
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            OnDeleteImage?.Invoke(this);
             Dispose();
         }
 
@@ -80,7 +82,7 @@ namespace BatchImageProcessing
         private void imagePictureBox_Click(object sender, EventArgs e)
         {
             if (!IsProcessing)
-                SelectImage.Invoke(this);
+                OnSelectImage.Invoke(this);
         }
 
         public void ApplyFilters()
@@ -92,7 +94,6 @@ namespace BatchImageProcessing
 
             int processCompletedProcentes = 1;
             imagePictureBox?.Invoke((Action)delegate () {
-                //processProgressBar.Visible = true;
                 processProgressBar.Value = processCompletedProcentes;
             });
             for (int i = 0; i < FilterPlugins.Length; i++)
@@ -104,7 +105,6 @@ namespace BatchImageProcessing
                 if (processCompletedProcentes > 100) processCompletedProcentes = 100;
                 imagePictureBox?.Invoke((Action)delegate () { processProgressBar.Value = processCompletedProcentes; });
             }
-            //imagePictureBox?.Invoke((Action)delegate () { processProgressBar.Value = 100; });
 
             UpdateImage();
         }
@@ -124,12 +124,41 @@ namespace BatchImageProcessing
 
         public void Save(string path)
         {
-            ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + Name+ ".jpg");
+            string savedName = path + '\\' + GetImageName() + ".jpg";
+            ProcessedImages.GetCurrentImage.Image.Save(savedName);
         }
 
-        public void Save(string path, string name)
+        public void Save(string path, int number, bool isNameNeeded)
         {
-            ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + name + ".jpg");
+            string savedName = path + '\\' + number;
+            if (isNameNeeded)
+            {
+                savedName += ' ' + GetImageName();
+            }
+            savedName += ".jpg";
+            ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        }
+
+        public void Save(string path, string substring)
+        {
+            string savedName = path + '\\' + substring + ' ' + GetImageName() + ".jpg";
+            ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        }
+
+        public void Save(string path, int number, string substring, bool isNameNeeded)
+        {
+            string savedName = path + '\\' + substring + ' ' + number;
+            if (isNameNeeded)
+            {
+                savedName += ' ' + GetImageName();
+            }
+            savedName += ".jpg";
+            ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        }
+
+        private string GetImageName()
+        {
+            return _fileName.Split(".")[0];
         }
     }
 }

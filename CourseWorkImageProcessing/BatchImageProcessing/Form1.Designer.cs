@@ -57,6 +57,7 @@ namespace BatchImageProcessing
             this.openPluginDialog = new System.Windows.Forms.OpenFileDialog();
             this.UndoButton = new System.Windows.Forms.Button();
             this.RedoButton = new System.Windows.Forms.Button();
+            this.processProgressBar = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -225,7 +226,7 @@ namespace BatchImageProcessing
             // processedImagesCounterLabel
             // 
             this.processedImagesCounterLabel.AutoSize = true;
-            this.processedImagesCounterLabel.Location = new System.Drawing.Point(606, 441);
+            this.processedImagesCounterLabel.Location = new System.Drawing.Point(606, 453);
             this.processedImagesCounterLabel.Name = "processedImagesCounterLabel";
             this.processedImagesCounterLabel.Size = new System.Drawing.Size(176, 15);
             this.processedImagesCounterLabel.TabIndex = 7;
@@ -252,7 +253,7 @@ namespace BatchImageProcessing
             // 
             this.UndoButton.Location = new System.Drawing.Point(224, 400);
             this.UndoButton.Name = "UndoButton";
-            this.UndoButton.Size = new System.Drawing.Size(147, 38);
+            this.UndoButton.Size = new System.Drawing.Size(147, 56);
             this.UndoButton.TabIndex = 9;
             this.UndoButton.Text = "Отменить действие";
             this.UndoButton.UseVisualStyleBackColor = true;
@@ -262,17 +263,25 @@ namespace BatchImageProcessing
             // 
             this.RedoButton.Location = new System.Drawing.Point(377, 400);
             this.RedoButton.Name = "RedoButton";
-            this.RedoButton.Size = new System.Drawing.Size(147, 38);
+            this.RedoButton.Size = new System.Drawing.Size(147, 56);
             this.RedoButton.TabIndex = 10;
             this.RedoButton.Text = "Повторить действие";
             this.RedoButton.UseVisualStyleBackColor = true;
             this.RedoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
+            // processProgressBar
+            // 
+            this.processProgressBar.Location = new System.Drawing.Point(606, 471);
+            this.processProgressBar.Name = "processProgressBar";
+            this.processProgressBar.Size = new System.Drawing.Size(182, 14);
+            this.processProgressBar.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 457);
+            this.ClientSize = new System.Drawing.Size(800, 486);
+            this.Controls.Add(this.processProgressBar);
             this.Controls.Add(this.RedoButton);
             this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.numberOfUploadedImagesLabel);
@@ -325,6 +334,7 @@ namespace BatchImageProcessing
         private System.Windows.Forms.OpenFileDialog openPluginDialog;
         private System.Windows.Forms.Button UndoButton;
         private System.Windows.Forms.Button RedoButton;
+        private System.Windows.Forms.ProgressBar processProgressBar;
     }
 }
 

@@ -60,17 +60,25 @@ namespace BatchImageProcessing
             {
                 UploadImagesButton.Hide();
                 string[] selectedImages = openImagesDialog.FileNames;
+
+                int numberOfNewImages = 0;
+
                 for (int i = 0; i < selectedImages.Length; i++)
                 {
                     ImageItem newImageItem = new ImageItem(selectedImages[i]);
-                    newImageItem.SelectImage += ImageSelected;
-                    newImageItem.ProcessedImage += ImageProcessed;
+                    newImageItem.OnSelectImage += ImageSelected;
+                    newImageItem.OnProcessedImage += ImageProcessed;
+                    newImageItem.OnDeleteImage += ImageDeleted;
                     imagesList.Controls.Add(newImageItem);
+                    numberOfNewImages++;
                 }
 
                 if (imagesList.Controls.Count > 0)
                 {
-                    ImageSelected((ImageItem)imagesList.Controls[0]);
+                    if (imagesList.Controls.Count - numberOfNewImages == 0)
+                        ImageSelected((ImageItem)imagesList.Controls[0]);
+                    else if (numberOfNewImages != imagesList.Controls.Count)
+                        ResetStep();
                 }
 
                 numberOfUploadedImagesLabel.Text = "Загружено изображений: " + imagesList.Controls.Count;
@@ -88,13 +96,36 @@ namespace BatchImageProcessing
         {
             _processedImagesCounter++;
             processedImagesCounterLabel.Text = $"Обработано изображений {_processedImagesCounter}/{imagesList.Controls.Count}";
+            processProgressBar.Value = (int)((float)(_processedImagesCounter) / imagesList.Controls.Count * 100);
             if (_processedImagesCounter == imagesList.Controls.Count)
                 FinishProcess();
         }
 
-        private async void ProcessImagesButton_Click(object sender, EventArgs e)
+        public void ImageDeleted(ImageItem imageItem)
         {
-            numberOfUploadedImagesLabel.Text = "Загружено изображений: " + imagesList.Controls.Count;
+            if (imageItem == _selectedImageItem)
+            {
+                pictureBox1.Image = new Bitmap(1, 1);
+            }
+
+            imageItem.OnSelectImage -= ImageSelected;
+            imageItem.OnProcessedImage -= ImageProcessed;
+            imageItem.OnDeleteImage -= ImageDeleted;
+
+            int currentNumberOfImages = imagesList.Controls.Count - 1;
+
+            numberOfUploadedImagesLabel.Text = $"Загружено изображений: {currentNumberOfImages}";
+            processedImagesCounterLabel.Text = $"Обработано изображений 0/{currentNumberOfImages}";
+
+            if (currentNumberOfImages == 0)
+                ResetStep();
+        }
+
+        private void ProcessImagesButton_Click(object sender, EventArgs e)
+        {
+            if (imagesList.Controls.Count == 0)
+                return;
+
             _processedImagesCounter = 0;
             ProcessImagesButton.Enabled = false;
             ResetStep();
@@ -130,11 +161,7 @@ namespace BatchImageProcessing
 
         private void сохранитьИзображенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImageItem[] imageItems = new ImageItem[imagesList.Controls.Count];
-            for (int i = 0; i < imagesList.Controls.Count; i++)
-            {
-                imageItems[i] = (ImageItem)imagesList.Controls[i];
-            }
+            ImageItem[] imageItems = GetImageItems();
             ExportImagesForm exportImagesForm = new ExportImagesForm(imageItems);
             exportImagesForm.ShowDialog();
         }
@@ -150,7 +177,6 @@ namespace BatchImageProcessing
         private void ResetStep()
         {
             _currentStep = 0;
-            //SetStep();
             SetUndoAvailability(false);
             SetRedoAvailability(false);
         }
@@ -173,12 +199,37 @@ namespace BatchImageProcessing
 
         private void SetUndoAvailability(bool isAvailable)
         {
+            string context;
+            if (isAvailable)
+            {
+                context = $"Отменить действие - [{_selectedImageItem.ProcessedImages.GetCurrentImage.ActionName}]";
+                
+            }
+            else
+            {
+                context = "Отменить действие";
+            }
+
+            отменитьДействиеToolStripMenuItem.Text = context;
+            UndoButton.Text = context;
             отменитьДействиеToolStripMenuItem.Enabled = isAvailable;
             UndoButton.Enabled = isAvailable;
         }
 
         private void SetRedoAvailability(bool isAvailable)
         {
+            string context;
+            if (isAvailable)
+            {
+                context = $"Повторить действие - [{_selectedImageItem.ProcessedImages.GetNextImage.ActionName}]";
+            }
+            else
+            {
+                context = "Повторить действие";
+            }
+
+            повторитьДействиеToolStripMenuItem.Text = context;
+            RedoButton.Text = context;
             повторитьДействиеToolStripMenuItem.Enabled = isAvailable;
             RedoButton.Enabled = isAvailable;
         }

@@ -15,7 +15,8 @@ namespace BatchImageProcessing
         public bool IsProcessing;
 
         public ImageDetails GetCurrentImage { get => _processedImages[CurrentStep]; }
-        public ImageDetails GetSourceImage { get => _processedImages.Count > 0 ? _processedImages[CurrentStep] : null; }
+        public ImageDetails GetNextImage { get => _processedImages[CurrentStep + 1]; }
+        public ImageDetails GetSourceImage { get => _processedImages.Count > 0 ? _processedImages[0] : null; }
         public ImageDetails GetResultImage { get => _processedImages.Count > 0 ? _processedImages[_processedImages.Count - 1] : null; }
 
         public ProcessingImagesList()
@@ -46,6 +47,8 @@ namespace BatchImageProcessing
             if (_processedImages.Count > 0)
             {
                 ImageDetails sourceImageDetails = GetSourceImage;
+                _processedImages.Clear();
+                _processedImages.Add(sourceImageDetails);
             }
         }
 

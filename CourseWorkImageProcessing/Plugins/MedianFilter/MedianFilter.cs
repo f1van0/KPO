@@ -38,12 +38,12 @@ namespace MedianFilter
             return resultImage;
         }
 
-        public Color GetMedianPixelColor(int x, int y, Bitmap sourceImage)
+        public Color GetMedianPixelColor(int x, int y, Bitmap currentSourceImageColor)
         {
+            Color sourceColor = currentSourceImageColor.GetPixel(x, y);
             if (x < _radius || y < _radius)
             {
-                Color sourceColor = sourceImage.GetPixel(x, y);
-                return Color.FromArgb(sourceColor.R, sourceColor.G, sourceColor.B);
+                return Color.FromArgb(sourceColor.A, sourceColor.R, sourceColor.G, sourceColor.B);
             }
 
             int cR_, cB_, cG_;      // Выходные цвета
@@ -61,9 +61,9 @@ namespace MedianFilter
                 {
                     if (k < size + 1)
                     {
-                        if (i < sourceImage.Width && j < sourceImage.Height)
+                        if (i < currentSourceImageColor.Width && j < currentSourceImageColor.Height)
                         {
-                            Color c = sourceImage.GetPixel(i, j);
+                            Color c = currentSourceImageColor.GetPixel(i, j);
                             cR[k] = Convert.ToInt32(c.R);
                             cG[k] = Convert.ToInt32(c.G);
                             cB[k] = Convert.ToInt32(c.B);
@@ -83,7 +83,7 @@ namespace MedianFilter
             cG_ = cG[center];
             cB_ = cB[center];
 
-            return Color.FromArgb(cR_, cG_, cB_);
+            return Color.FromArgb(sourceColor.A, cR_, cG_, cB_);
         }
 
         private void quicksort(int[] a, int p, int r)

@@ -47,7 +47,7 @@ namespace SharpnessFilter
             _kernel[0, 1] = -1;
             _kernel[0, 2] = 0;
             _kernel[1, 0] = -1;
-            _kernel[1, 1] = 9;
+            _kernel[1, 1] = 5;
             _kernel[1, 2] = -1;
             _kernel[2, 0] = 0;
             _kernel[2, 1] = -1;

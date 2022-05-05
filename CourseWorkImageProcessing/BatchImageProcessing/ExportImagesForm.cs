@@ -41,7 +41,7 @@ namespace BatchImageProcessing
                 int iter = 1;
                 foreach (var item in _imageItems)
                 {
-                    item.Save(path, iter.ToString());
+                    item.Save(path, iter, false);
                     iter++;
                 }
             }
@@ -50,7 +50,32 @@ namespace BatchImageProcessing
                 int iter = 1;
                 foreach (var item in _imageItems)
                 {
-                    item.Save(path, $"{iter} {item.Name}");
+                    item.Save(path, iter, true);
+                    iter++;
+                }
+            }
+            else if (radioButton4.Checked)
+            {
+                foreach (var item in _imageItems)
+                {
+                    item.Save(path, substringTextBox.Text);
+                }
+            }
+            else if (radioButton5.Checked)
+            {
+                int iter = 1;
+                foreach (var item in _imageItems)
+                {
+                    item.Save(path, iter, substringTextBox.Text, false);
+                    iter++;
+                }
+            }
+            else if (radioButton6.Checked)
+            {
+                int iter = 1;
+                foreach (var item in _imageItems)
+                {
+                    item.Save(path, iter, substringTextBox.Text, true);
                     iter++;
                 }
             }

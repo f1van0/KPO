@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 using DL;
 
 namespace ResizeFilter
 {
     public class ResizeFilter : IFilterDynamicLibrary
     {
-        public string Name => "Изменение размера изображения";
+        public string Name => "Изменение области изображения";
         public string Version => "1.0";
         public string Author => "Фролов Иван";
 
@@ -23,31 +24,62 @@ namespace ResizeFilter
 
         public ResizeFilter()
         {
-            Options = new OptionsVariable[2];
+            Options = new OptionsVariable[3];
             Options[0] = new OptionsVariable(400, 1, 10000, "Ширина", VariableType.Int);
             Options[1] = new OptionsVariable(250, 1, 10000, "Высота", VariableType.Int);
+            Options[2] = new OptionsVariable(1, 0, 1, "Центрировать рамку", VariableType.Int);
         }
 
 
         public Bitmap Apply(Bitmap sourceImage)
         {
+            int sourceWidth = sourceImage.Width;
+            int sourceHeight = sourceImage.Height;
+
             _width = Options[0].Value;
             _height = Options[1].Value;
 
             Bitmap resultImage = new Bitmap(_width, _height);
 
-            //for (int i = 0; i < )
+            Vector2 center;
+
+            if (Options[2].Value == 1)
+                center = Centering(sourceImage);
+            else
+                center = new Vector2(sourceWidth / 2, sourceHeight / 2);
+
+            Vector2 startPoint = new Vector2(center.X - _width / 2, center.Y - _height / 2);
+            Vector2 currentPoint;
+            Color currentColor;
+
+            for (int j = 0; j < _height; j++)
+            {
+                for (int i = 0; i < _width; i++)
+                {
+                    currentPoint = new Vector2(startPoint.X + i, startPoint.Y + j);
+                    if (currentPoint.X > 0 && currentPoint.X < sourceWidth && currentPoint.Y > 0 && currentPoint.Y < sourceHeight)
+                    {
+                        currentColor = sourceImage.GetPixel((int)currentPoint.X, (int)currentPoint.Y);
+                    }
+                    else
+                    {
+                        currentColor = Color.FromArgb(0, 0, 0, 0);
+                    }
+
+                    resultImage.SetPixel(i, j, currentColor);
+                }
+            }
 
             return resultImage;
         }
 
         //Центрирование (по идее, если будет масштабирование самого изображение, то центрировать не нужно будет)
-        public void Centering(Bitmap sourceImage, out int centerX, out int centerY)
+        public Vector2 Centering(Bitmap sourceImage)
         {
             //Центр по горизонтали
-            centerX = 0;
+            int centerX = 0;
             //Центр по вертикали
-            centerY = 0;
+            int centerY = 0;
 
 
             int sumX = 0, sumY = 0, sum = 0;
@@ -69,6 +101,8 @@ namespace ResizeFilter
 
             centerX = sumX / sum;
             centerY = sumY / sum;
+
+            return new Vector2(centerX, centerY);
         }
 
         //Масштабирование картинки

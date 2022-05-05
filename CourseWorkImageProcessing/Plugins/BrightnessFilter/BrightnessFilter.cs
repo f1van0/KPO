@@ -34,6 +34,7 @@ namespace BrightnessFilter
                 {
                     currentColor = sourceImage.GetPixel(i, j);
                     resultImage.SetPixel(i, j, Color.FromArgb(
+                                   currentColor.A,
                                    Clamp((currentColor.R + _k), 0, 255),
                                    Clamp((currentColor.G + _k), 0, 255),
                                    Clamp((currentColor.B + _k), 0, 255)
