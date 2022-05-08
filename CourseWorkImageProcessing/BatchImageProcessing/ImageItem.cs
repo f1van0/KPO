@@ -122,41 +122,40 @@ namespace BatchImageProcessing
             });
         }
 
-        public void Save(string path)
+        //public void Save(string path)
+        //{
+        //    string savedName = path + '\\' + GetImageName() + ".jpg";
+        //    ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        //}
+        //
+        //public void Save(string path, int number, bool isNameNeeded)
+        //{
+        //    string savedName = path + '\\' + number;
+        //    if (isNameNeeded)
+        //    {
+        //        savedName += ' ' + GetImageName();
+        //    }
+        //    savedName += ".jpg";
+        //    ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        //}
+
+        public void Save(string path, string fileName)
         {
-            string savedName = path + '\\' + GetImageName() + ".jpg";
-            ProcessedImages.GetCurrentImage.Image.Save(savedName);
+            ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + fileName);
         }
 
-        public void Save(string path, int number, bool isNameNeeded)
-        {
-            string savedName = path + '\\' + number;
-            if (isNameNeeded)
-            {
-                savedName += ' ' + GetImageName();
-            }
-            savedName += ".jpg";
-            ProcessedImages.GetCurrentImage.Image.Save(savedName);
-        }
+        //public void Save(string path, int number, string substring, bool isNameNeeded)
+        //{
+        //    string savedName = path + '\\' + substring + ' ' + number;
+        //    if (isNameNeeded)
+        //    {
+        //        savedName += ' ' + GetImageName();
+        //    }
+        //    savedName += ".jpg";
+        //    ProcessedImages.GetCurrentImage.Image.Save(savedName);
+        //}
 
-        public void Save(string path, string substring)
-        {
-            string savedName = path + '\\' + substring + ' ' + GetImageName() + ".jpg";
-            ProcessedImages.GetCurrentImage.Image.Save(savedName);
-        }
-
-        public void Save(string path, int number, string substring, bool isNameNeeded)
-        {
-            string savedName = path + '\\' + substring + ' ' + number;
-            if (isNameNeeded)
-            {
-                savedName += ' ' + GetImageName();
-            }
-            savedName += ".jpg";
-            ProcessedImages.GetCurrentImage.Image.Save(savedName);
-        }
-
-        private string GetImageName()
+        public string GetImageName()
         {
             return _fileName.Split(".")[0];
         }

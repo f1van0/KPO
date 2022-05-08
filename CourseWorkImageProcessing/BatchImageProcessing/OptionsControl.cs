@@ -18,7 +18,7 @@ namespace BatchImageProcessing
             InitializeComponent();
         }
 
-        public OptionsControl(OptionsVariable optionsVariable)
+        public OptionsControl(SettingsVariable optionsVariable)
         {
             InitializeComponent();
             VariableNameLabel.Text = optionsVariable.Name;

@@ -12,8 +12,9 @@ namespace DL
         public string Name { get; }
         public string Version { get; }
         public string Author { get; }
+        public string SettingsFileName { get; }
 
-        public OptionsVariable[] Options { get; set; }
+        public Settings Settings { get; set; }
 
         public Bitmap Apply(Bitmap sourceImage);
     }

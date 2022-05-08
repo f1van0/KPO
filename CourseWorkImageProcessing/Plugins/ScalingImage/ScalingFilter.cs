@@ -13,13 +13,16 @@ namespace ScalingFilter
 
 		public string Author => "Фролов Иван";
 
-		public OptionsVariable[] Options { get; set; }
+		public Settings Settings { get; set; }
+
+		public string SettingsFileName => "ScalingFilter_Settings.json";
 
 		public ScalingFilter()
 		{
-			Options = new OptionsVariable[2];
-			Options[0] = new OptionsVariable(300, 1, 3000, "Ширина", VariableType.Int);
-			Options[1] = new OptionsVariable(300, 1, 3000, "Высота", VariableType.Int);
+			SettingsVariable[] defaultSettings = new SettingsVariable[2];
+			defaultSettings[0] = new SettingsVariable(300, 1, 3000, "Ширина", VariableType.Int);
+			defaultSettings[1] = new SettingsVariable(300, 1, 3000, "Высота", VariableType.Int);
+			Settings = new Settings(defaultSettings, SettingsFileName);
 		}
 
 		public struct MultiColor
@@ -78,31 +81,6 @@ namespace ScalingFilter
 			}
 		}
 
-		//public Bitmap Apply(Bitmap sourceImage)
-        //{
-		//	float scaleValue = Options[0].Value / 10;
-		//	int resultWidth = (int)(sourceImage.Width * scaleValue);
-		//	int resultHeight = (int)(sourceImage.Height * scaleValue);
-		//	Bitmap resultImage = new Bitmap(resultWidth, resultHeight);
-		//	MultiColorMatrix matrix = new MultiColorMatrix(resultWidth, resultHeight);
-		//	for (int x = 0; x < sourceImage.Width / scaleValue; x++)
-		//	{
-		//		for (int y = 0; y < sourceImage.Height / scaleValue; y++)
-		//		{
-		//			Color newColor = sourceImage.GetPixel((int)(x * scaleValue), (int)(y * scaleValue));
-		//			for (int ix = 0; ix < scaleValue; ix++)
-		//			{
-		//				for (int iy = 0; iy < scaleValue; iy++)
-		//				{
-		//					resultImage.SetPixel(ix + x * scaleValue, iy + y * scaleValue, newColor);
-		//				}
-		//			}
-		//		}
-		//	}
-		//
-		//	return resultImage;
-		//}
-
 		public Bitmap Apply(Bitmap sourceImage)
         {
 			int i;
@@ -116,8 +94,8 @@ namespace ScalingFilter
 			Color p1, p2, p3, p4; /* nearby pixels */
 			int alpha, red, green, blue;
 
-			int resultWidth = Options[0].Value;
-			int resultHeight = Options[1].Value;
+			int resultWidth = Settings.SettingsVariables[0].Value;
+			int resultHeight = Settings.SettingsVariables[1].Value;
 			Bitmap resultImage = new Bitmap(resultWidth, resultHeight);
 
 			for (i = 0; i < resultHeight; i++)

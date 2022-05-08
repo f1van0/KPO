@@ -28,9 +28,13 @@ namespace BatchImageProcessing
             VersionLabel.Text = "Версия: " + Plugin.Filter.Version;
             AuthorLabel.Text = "Автор: " + Plugin.Filter.Author;
 
-            
+            ShowSettings();
+        }
+
+        private void ShowSettings()
+        {
             OptionsPanel.Controls.Clear();
-            OptionsVariable[] optionsVariables = Plugin.Filter.Options;
+            SettingsVariable[] optionsVariables = Plugin.Filter.Settings.SettingsVariables;
             OptionsControl[] optionsControls = new OptionsControl[optionsVariables.Length];
             for (int i = 0; i < optionsVariables.Length; i++)
             {
@@ -46,12 +50,20 @@ namespace BatchImageProcessing
 
         private void FilterOptionsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            for (int i = 0; i < Plugin.Filter.Options.Length; i++)
+            int[] newValues = new int[OptionsPanel.Controls.Count];
+            for (int i = 0; i < OptionsPanel.Controls.Count; i++)
             {
-                Plugin.Filter.Options[i].Value = ((OptionsControl)OptionsPanel.Controls[i]).GetValue();
+                newValues[i] = ((OptionsControl)OptionsPanel.Controls[i]).GetValue();
             }
+            Plugin.Filter.Settings.UpdateSettings(newValues);
 
             DialogResult = DialogResult.OK;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Plugin.Filter.Settings.ResetToDefault();
+            ShowSettings();
         }
     }
 }

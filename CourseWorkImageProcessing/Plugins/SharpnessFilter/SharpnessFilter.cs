@@ -16,11 +16,15 @@ namespace SharpnessFilter
         //Коэффициент резкости
         private int _sharpness;
 
-        public OptionsVariable[] Options { get; set; }
+        public SettingsVariable[] Settings { get; set; }
+
+        public string SettingsFileName => throw new NotImplementedException();
+
+        Settings IFilterDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public SharpnessFilter()
         {
-            Options = new OptionsVariable[0];
+            Settings = new SettingsVariable[0];
             _sharpness = 5;
         }
 

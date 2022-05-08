@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using System.IO;
 using DL;
+using Newtonsoft.Json;
 
 namespace BrightnessFilter
 {
@@ -12,20 +14,21 @@ namespace BrightnessFilter
         //Коэффициент изменения яркости
         private int _k;
 
-        public OptionsVariable[] Options { get; set; }
+        public Settings Settings { get; set; }
+
+        public string SettingsFileName => "BrightnessFilter_Settings.json";
 
         public BrightnessFilter()
         {
-            Options = new OptionsVariable[1];
-            Options[0] = new OptionsVariable(30, -100, 100, "Коэффициент изменения яркости", VariableType.Int);
+            SettingsVariable[] defaultSettings = new SettingsVariable[1];
+            defaultSettings[0] = new SettingsVariable(30, -100, 100, "Коэффициент изменения яркости", VariableType.Int);
+            Settings = new Settings(defaultSettings, SettingsFileName);
         }
-
-
 
         public Bitmap Apply(Bitmap sourceImage)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-            _k = Options[0].Value;
+            _k = Settings.SettingsVariables[0].Value;
 
             Color currentColor;
             for (int j = 0; j < resultImage.Height; j++)

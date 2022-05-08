@@ -12,12 +12,15 @@ namespace ContrastFilter
 
         public string Author => "Фролов Иван";
 
-        public OptionsVariable[] Options { get; set; }
+        public Settings Settings { get; set; }
+
+        public string SettingsFileName => "ContrastFilter_Settings.json";
 
         public ContrastFilter()
         {
-            Options = new OptionsVariable[1];
-            Options[0] = new OptionsVariable(0, -10, 10, "Коэффициент изменения контастности", VariableType.Int);
+            SettingsVariable[] defaultSettings = new SettingsVariable[1];
+            defaultSettings[0] = new SettingsVariable(0, -10, 10, "Коэффициент изменения контастности", VariableType.Int);
+            Settings = new Settings(defaultSettings, SettingsFileName);
         }
 
         public Bitmap Apply(Bitmap sourceImage)
@@ -43,7 +46,7 @@ namespace ContrastFilter
             int G;
             int B;
 
-            int N = (100 / Options[0].Maximum) * Options[0].Value; //кол-во процентов
+            int N = (100 / Settings.SettingsVariables[0].Maximum) * Settings.SettingsVariables[0].Value; //кол-во процентов
 
             if (N >= 0)
             {

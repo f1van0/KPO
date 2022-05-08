@@ -31,56 +31,30 @@ namespace BatchImageProcessing
         private void ExportButton_Click(object sender, EventArgs e)
         {
             string path = PathTextBox.Text;
-            if (radioButton1.Checked)
+            if (exportNameTextBox.Text == "")
             {
+                MessageBox.Show("Некорректно выбрано название для сохраняемых изображений");
+            }
+            else
+            {
+                string fileName;
+                string exportName = exportNameTextBox.Text;
+                int iter = 1;
                 foreach(var item in _imageItems)
-                    item.Save(path);
-            }
-            else if (radioButton2.Checked)
-            {
-                int iter = 1;
-                foreach (var item in _imageItems)
                 {
-                    item.Save(path, iter, false);
-                    iter++;
-                }
-            }
-            else if (radioButton3.Checked)
-            {
-                int iter = 1;
-                foreach (var item in _imageItems)
-                {
-                    item.Save(path, iter, true);
-                    iter++;
-                }
-            }
-            else if (radioButton4.Checked)
-            {
-                foreach (var item in _imageItems)
-                {
-                    item.Save(path, substringTextBox.Text);
-                }
-            }
-            else if (radioButton5.Checked)
-            {
-                int iter = 1;
-                foreach (var item in _imageItems)
-                {
-                    item.Save(path, iter, substringTextBox.Text, false);
-                    iter++;
-                }
-            }
-            else if (radioButton6.Checked)
-            {
-                int iter = 1;
-                foreach (var item in _imageItems)
-                {
-                    item.Save(path, iter, substringTextBox.Text, true);
-                    iter++;
-                }
-            }
+                    fileName = exportName;
+                    fileName = fileName.Replace("%Name%", item.GetImageName());
+                    fileName = fileName.Replace("%Number%", iter.ToString());
+                    fileName = fileName.Replace("%Date%", DateTime.Now.ToString());
 
-            Close();
+                    item.Save(path, fileName);
+
+                    iter++;
+                }
+
+                MessageBox.Show("Изображения успешно сохранены");
+                Close();
+            }
         }
 
         private void ChangeDirectoryButton_Click(object sender, EventArgs e)
@@ -89,6 +63,26 @@ namespace BatchImageProcessing
             {
                 PathTextBox.Text = folderBrowserDialog1.SelectedPath;
             }
+        }
+
+        private void ExportImagesForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imageNameButton_Click(object sender, EventArgs e)
+        {
+            exportNameTextBox.Text += "%Name%";
+        }
+
+        private void orderNumberButton_Click(object sender, EventArgs e)
+        {
+            exportNameTextBox.Text += "%Number%";
+        }
+
+        private void exportDateButton_Click(object sender, EventArgs e)
+        {
+            exportNameTextBox.Text += "%Date%";
         }
     }
 }

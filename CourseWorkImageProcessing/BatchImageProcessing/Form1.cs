@@ -13,6 +13,7 @@ namespace BatchImageProcessing
 {
     public partial class Form1 : Form
     {
+        private License _license;
         private PluginFoldersManager _foldersManager;
         private PluginLoader _pluginLoader;
         private ImageItem _selectedImageItem;
@@ -29,8 +30,9 @@ namespace BatchImageProcessing
         {
             InitializeComponent();
             _imageItems = new List<ImageItem>();
+            _license = new License();
             _foldersManager = new PluginFoldersManager();
-            _pluginLoader = new PluginLoader(_foldersManager);
+            _pluginLoader = new PluginLoader(_foldersManager, _license);
             ResetStep();
         }
 
@@ -170,8 +172,11 @@ namespace BatchImageProcessing
         {
             pictureBox1.Image = _selectedImageItem.ProcessedImages.GetImageInStep(_currentStep).Image;
             SetStep();
-            UpdateAvailabilityOfUndoButton();
-            UpdateAvailabilityOfRedoButton();
+            if (_license.Status == LicenseStatus.Active)
+            {
+                UpdateAvailabilityOfUndoButton();
+                UpdateAvailabilityOfRedoButton();
+            }
         }
 
         private void ResetStep()
@@ -270,6 +275,12 @@ namespace BatchImageProcessing
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LicenseForm licenseForm = new LicenseForm(_license);
+            licenseForm.ShowDialog();
         }
     }
 }

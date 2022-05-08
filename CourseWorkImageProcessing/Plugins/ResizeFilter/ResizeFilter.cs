@@ -20,33 +20,31 @@ namespace ResizeFilter
         public bool isCenteringY;
         public bool isScalingImage;
 
-        public OptionsVariable[] Options { get; set; }
+        public Settings Settings { get; set; }
+
+        public string SettingsFileName => "ResizeFilter_Settings.json";
 
         public ResizeFilter()
         {
-            Options = new OptionsVariable[3];
-            Options[0] = new OptionsVariable(400, 1, 10000, "Ширина", VariableType.Int);
-            Options[1] = new OptionsVariable(250, 1, 10000, "Высота", VariableType.Int);
-            Options[2] = new OptionsVariable(1, 0, 1, "Центрировать рамку", VariableType.Int);
+            SettingsVariable[] defaultSettings = new SettingsVariable[2];
+            defaultSettings[0] = new SettingsVariable(400, 1, 10000, "Ширина", VariableType.Int);
+            defaultSettings[1] = new SettingsVariable(250, 1, 10000, "Высота", VariableType.Int);
+            Settings = new Settings(defaultSettings, SettingsFileName);
         }
-
 
         public Bitmap Apply(Bitmap sourceImage)
         {
             int sourceWidth = sourceImage.Width;
             int sourceHeight = sourceImage.Height;
 
-            _width = Options[0].Value;
-            _height = Options[1].Value;
+            _width = Settings.SettingsVariables[0].Value;
+            _height = Settings.SettingsVariables[1].Value;
 
             Bitmap resultImage = new Bitmap(_width, _height);
 
             Vector2 center;
 
-            if (Options[2].Value == 1)
-                center = Centering(sourceImage);
-            else
-                center = new Vector2(sourceWidth / 2, sourceHeight / 2);
+            center = Centering(sourceImage);
 
             Vector2 startPoint = new Vector2(center.X - _width / 2, center.Y - _height / 2);
             Vector2 currentPoint;
@@ -104,14 +102,5 @@ namespace ResizeFilter
 
             return new Vector2(centerX, centerY);
         }
-
-        //Масштабирование картинки
-        public Bitmap ScaleImage(Bitmap sourceImage)
-        {
-            //Метод ближайшего соседа
-            return sourceImage;
-        }
-
-        //Масштабирование холста
     }
 }

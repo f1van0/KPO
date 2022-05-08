@@ -35,17 +35,25 @@ namespace BatchImageProcessing
     public class PluginLoader
     {
 		public List<FilterPlugin> ImageFiltersPlugins;
+		public License CurrentLicense;
+
 		private static FileInfo[] _pluginsFiles;
 		private PluginFoldersManager _pluginFoldersManager;
 
-		public PluginLoader(PluginFoldersManager foldersManager)
+		public PluginLoader(PluginFoldersManager foldersManager, License license)
         {
 			ImageFiltersPlugins = new List<FilterPlugin>();
 			_pluginFoldersManager = foldersManager;
-			LoadPlugins();
+			CurrentLicense = license;
+			LoadPlugins(CurrentLicense.Status);
 		}
 
-        public void LoadPlugins()
+		public void LoadPlugins()
+		{
+			LoadPlugins(CurrentLicense.Status);
+		}
+
+		public void LoadPlugins(LicenseStatus status)
         {
 			ImageFiltersPlugins = new List<FilterPlugin>();
 			if (!Directory.Exists("Plugins"))
@@ -77,7 +85,17 @@ namespace BatchImageProcessing
 				IFilterDynamicLibrary newFilter = (IFilterDynamicLibrary)Activator.CreateInstance(type);
 				ImageFiltersPlugins.Add(new FilterPlugin(newFilter));
 			}
+
+			LoadSettingsForPlugins();
 		}
+
+		private void LoadSettingsForPlugins()
+        {
+			foreach (var plugin in ImageFiltersPlugins)
+            {
+				plugin.Filter.Settings.TryToLoadSettings();
+            }
+        }
 
 		private Assembly ResolveAssembly(object sender, ResolveEventArgs args)
 		{

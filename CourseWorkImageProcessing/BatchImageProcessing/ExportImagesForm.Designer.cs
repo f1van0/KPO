@@ -30,20 +30,16 @@ namespace BatchImageProcessing
         private void InitializeComponent()
         {
             this.amountOfExportingImagesLabel = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.PathTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ChangeDirectoryButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.substringTextBox = new System.Windows.Forms.TextBox();
+            this.exportNameTextBox = new System.Windows.Forms.TextBox();
+            this.imageNameButton = new System.Windows.Forms.Button();
+            this.orderNumberButton = new System.Windows.Forms.Button();
+            this.exportDateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // amountOfExportingImagesLabel
@@ -55,72 +51,27 @@ namespace BatchImageProcessing
             this.amountOfExportingImagesLabel.TabIndex = 0;
             this.amountOfExportingImagesLabel.Text = "Количество выгружаемых изображений: ";
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(11, 70);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(132, 19);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Исходное название";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Способ наименования изображений:";
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(11, 93);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(134, 19);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Порядковый номер";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(11, 116);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(253, 19);
-            this.radioButton3.TabIndex = 4;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Исходное название и порядновый номер";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
             // PathTextBox
             // 
-            this.PathTextBox.Location = new System.Drawing.Point(11, 292);
+            this.PathTextBox.Location = new System.Drawing.Point(6, 217);
             this.PathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PathTextBox.Name = "PathTextBox";
+            this.PathTextBox.ReadOnly = true;
             this.PathTextBox.Size = new System.Drawing.Size(402, 23);
             this.PathTextBox.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 275);
+            this.label3.Location = new System.Drawing.Point(6, 200);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(292, 15);
+            this.label3.Size = new System.Drawing.Size(273, 15);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Путь к папке, в которую экспортируются элементы";
+            this.label3.Text = "Путь к папке, в которую сохраняются элементы";
             // 
             // ChangeDirectoryButton
             // 
-            this.ChangeDirectoryButton.Location = new System.Drawing.Point(418, 291);
+            this.ChangeDirectoryButton.Location = new System.Drawing.Point(413, 216);
             this.ChangeDirectoryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ChangeDirectoryButton.Name = "ChangeDirectoryButton";
             this.ChangeDirectoryButton.Size = new System.Drawing.Size(82, 22);
@@ -131,7 +82,7 @@ namespace BatchImageProcessing
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(206, 326);
+            this.ExportButton.Location = new System.Drawing.Point(201, 259);
             this.ExportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(121, 22);
@@ -140,81 +91,73 @@ namespace BatchImageProcessing
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(11, 139);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(202, 19);
-            this.radioButton4.TabIndex = 9;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Исходное название и подстрока";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(11, 162);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(204, 19);
-            this.radioButton5.TabIndex = 10;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Порядковый номер и подстрока";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(11, 185);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(315, 19);
-            this.radioButton6.TabIndex = 11;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Исходное название, порядковый номер и подстрока";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 220);
+            this.label1.Location = new System.Drawing.Point(11, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 15);
+            this.label1.Size = new System.Drawing.Size(286, 15);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Подстрока";
+            this.label1.Text = "Строка формирующая название для изображения";
             // 
-            // substringTextBox
+            // exportNameTextBox
             // 
-            this.substringTextBox.Location = new System.Drawing.Point(11, 237);
-            this.substringTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.substringTextBox.Name = "substringTextBox";
-            this.substringTextBox.Size = new System.Drawing.Size(204, 23);
-            this.substringTextBox.TabIndex = 13;
+            this.exportNameTextBox.Location = new System.Drawing.Point(11, 66);
+            this.exportNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exportNameTextBox.Name = "exportNameTextBox";
+            this.exportNameTextBox.Size = new System.Drawing.Size(402, 23);
+            this.exportNameTextBox.TabIndex = 13;
+            this.exportNameTextBox.Text = "%Number%. %Name%.png";
+            // 
+            // imageNameButton
+            // 
+            this.imageNameButton.Location = new System.Drawing.Point(12, 94);
+            this.imageNameButton.Name = "imageNameButton";
+            this.imageNameButton.Size = new System.Drawing.Size(205, 23);
+            this.imageNameButton.TabIndex = 14;
+            this.imageNameButton.Text = "Добавить название изображения";
+            this.imageNameButton.UseVisualStyleBackColor = true;
+            this.imageNameButton.Click += new System.EventHandler(this.imageNameButton_Click);
+            // 
+            // orderNumberButton
+            // 
+            this.orderNumberButton.Location = new System.Drawing.Point(12, 123);
+            this.orderNumberButton.Name = "orderNumberButton";
+            this.orderNumberButton.Size = new System.Drawing.Size(205, 23);
+            this.orderNumberButton.TabIndex = 15;
+            this.orderNumberButton.Text = "Добавить порядковый номер";
+            this.orderNumberButton.UseVisualStyleBackColor = true;
+            this.orderNumberButton.Click += new System.EventHandler(this.orderNumberButton_Click);
+            // 
+            // exportDateButton
+            // 
+            this.exportDateButton.Location = new System.Drawing.Point(12, 152);
+            this.exportDateButton.Name = "exportDateButton";
+            this.exportDateButton.Size = new System.Drawing.Size(205, 23);
+            this.exportDateButton.TabIndex = 16;
+            this.exportDateButton.Text = "Добавить дату экспорта";
+            this.exportDateButton.UseVisualStyleBackColor = true;
+            this.exportDateButton.Click += new System.EventHandler(this.exportDateButton_Click);
             // 
             // ExportImagesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 358);
-            this.Controls.Add(this.substringTextBox);
+            this.ClientSize = new System.Drawing.Size(507, 292);
+            this.Controls.Add(this.exportDateButton);
+            this.Controls.Add(this.orderNumberButton);
+            this.Controls.Add(this.imageNameButton);
+            this.Controls.Add(this.exportNameTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.radioButton6);
-            this.Controls.Add(this.radioButton5);
-            this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.ChangeDirectoryButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PathTextBox);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.amountOfExportingImagesLabel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ExportImagesForm";
             this.Text = "ExportImagesForm";
+            this.Load += new System.EventHandler(this.ExportImagesForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,19 +166,15 @@ namespace BatchImageProcessing
         #endregion
 
         private System.Windows.Forms.Label amountOfExportingImagesLabel;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.TextBox PathTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button ChangeDirectoryButton;
         private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox substringTextBox;
+        private System.Windows.Forms.TextBox exportNameTextBox;
+        private System.Windows.Forms.Button imageNameButton;
+        private System.Windows.Forms.Button orderNumberButton;
+        private System.Windows.Forms.Button exportDateButton;
     }
 }

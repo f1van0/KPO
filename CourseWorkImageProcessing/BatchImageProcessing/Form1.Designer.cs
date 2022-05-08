@@ -43,7 +43,9 @@ namespace BatchImageProcessing
             this.повторитьДействиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.лицензияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.активироватьЛицензиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imagesList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -71,7 +73,7 @@ namespace BatchImageProcessing
             this.фильтрToolStripMenuItem,
             this.изображениеToolStripMenuItem,
             this.отчетToolStripMenuItem,
-            this.справкаToolStripMenuItem});
+            this.лицензияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -168,11 +170,27 @@ namespace BatchImageProcessing
             this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.статистикаToolStripMenuItem.Text = "Статистика";
             // 
-            // справкаToolStripMenuItem
+            // лицензияToolStripMenuItem
             // 
-            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.справкаToolStripMenuItem.Text = "Справка";
+            this.лицензияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.активироватьЛицензиюToolStripMenuItem,
+            this.информацияToolStripMenuItem});
+            this.лицензияToolStripMenuItem.Name = "лицензияToolStripMenuItem";
+            this.лицензияToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.лицензияToolStripMenuItem.Text = "Лицензия";
+            // 
+            // активироватьЛицензиюToolStripMenuItem
+            // 
+            this.активироватьЛицензиюToolStripMenuItem.Name = "активироватьЛицензиюToolStripMenuItem";
+            this.активироватьЛицензиюToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.активироватьЛицензиюToolStripMenuItem.Text = "Активировать";
+            // 
+            // информацияToolStripMenuItem
+            // 
+            this.информацияToolStripMenuItem.Name = "информацияToolStripMenuItem";
+            this.информацияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.информацияToolStripMenuItem.Text = "Информация";
+            this.информацияToolStripMenuItem.Click += new System.EventHandler(this.информацияToolStripMenuItem_Click);
             // 
             // imagesList
             // 
@@ -327,7 +345,6 @@ namespace BatchImageProcessing
         private System.Windows.Forms.ToolStripMenuItem повторитьДействиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem отчетToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.OpenFileDialog openImagesDialog;
         private System.Windows.Forms.SaveFileDialog saveImagesDialog;
@@ -335,6 +352,9 @@ namespace BatchImageProcessing
         private System.Windows.Forms.Button UndoButton;
         private System.Windows.Forms.Button RedoButton;
         private System.Windows.Forms.ProgressBar processProgressBar;
+        private System.Windows.Forms.ToolStripMenuItem лицензияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem активироватьЛицензиюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem информацияToolStripMenuItem;
     }
 }
 

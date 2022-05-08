@@ -23,18 +23,33 @@ namespace BatchImageProcessing
         {
             InitializeComponent();
             _pluginLoader = pluginLoader;
-            ShowPlugins();
+            LicenseStatus licenseStatus = _pluginLoader.CurrentLicense.Status;
+            ShowPlugins(licenseStatus);
+            if (licenseStatus != LicenseStatus.Active)
+            {
+                LockButtons();
+            }
         }
 
-        private void ShowPlugins()
+        private void ShowPlugins(LicenseStatus status)
         {
             FiltersRadioButtonList.Items.Clear();
-            foreach(var plugin in _pluginLoader.ImageFiltersPlugins)
+
+            for (int i = 0; i < _pluginLoader.ImageFiltersPlugins.Count; i++)
             {
-                FiltersRadioButtonList.Items.Add(plugin, plugin.IsActive);
+                FilterPlugin currentPlugin = _pluginLoader.ImageFiltersPlugins[i];
+
+                FiltersRadioButtonList.Items.Add(currentPlugin, currentPlugin.IsActive);
             }
 
             FiltersRadioButtonList.CheckOnClick = false;
+        }
+
+        private void LockButtons()
+        {
+            UpButton.Enabled = false;
+            DownButton.Enabled = false;
+            OptionsButton.Enabled = false;
         }
 
         private void FiltersForm_Load(object sender, EventArgs e)

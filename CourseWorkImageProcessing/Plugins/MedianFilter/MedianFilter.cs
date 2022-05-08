@@ -13,19 +13,20 @@ namespace MedianFilter
         //Радиус
         private int _radius;
 
-        public OptionsVariable[] Options { get; set; }
+        public Settings Settings { get; set; }
+
+        public string SettingsFileName => "MedianFilter_Settings.json";
 
         public MedianFilter()
         {
-            Options = new OptionsVariable[1];
-            Options[0] = new OptionsVariable(4, 1, 10, "Радиус", VariableType.Int);
+            SettingsVariable[] defaultSettings = new SettingsVariable[1];
+            defaultSettings[0] = new SettingsVariable(4, 1, 10, "Радиус", VariableType.Int);
+            Settings = new Settings(defaultSettings, SettingsFileName);
         }
-
-
 
         public Bitmap Apply(Bitmap sourceImage)
         {
-            _radius = Options[0].Value;
+            _radius = Settings.SettingsVariables[0].Value;
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int j = 0; j < resultImage.Height; j++)
             {

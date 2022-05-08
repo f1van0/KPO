@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContrastFilter", "Plugins\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalingFilter", "Plugins\ScalingImage\ScalingFilter.csproj", "{5CD0F489-C68B-4408-B456-A1B83DABCA61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnsharpMaskFilter", "Plugins\UnsharpMaskFilter\UnsharpMaskFilter.csproj", "{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{5CD0F489-C68B-4408-B456-A1B83DABCA61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CD0F489-C68B-4408-B456-A1B83DABCA61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CD0F489-C68B-4408-B456-A1B83DABCA61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{255C1E7A-D0D8-4F5F-BF1D-0D0C2A53F800} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 		{CF536A10-1CC1-4636-B70C-5A2ED7BA29F5} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 		{5CD0F489-C68B-4408-B456-A1B83DABCA61} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
+		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566} = {03682F20-17D2-4727-A3D5-6F2BE880EECB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1599B476-1B1B-4F98-8DAC-F77D41CC3458}
