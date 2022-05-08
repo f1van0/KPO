@@ -93,6 +93,7 @@ namespace BatchImageProcessing
 
         private void FiltersForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _pluginLoader.CurrentLicense.Updated -= UpdateButtons;
             _pluginLoader.ImageFiltersPlugins.Clear();
             for (int i = 0; i < FiltersRadioButtonList.Items.Count; i++)
             {
