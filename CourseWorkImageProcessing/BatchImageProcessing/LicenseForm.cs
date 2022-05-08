@@ -23,6 +23,7 @@ namespace BatchImageProcessing
         {
             InitializeComponent();
             _license = license;
+            _license.Updated += ShowLicenseInformation;
             ShowLicenseInformation();
         }
 
@@ -77,7 +78,12 @@ namespace BatchImageProcessing
 
         private void LicenseForm_Load(object sender, EventArgs e)
         {
+            
+        }
 
+        private void LicenseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _license.Updated -= ShowLicenseInformation;
         }
     }
 }

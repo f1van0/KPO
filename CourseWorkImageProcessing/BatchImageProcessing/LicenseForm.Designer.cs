@@ -169,6 +169,7 @@ namespace BatchImageProcessing
             this.Controls.Add(this.usernameTextBox);
             this.Name = "LicenseForm";
             this.Text = "LicenseForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LicenseForm_FormClosing);
             this.Load += new System.EventHandler(this.LicenseForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

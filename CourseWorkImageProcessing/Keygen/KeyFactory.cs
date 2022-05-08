@@ -8,8 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 
-
-namespace BatchImageProcessing
+namespace Keygen
 {
 	[Serializable]
 	public record Key

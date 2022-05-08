@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResizeFilter", "Plugins\Res
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContrastFilter", "Plugins\ContrastFilter\ContrastFilter.csproj", "{CF536A10-1CC1-4636-B70C-5A2ED7BA29F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalingFilter", "Plugins\ScalingImage\ScalingFilter.csproj", "{5CD0F489-C68B-4408-B456-A1B83DABCA61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScalingFilter", "Plugins\ScalingImage\ScalingFilter.csproj", "{5CD0F489-C68B-4408-B456-A1B83DABCA61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnsharpMaskFilter", "Plugins\UnsharpMaskFilter\UnsharpMaskFilter.csproj", "{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnsharpMaskFilter", "Plugins\UnsharpMaskFilter\UnsharpMaskFilter.csproj", "{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keygen", "Keygen\Keygen.csproj", "{7A3C4CF7-C96B-419B-9D2C-273FCB38BBF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{231B1DB7-3BC9-45D0-B0D7-4B58B2174566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3C4CF7-C96B-419B-9D2C-273FCB38BBF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3C4CF7-C96B-419B-9D2C-273FCB38BBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3C4CF7-C96B-419B-9D2C-273FCB38BBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3C4CF7-C96B-419B-9D2C-273FCB38BBF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
