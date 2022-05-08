@@ -54,7 +54,7 @@ namespace Keygen
 			{
 				var device = (USBFlash)devicesComboBox.SelectedValue;
 
-				Key generatedKey = new Key(usernameTextBox.Text, device.SerialNumber, device.Name, endTimeDatePicker.Value);
+				Key generatedKey = new Key(usernameTextBox.Text, device.Name, device.SerialNumber, endTimeDatePicker.Value);
 
 				serialTextBox.Text = device.SerialNumber;
 				startTimeTextBox.Text = generatedKey.EndTime.ToString();

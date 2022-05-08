@@ -36,17 +36,20 @@ namespace BatchImageProcessing
             byte[] serialMD5;
             byte[] usbMD5;
             
-            foreach (var device in devices)
+            lock (devices)
             {
-                serialMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.SerialNumber));
-                usbMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.Name));
-                EncryptedKey? foundKey = KeyFactory.ReadKey(device.DriveName);
-                if (foundKey.HasValue)
+                foreach (var device in devices)
                 {
-                    if (VerifyData(usernameMD5, foundKey.Value.Username) && VerifyData(serialMD5, foundKey.Value.SerialNumber) && VerifyData(usbMD5, foundKey.Value.USB))
+                    serialMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.SerialNumber));
+                    usbMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.Name));
+                    EncryptedKey? foundKey = KeyFactory.ReadKey(device.DriveName);
+                    if (foundKey.HasValue)
                     {
-                        Key verifiedKey = new Key(username, device.Name, device.SerialNumber, foundKey.Value);
-                        return verifiedKey;
+                        if (VerifyData(usernameMD5, foundKey.Value.Username) && VerifyData(serialMD5, foundKey.Value.SerialNumber) && VerifyData(usbMD5, foundKey.Value.USB))
+                        {
+                            Key verifiedKey = new Key(username, device.Name, device.SerialNumber, foundKey.Value);
+                            return verifiedKey;
+                        }
                     }
                 }
             }

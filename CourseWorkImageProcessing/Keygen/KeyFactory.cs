@@ -28,7 +28,7 @@ namespace Keygen
 			StartTime = DateTime.Now;
 		}
 
-		public Key(string username, string serialNum, string usb, EncryptedKey encryptedKey)
+		public Key(string username, string usb, string serialNum, EncryptedKey encryptedKey)
 		{
 			Username = username;
 			USB = usb;
@@ -55,7 +55,7 @@ namespace Keygen
 		{
 			RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
 			SerialNumber = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(key.SerialNumber));
-			USB = new byte[0];
+			USB = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(key.USB));
 			Username = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(key.Username));
 			UntilDate = key.EndTime;
 			CreatedDate = key.StartTime;

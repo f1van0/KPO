@@ -33,6 +33,7 @@ namespace Keygen
 		public List<USBFlash> Devices;
 		public event Action<List<USBFlash>> UpdateDevices;
 		public bool inAutoupdate => Updater?.IsAlive ?? false;
+		private bool isWorking;
 		Thread Updater;
 
 		static USBObserver instance;
@@ -85,6 +86,8 @@ namespace Keygen
 		{
 			if (Updater != null && Updater.IsAlive)
 				return;
+
+			isWorking = true;
 			Updater = new Thread(AutoUpdate);
 			Updater.Start();
 		}
@@ -93,6 +96,7 @@ namespace Keygen
 		{
 			if (Updater != null && Updater.IsAlive)
             {
+				isWorking = false;
 				if (!Updater.Join(2000))
 				{ // or an agreed resonable time
 					Updater.Abort();
@@ -102,7 +106,7 @@ namespace Keygen
 
 		void AutoUpdate()
 		{
-			while (true)
+			while (isWorking)
 			{
 				refreshDevices();
 				Thread.Sleep(700);

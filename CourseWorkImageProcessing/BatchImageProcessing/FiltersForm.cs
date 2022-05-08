@@ -23,12 +23,6 @@ namespace BatchImageProcessing
         {
             InitializeComponent();
             _pluginLoader = pluginLoader;
-            LicenseStatus licenseStatus = _pluginLoader.CurrentLicense.Status;
-            ShowPlugins(licenseStatus);
-            if (licenseStatus != LicenseStatus.Active)
-            {
-                LockButtons();
-            }
         }
 
         private void ShowPlugins(LicenseStatus status)
@@ -45,16 +39,27 @@ namespace BatchImageProcessing
             FiltersRadioButtonList.CheckOnClick = false;
         }
 
-        private void LockButtons()
-        {
-            UpButton.Enabled = false;
-            DownButton.Enabled = false;
-            OptionsButton.Enabled = false;
-        }
-
         private void FiltersForm_Load(object sender, EventArgs e)
         {
+            SetActiveButtons(_pluginLoader.CurrentLicense.Status == LicenseStatus.Active);
+            _pluginLoader.CurrentLicense.Updated += UpdateButtons;
+            LicenseStatus licenseStatus = _pluginLoader.CurrentLicense.Status;
+            ShowPlugins(licenseStatus);
+        }
 
+        private void SetActiveButtons(bool isActive)
+        {
+            UpButton.Enabled = isActive;
+            DownButton.Enabled = isActive;
+            OptionsButton.Enabled = isActive;
+        }
+
+        private void UpdateButtons()
+        {
+            OptionsButton?.Invoke((Action)delegate () {
+                bool isActive = _pluginLoader.CurrentLicense.Status == LicenseStatus.Active;
+                SetActiveButtons(isActive);
+            });
         }
 
         private void UpButton_Click(object sender, EventArgs e)

@@ -29,16 +29,16 @@ namespace BatchImageProcessing
         public Form1()
         {
             InitializeComponent();
-            _imageItems = new List<ImageItem>();
-            _license = new License();
-            _foldersManager = new PluginFoldersManager();
-            _pluginLoader = new PluginLoader(_foldersManager, _license);
-            ResetStep();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            _imageItems = new List<ImageItem>();
+            _license = new License();
+            _license.Updated += UpdateLicense;
+            _foldersManager = new PluginFoldersManager();
+            _pluginLoader = new PluginLoader(_foldersManager, _license);
+            ResetStep();
         }
 
         private void UploadImagesButton_Click(object sender, EventArgs e)
@@ -170,13 +170,27 @@ namespace BatchImageProcessing
 
         private void UpdateStep()
         {
-            pictureBox1.Image = _selectedImageItem.ProcessedImages.GetImageInStep(_currentStep).Image;
+            if (_selectedImageItem != null)
+                pictureBox1.Image = _selectedImageItem.ProcessedImages.GetImageInStep(_currentStep).Image;
+            
             SetStep();
             if (_license.Status == LicenseStatus.Active)
             {
                 UpdateAvailabilityOfUndoButton();
                 UpdateAvailabilityOfRedoButton();
             }
+            else
+            {
+                SetUndoAvailability(false);
+                SetRedoAvailability(false);
+            }
+        }
+
+        private void UpdateLicense()
+        {
+            pictureBox1?.Invoke((Action)delegate () {
+                UpdateStep();
+            });
         }
 
         private void ResetStep()
