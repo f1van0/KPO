@@ -6,7 +6,7 @@ namespace MedianFilter
 {
     public class MedianFilter : IFilterDynamicLibrary
     {
-        public string Name => "Мудианный фильтр";
+        public string Name => "Медианный фильтр";
         public string Version => "1.0";
         public string Author => "Фролов Иван";
 

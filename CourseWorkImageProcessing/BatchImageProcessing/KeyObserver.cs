@@ -32,23 +32,17 @@ namespace BatchImageProcessing
         private Key FindKeyOnFlashDrives()
         {
             string username = Environment.UserName;
-            byte[] usernameMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(username));
-            byte[] serialMD5;
-            byte[] usbMD5;
             
             lock (devices)
             {
                 foreach (var device in devices)
                 {
-                    serialMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.SerialNumber));
-                    usbMD5 = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(device.Name));
-                    EncryptedKey? foundKey = KeyFactory.ReadKey(device.DriveName);
-                    if (foundKey.HasValue)
+                    Key foundKey = KeyFactory.ReadKey(device.DriveName);
+                    if (foundKey != null)
                     {
-                        if (VerifyData(usernameMD5, foundKey.Value.Username) && VerifyData(serialMD5, foundKey.Value.SerialNumber) && VerifyData(usbMD5, foundKey.Value.USB))
+                        if (username == foundKey.Username && device.Name == foundKey.USB && device.SerialNumber == foundKey.SerialNumber)
                         {
-                            Key verifiedKey = new Key(username, device.Name, device.SerialNumber, foundKey.Value);
-                            return verifiedKey;
+                            return foundKey;
                         }
                     }
                 }

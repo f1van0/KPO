@@ -11,7 +11,7 @@ using DL;
 
 namespace BatchImageProcessing
 {
-    public partial class Form1 : Form
+    public partial class MainProgram : Form
     {
         private License _license;
         private PluginFoldersManager _foldersManager;
@@ -26,7 +26,7 @@ namespace BatchImageProcessing
 
         private int _processedImagesCounter;
 
-        public Form1()
+        public MainProgram()
         {
             InitializeComponent();
         }

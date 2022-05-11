@@ -16,6 +16,8 @@ namespace Keygen
 		List<USBFlash> devices;
 		BindingSource source;
 
+		EncryptedKey _savedKey;
+
 		public Keygen()
 		{
 			InitializeComponent();
@@ -52,15 +54,16 @@ namespace Keygen
 				&& usernameTextBox.Text.Length > 0
 				&& devicesComboBox.SelectedValue != null)
 			{
+
 				var device = (USBFlash)devicesComboBox.SelectedValue;
-
 				Key generatedKey = new Key(usernameTextBox.Text, device.Name, device.SerialNumber, endTimeDatePicker.Value);
-
-				serialTextBox.Text = device.SerialNumber;
-				startTimeTextBox.Text = generatedKey.EndTime.ToString();
+				loadedKey = generatedKey;
 
 				// сохраняю ключ
-				KeyFactory.CreateKey(device.DriveName, generatedKey);
+				_savedKey = KeyFactory.CreateKey(device.DriveName, generatedKey);
+				usernameTextBox.Text = generatedKey.Username.ToString();
+				serialTextBox.Text = generatedKey.SerialNumber.ToString();
+				startTimeTextBox.Text = generatedKey.StartTime.ToString();
 				MessageBox.Show("Ключ успешно сгенерирован и сохранен на USB накопитель", "Ключ сгенерирован", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			else
@@ -74,5 +77,10 @@ namespace Keygen
 			USBObserver.Instance.UpdateDevices -= updateDevices;
 			USBObserver.Instance.stopAutoUpdate();
 		}
-	}
+
+        private void Keygen_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

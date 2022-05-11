@@ -140,7 +140,7 @@ namespace Keygen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(221, 343);
+            this.ClientSize = new System.Drawing.Size(221, 332);
             this.Controls.Add(this.generateKeyButton);
             this.Controls.Add(this.endTimeDatePicker);
             this.Controls.Add(this.label5);
@@ -155,6 +155,7 @@ namespace Keygen
             this.Name = "Keygen";
             this.Text = "Keygen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Keygen_FormClosing);
+            this.Load += new System.EventHandler(this.Keygen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +174,7 @@ namespace Keygen
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker endTimeDatePicker;
         private System.Windows.Forms.Button generateKeyButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 

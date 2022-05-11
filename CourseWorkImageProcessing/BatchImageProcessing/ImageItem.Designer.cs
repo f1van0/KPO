@@ -58,12 +58,13 @@ namespace BatchImageProcessing
             // 
             // closeButton
             // 
+            this.closeButton.BackColor = System.Drawing.SystemColors.Control;
             this.closeButton.Location = new System.Drawing.Point(163, -1);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(25, 25);
             this.closeButton.TabIndex = 5;
             this.closeButton.Text = "x";
-            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // imageName
@@ -79,6 +80,7 @@ namespace BatchImageProcessing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.processProgressBar);
             this.Controls.Add(this.imagePictureBox);
