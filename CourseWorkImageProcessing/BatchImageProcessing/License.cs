@@ -40,6 +40,7 @@ namespace BatchImageProcessing
         {
             _keyObserver = new KeyObserver();
             _keyObserver.FoundKey += UpdateLicense;
+            Status = LicenseStatus.Trial;
         }
 
         public void UpdateLicense(Key key)

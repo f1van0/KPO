@@ -35,6 +35,7 @@ namespace BatchImageProcessing
 		public event Action<List<USBFlash>> UpdateDevices;
 		public bool inRunning;
 		Thread Updater;
+		CancellationTokenSource _tokenSource;
 
 		static USBObserver instance;
 		public static USBObserver Instance
@@ -85,31 +86,33 @@ namespace BatchImageProcessing
 			if (Updater != null && Updater.IsAlive)
 				return;
 
-			Updater = new Thread(AutoUpdate);
 			inRunning = true;
-			Updater.Start();
-		}
+			_tokenSource = new CancellationTokenSource();
+			Updater = new Thread(AutoUpdate) { IsBackground=true};
+			Updater.Start(_tokenSource.Token);
+        }
 
 		public void stopAutoUpdate()
 		{
 			if (Updater != null && Updater.IsAlive)
 			{
 				inRunning = false;
-				if (!Updater.Join(2000))
-				{ // or an agreed resonable time
-					Updater.Abort();
-				}
+				_tokenSource.Cancel();
+				//if (!Updater.Join(2000))
+				//{ // or an agreed resonable time
+				//	Updater.Abort();
+				//}
 			}
 		}
 
-		void AutoUpdate()
+		void AutoUpdate(object obj)
 		{
-			while (true)
+			var cancellationToken = (CancellationToken)obj;
+			while (inRunning)
 			{
+				cancellationToken.ThrowIfCancellationRequested();
 				refreshDevices();
 				Thread.Sleep(700);
-				if (!inRunning)
-					break;
 			}
 		}
 
