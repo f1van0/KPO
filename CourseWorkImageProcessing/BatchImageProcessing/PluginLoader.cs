@@ -11,16 +11,16 @@ namespace BatchImageProcessing
 {
 	public class FilterPlugin
     {
-		public IFilterDynamicLibrary Filter { get; }
+		public IImageFilterDynamicLibrary Filter { get; }
 		public bool IsActive { get; set; }
 
-		public FilterPlugin(IFilterDynamicLibrary filter)
+		public FilterPlugin(IImageFilterDynamicLibrary filter)
         {
 			Filter = filter;
 			IsActive = true;
 		}
 
-		public FilterPlugin(IFilterDynamicLibrary filter, bool isActive)
+		public FilterPlugin(IImageFilterDynamicLibrary filter, bool isActive)
 		{
 			Filter = filter;
 			IsActive = isActive;
@@ -72,7 +72,7 @@ namespace BatchImageProcessing
 					Assembly.LoadFile(file.FullName);
 			}
 			
-			Type interfaceType = typeof(IFilterDynamicLibrary);
+			Type interfaceType = typeof(IImageFilterDynamicLibrary);
 			//Fetch all types that implement the interface IPlugin and are a class
 			Type[] types = AppDomain.CurrentDomain.GetAssemblies()
 				.SelectMany(a => a.GetTypes())
@@ -82,7 +82,7 @@ namespace BatchImageProcessing
 			//Create a new instance of all found types
 			foreach (Type type in types)
             {
-				IFilterDynamicLibrary newFilter = (IFilterDynamicLibrary)Activator.CreateInstance(type);
+				IImageFilterDynamicLibrary newFilter = (IImageFilterDynamicLibrary)Activator.CreateInstance(type);
 				ImageFiltersPlugins.Add(new FilterPlugin(newFilter));
 			}
 

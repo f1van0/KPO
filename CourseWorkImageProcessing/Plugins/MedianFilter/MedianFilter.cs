@@ -4,7 +4,7 @@ using DL;
 
 namespace MedianFilter
 {
-    public class MedianFilter : IFilterDynamicLibrary
+    public class MedianFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Медианный фильтр";
         public string Version => "1.0";

@@ -4,7 +4,7 @@ using DL;
 
 namespace ContrastFilter
 {
-    public class ContrastFilter : IFilterDynamicLibrary
+    public class ContrastFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Изменение контраста";
 

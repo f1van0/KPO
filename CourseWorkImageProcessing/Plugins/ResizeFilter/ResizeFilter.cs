@@ -5,7 +5,7 @@ using DL;
 
 namespace ResizeFilter
 {
-    public class ResizeFilter : IFilterDynamicLibrary
+    public class ResizeFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Изменение области изображения";
         public string Version => "1.0";

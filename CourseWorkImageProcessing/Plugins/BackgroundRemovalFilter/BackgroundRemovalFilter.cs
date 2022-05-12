@@ -8,7 +8,7 @@ using System.IO;
 
 namespace BackgroundRemovalFilter
 {
-    public class BackgroundRemovalFilter : IFilterDynamicLibrary
+    public class BackgroundRemovalFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Фильтр удаления фона";
 		public string Version => "1.1";

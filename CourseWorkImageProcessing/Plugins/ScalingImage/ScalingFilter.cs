@@ -5,7 +5,7 @@ using DL;
 
 namespace ScalingFilter
 {
-	public class ScalingFilter : IFilterDynamicLibrary
+	public class ScalingFilter : IImageFilterDynamicLibrary
 	{
 		public string Name => "Масштабирование изображения";
 

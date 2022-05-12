@@ -6,7 +6,7 @@ using DL;
 
 namespace UnsharpMaskFilter
 {
-    public class UnsharpMaskFilter : IFilterDynamicLibrary
+    public class UnsharpMaskFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Unsharp mask";
 
@@ -18,7 +18,9 @@ namespace UnsharpMaskFilter
 
         public string SettingsFileName => throw new NotImplementedException();
 
-        Settings IFilterDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        Settings ICustomizableDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        // Settings IImageFilterDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public UnsharpMaskFilter()
         {

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BrightnessFilter
 {
-    public class BrightnessFilter : IFilterDynamicLibrary
+    public class BrightnessFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Изменение яркости";
         public string Version => "1.0";

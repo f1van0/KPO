@@ -4,7 +4,7 @@ using DL;
 
 namespace SharpnessFilter
 {
-    public class SharpnessFilter : IFilterDynamicLibrary
+    public class SharpnessFilter : IImageFilterDynamicLibrary
     {
         public string Name => "Изменение резкости";
         public string Version => "1.2";
@@ -20,11 +20,12 @@ namespace SharpnessFilter
 
         public string SettingsFileName => throw new NotImplementedException();
 
-        Settings IFilterDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //Settings Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        Settings ICustomizableDynamicLibrary.Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public SharpnessFilter()
         {
-            Settings = new SettingsVariable[0];
+            //Settings = new SettingsVariable[0];
             _sharpness = 5;
         }
 
