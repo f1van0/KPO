@@ -18,6 +18,7 @@ namespace BatchImageProcessing
         private PluginLoader _pluginLoader;
         private ImageItem _selectedImageItem;
         private List<ImageItem> _imageItems;
+        private ImagesDB _imagesDB;
 
         private Task _processingTask;
 
@@ -33,6 +34,7 @@ namespace BatchImageProcessing
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            _imagesDB = new ImagesDB();
             _imageItems = new List<ImageItem>();
             _license = new License();
             _license.Updated += UpdateLicense;

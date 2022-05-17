@@ -98,10 +98,6 @@ namespace BatchImageProcessing
 			{
 				inRunning = false;
 				_tokenSource.Cancel();
-				//if (!Updater.Join(2000))
-				//{ // or an agreed resonable time
-				//	Updater.Abort();
-				//}
 			}
 		}
 

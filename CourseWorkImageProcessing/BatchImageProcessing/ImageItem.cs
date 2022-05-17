@@ -27,6 +27,10 @@ namespace BatchImageProcessing
         public bool IsProcessing;
         public FilterPlugin[] FilterPlugins;
 
+        private int _appliedFiltersAmount;
+        private string _imageResolution;
+        private int _processingTime;
+
         public ImageItem()
         {
             InitializeComponent();
@@ -44,6 +48,11 @@ namespace BatchImageProcessing
 
             imagePictureBox.Image = sourceImage;
             IsProcessing = false;
+
+            _imageResolution = $"{sourceImage.Width}x{sourceImage.Height}";
+            _appliedFiltersAmount = 0;
+            _processingTime = 0;
+            InsertImage(0, _fileName);
         }
 
         public void AddProcessedImage(string filterName, Bitmap processedImage)
@@ -96,6 +105,7 @@ namespace BatchImageProcessing
             imagePictureBox?.Invoke((Action)delegate () {
                 processProgressBar.Value = processCompletedProcentes;
             });
+            DateTime startTime = DateTime.Now;
             for (int i = 0; i < FilterPlugins.Length; i++)
             {
                 Bitmap filteredImage = FilterPlugins[i].Filter.Apply(ProcessedImages.GetResultImage.Image);
@@ -105,6 +115,8 @@ namespace BatchImageProcessing
                 if (processCompletedProcentes > 100) processCompletedProcentes = 100;
                 imagePictureBox?.Invoke((Action)delegate () { processProgressBar.Value = processCompletedProcentes; });
             }
+            _processingTime = (int)(DateTime.Now - startTime).TotalMilliseconds;
+            _appliedFiltersAmount = FilterPlugins.Length;
 
             UpdateImage();
         }
@@ -142,6 +154,7 @@ namespace BatchImageProcessing
         public void Save(string path, string fileName)
         {
             ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + fileName);
+            InsertImage(1, fileName);
         }
 
         //public void Save(string path, int number, string substring, bool isNameNeeded)
@@ -158,6 +171,11 @@ namespace BatchImageProcessing
         public string GetImageName()
         {
             return _fileName.Split(".")[0];
+        }
+
+        public void InsertImage(int status, string fileName)
+        {
+            ImagesDB.Instance.Insert(new ImageRow(fileName, status, _imageResolution, _appliedFiltersAmount, _processingTime));
         }
     }
 }
