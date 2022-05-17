@@ -44,7 +44,7 @@ namespace BatchImageProcessing
             {
                 LicenseFoundText.Text = "Лицензия найдена:";
                 usernameTextBox.Text = _license.UserName;
-                usbTextBox.Text = _license.SerialNumber;
+                usbTextBox.Text = _license.USB;
                 serialTextBox.Text = _license.SerialNumber;
                 timeStartTextBox.Text = _license.StartDate.ToString();
                 timeEndTextBox.Text = _license.EndDate.ToString();
