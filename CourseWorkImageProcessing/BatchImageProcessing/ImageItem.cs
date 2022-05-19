@@ -154,6 +154,8 @@ namespace BatchImageProcessing
         public void Save(string path, string fileName)
         {
             ProcessedImages.GetCurrentImage.Image.Save(path + '\\' + fileName);
+            Bitmap resultimage = ProcessedImages.GetCurrentImage.Image;
+            _imageResolution = $"{resultimage.Width}x{resultimage.Height}";
             InsertImage(1, fileName);
         }
 
