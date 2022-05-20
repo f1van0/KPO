@@ -293,7 +293,7 @@ namespace BatchImageProcessing
 
         }
 
-        private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void лицензияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LicenseForm licenseForm = new LicenseForm(_license);
             licenseForm.ShowDialog();

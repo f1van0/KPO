@@ -125,6 +125,10 @@ namespace CourseStatistics
 
         private void UpdateInformation()
         {
+            if (File.Exists("images.db"))
+            {
+                titleInfoLabel.Text = $"Статистика использования приложения за {File.GetCreationTime("images.db")}";
+            }
             _numberOfImages = -1;
             numericUpDown1.Value = 0;
             numericUpDown1.Minimum = 0;

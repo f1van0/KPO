@@ -60,4 +60,18 @@
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Справочная информация:
+Строка, формирующая название для изображения,
+может быть заполнена специальными ключевыми
+словами, такими как: %Number%, %Name%, %Date%.
+
+%Number% - заменяется на номер изображения в списке
+%Name% - заменяется на исходное название файла
+%Date% - заменяется на текущую дату
+
+Чтобы не вводить эти названия собственноручно, под
+строкой есть кнопки, которые позволяют добавить эти
+слова в конец строки.</value>
+  </data>
 </root>

@@ -45,7 +45,8 @@ namespace BatchImageProcessing
                     fileName = exportName;
                     fileName = fileName.Replace("%Name%", item.GetImageName());
                     fileName = fileName.Replace("%Number%", iter.ToString());
-                    fileName = fileName.Replace("%Date%", DateTime.Now.ToString());
+                    DateTime date = DateTime.Now;
+                    fileName = fileName.Replace("%Date%", $"{date.Day}-{date.Month}-{date.Year}  {date.Hour}-{date.Minute}-{date.Second}");
 
                     item.Save(path, fileName);
 

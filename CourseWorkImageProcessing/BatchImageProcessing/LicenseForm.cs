@@ -36,7 +36,6 @@ namespace BatchImageProcessing
                 LicenseFoundText.Text = "Лицензия не найдена:";
                 usernameTextBox.Text = "";
                 usbTextBox.Text = "";
-                serialTextBox.Text = "";
                 timeStartTextBox.Text = "";
                 timeEndTextBox.Text = "";
             }
@@ -45,7 +44,6 @@ namespace BatchImageProcessing
                 LicenseFoundText.Text = "Лицензия найдена:";
                 usernameTextBox.Text = _license.UserName;
                 usbTextBox.Text = _license.USB;
-                serialTextBox.Text = _license.SerialNumber;
                 timeStartTextBox.Text = _license.StartDate.ToString();
                 timeEndTextBox.Text = _license.EndDate.ToString();
             }
@@ -57,7 +55,7 @@ namespace BatchImageProcessing
             {
                 case LicenseStatus.Active:
                     {
-                        LicenseStatusText.Text = "Лицензия активирована";
+                        LicenseStatusText.Text = "Лицензия активна";
                         LicenseStatusText.BackColor = Color.LightGreen;
                         break;
                     }
