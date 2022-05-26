@@ -83,77 +83,79 @@ namespace ScalingFilter
 
 		public Bitmap Apply(Bitmap sourceImage)
         {
-			int i;
 			int j;
-			int l;
-			int c;
-			float t;
-			float u;
-			float tmp;
+			int i;
+			int consideredYPotision;
+			int consideredXPosition;
+			float deltaX;
+			float deltaY;
+			float yPositionRelativeToSource;
+			float xPositionRelativeToSource;
 			float d1, d2, d3, d4;
-			Color p1, p2, p3, p4; /* nearby pixels */
+			Color pixel1, pixel2, pixel3, pixel4;
 			int alpha, red, green, blue;
 
 			int resultWidth = Settings.SettingsVariables[0].Value;
 			int resultHeight = Settings.SettingsVariables[1].Value;
 			Bitmap resultImage = new Bitmap(resultWidth, resultHeight);
 
-			for (i = 0; i < resultHeight; i++)
+			for (j = 0; j < resultHeight; j++)
 			{
-				for (j = 0; j < resultWidth; j++)
+				for (i = 0; i < resultWidth; i++)
 				{
 
-					tmp = (float)(i) / (float)(resultHeight - 1) * (sourceImage.Height - 1);
-					l = (int)Math.Floor(tmp);
-					if (l < 0)
+					yPositionRelativeToSource = (float)(j) / (float)(resultHeight - 1) * (sourceImage.Height - 1);
+					consideredYPotision = (int)Math.Floor(yPositionRelativeToSource);
+					if (consideredYPotision < 0)
 					{
-						l = 0;
+						consideredYPotision = 0;
 					}
 					else
 					{
-						if (l >= sourceImage.Height - 1)
+						if (consideredYPotision >= sourceImage.Height - 1)
 						{
-							l = sourceImage.Height - 2;
+							consideredYPotision = sourceImage.Height - 2;
 						}
 					}
 
-					u = tmp - l;
-					tmp = (float)(j) / (float)(resultWidth - 1) * (sourceImage.Width - 1);
-					c = (int)Math.Floor(tmp);
-					if (c < 0)
+					deltaY = yPositionRelativeToSource - consideredYPotision;
+
+					xPositionRelativeToSource = (float)(i) / (float)(resultWidth - 1) * (sourceImage.Width - 1);
+					consideredXPosition = (int)Math.Floor(xPositionRelativeToSource);
+					if (consideredXPosition < 0)
 					{
-						c = 0;
+						consideredXPosition = 0;
 					}
 					else
 					{
-						if (c >= sourceImage.Width - 1)
+						if (consideredXPosition >= sourceImage.Width - 1)
 						{
-							c = sourceImage.Width - 2;
+							consideredXPosition = sourceImage.Width - 2;
 						}
 					}
-					t = tmp - c;
+					deltaX = xPositionRelativeToSource - consideredXPosition;
 
-					/* coefficients */
-					d1 = (1 - t) * (1 - u);
-					d2 = t * (1 - u);
-					d3 = t * u;
-					d4 = (1 - t) * u;
+					//Высчитывание коэфициентов для каждого пикселя
+					d1 = (1 - deltaX) * (1 - deltaY);
+					d2 = deltaX * (1 - deltaY);
+					d3 = deltaX * deltaY;
+					d4 = (1 - deltaX) * deltaY;
 
-					/* nearby pixels: a[i][j] */
-					p1 = sourceImage.GetPixel(c, l);
-					p2 = sourceImage.GetPixel(c, l + 1);
-					p3 = sourceImage.GetPixel(c + 1, l + 1);
-					p4 = sourceImage.GetPixel(c + 1, l);
+					//соседние пиксели
+					pixel1 = sourceImage.GetPixel(consideredXPosition, consideredYPotision);
+					pixel2 = sourceImage.GetPixel(consideredXPosition, consideredYPotision + 1);
+					pixel3 = sourceImage.GetPixel(consideredXPosition + 1, consideredYPotision + 1);
+					pixel4 = sourceImage.GetPixel(consideredXPosition + 1, consideredYPotision);
 
-					/* color components */
-					alpha = (int)(p1.A * d1 + p2.A * d2 + p3.A * d3 + p4.A * d4);
-					red = (int)(p1.R * d1 + p2.R * d2 + p3.R * d3 + p4.R * d4);
-					green = (int)(p1.G * d1 + p2.G * d2 + p3.G * d3 + p4.G * d4);
-					blue = (int)(p1.B * d1 + p2.B * d2 + p3.B * d3 + p4.B * d4);
+					//Высчитывание коэфициентов R G B A для нового пикселя
+					alpha = (int)(pixel1.A * d1 + pixel2.A * d2 + pixel3.A * d3 + pixel4.A * d4);
+					red = (int)(pixel1.R * d1 + pixel2.R * d2 + pixel3.R * d3 + pixel4.R * d4);
+					green = (int)(pixel1.G * d1 + pixel2.G * d2 + pixel3.G * d3 + pixel4.G * d4);
+					blue = (int)(pixel1.B * d1 + pixel2.B * d2 + pixel3.B * d3 + pixel4.B * d4);
 					Color newColor = Color.FromArgb(alpha, red, green, blue);
 
-					/* new pixel R G B  */
-					resultImage.SetPixel(j, i, newColor); // + (i * resultWidth) + j) = (red << 16) | (green << 8) | (blue);
+					//Вставка нового цвета пикселя в картинку
+					resultImage.SetPixel(i, j, newColor);
 				}
 			}
 
