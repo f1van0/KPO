@@ -19,9 +19,4 @@ namespace DL
     {
         public Bitmap Apply(Bitmap sourceImage);
     }
-
-    public interface IServiceDynamicLibrary : ICustomizableDynamicLibrary
-    {
-
-    }
 }

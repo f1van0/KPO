@@ -72,8 +72,11 @@ namespace BatchImageProcessing
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            OnDeleteImage?.Invoke(this);
-            Dispose();
+            if (!IsProcessing)
+            {
+                OnDeleteImage?.Invoke(this);
+                Dispose();
+            }
         }
 
         private string GetFileName(string path)
