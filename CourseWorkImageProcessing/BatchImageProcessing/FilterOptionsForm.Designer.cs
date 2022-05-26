@@ -46,7 +46,7 @@ namespace BatchImageProcessing
             // FilterNameLabel
             // 
             this.FilterNameLabel.AutoSize = true;
-            this.FilterNameLabel.Location = new System.Drawing.Point(12, 23);
+            this.FilterNameLabel.Location = new System.Drawing.Point(12, 9);
             this.FilterNameLabel.Name = "FilterNameLabel";
             this.FilterNameLabel.Size = new System.Drawing.Size(228, 15);
             this.FilterNameLabel.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace BatchImageProcessing
             // VersionLabel
             // 
             this.VersionLabel.AutoSize = true;
-            this.VersionLabel.Location = new System.Drawing.Point(12, 51);
+            this.VersionLabel.Location = new System.Drawing.Point(12, 37);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(67, 15);
             this.VersionLabel.TabIndex = 1;
@@ -64,7 +64,7 @@ namespace BatchImageProcessing
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 123);
+            this.label1.Location = new System.Drawing.Point(12, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 15);
             this.label1.TabIndex = 2;
@@ -77,7 +77,7 @@ namespace BatchImageProcessing
             this.OptionsPanel.Controls.Add(this.numericUpDown1);
             this.OptionsPanel.Controls.Add(this.trackBar1);
             this.OptionsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.OptionsPanel.Location = new System.Drawing.Point(12, 141);
+            this.OptionsPanel.Location = new System.Drawing.Point(12, 111);
             this.OptionsPanel.Name = "OptionsPanel";
             this.OptionsPanel.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OptionsPanel.Size = new System.Drawing.Size(461, 297);
@@ -111,7 +111,7 @@ namespace BatchImageProcessing
             // AuthorLabel
             // 
             this.AuthorLabel.AutoSize = true;
-            this.AuthorLabel.Location = new System.Drawing.Point(12, 80);
+            this.AuthorLabel.Location = new System.Drawing.Point(12, 66);
             this.AuthorLabel.Name = "AuthorLabel";
             this.AuthorLabel.Size = new System.Drawing.Size(120, 15);
             this.AuthorLabel.TabIndex = 4;
@@ -119,7 +119,7 @@ namespace BatchImageProcessing
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(329, 112);
+            this.button1.Location = new System.Drawing.Point(330, 89);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 23);
             this.button1.TabIndex = 5;
@@ -139,7 +139,7 @@ namespace BatchImageProcessing
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.FilterNameLabel);
             this.Name = "FilterOptionsForm";
-            this.Text = "FilterOptionsForm";
+            this.Text = "Настройки плагина";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FilterOptionsForm_FormClosing);
             this.Load += new System.EventHandler(this.FilterOptionsForm_Load);
             this.OptionsPanel.ResumeLayout(false);
