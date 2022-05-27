@@ -87,8 +87,8 @@ namespace ScalingFilter
 			int i;
 			int consideredYPotision;
 			int consideredXPosition;
-			float deltaX;
-			float deltaY;
+			float offsetX;
+			float offsetY;
 			float yPositionRelativeToSource;
 			float xPositionRelativeToSource;
 			float d1, d2, d3, d4;
@@ -103,7 +103,6 @@ namespace ScalingFilter
 			{
 				for (i = 0; i < resultWidth; i++)
 				{
-
 					yPositionRelativeToSource = (float)(j) / (float)(resultHeight - 1) * (sourceImage.Height - 1);
 					consideredYPotision = (int)Math.Floor(yPositionRelativeToSource);
 					if (consideredYPotision < 0)
@@ -118,7 +117,7 @@ namespace ScalingFilter
 						}
 					}
 
-					deltaY = yPositionRelativeToSource - consideredYPotision;
+					offsetY = yPositionRelativeToSource - consideredYPotision;
 
 					xPositionRelativeToSource = (float)(i) / (float)(resultWidth - 1) * (sourceImage.Width - 1);
 					consideredXPosition = (int)Math.Floor(xPositionRelativeToSource);
@@ -133,13 +132,13 @@ namespace ScalingFilter
 							consideredXPosition = sourceImage.Width - 2;
 						}
 					}
-					deltaX = xPositionRelativeToSource - consideredXPosition;
+					offsetX = xPositionRelativeToSource - consideredXPosition;
 
 					//Высчитывание коэфициентов для каждого пикселя
-					d1 = (1 - deltaX) * (1 - deltaY);
-					d2 = deltaX * (1 - deltaY);
-					d3 = deltaX * deltaY;
-					d4 = (1 - deltaX) * deltaY;
+					d1 = (1 - offsetX) * (1 - offsetY);
+					d2 = offsetX * (1 - offsetY);
+					d3 = offsetX * offsetY;
+					d4 = (1 - offsetX) * offsetY;
 
 					//соседние пиксели
 					pixel1 = sourceImage.GetPixel(consideredXPosition, consideredYPotision);

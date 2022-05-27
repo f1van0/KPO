@@ -90,7 +90,7 @@ namespace BatchImageProcessing
             this.Controls.Add(this.UpButton);
             this.Controls.Add(this.FiltersRadioButtonList);
             this.Name = "FiltersForm";
-            this.Text = "FiltersForm";
+            this.Text = "Список плагинов";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FiltersForm_FormClosing);
             this.Load += new System.EventHandler(this.FiltersForm_Load);
             this.ResumeLayout(false);

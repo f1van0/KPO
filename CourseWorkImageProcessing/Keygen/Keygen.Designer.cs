@@ -44,7 +44,7 @@ namespace Keygen
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(12, 49);
+            this.usernameTextBox.Location = new System.Drawing.Point(118, 49);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.ReadOnly = true;
             this.usernameTextBox.Size = new System.Drawing.Size(193, 23);
@@ -53,7 +53,7 @@ namespace Keygen
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(118, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 1;
@@ -62,7 +62,7 @@ namespace Keygen
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 121);
+            this.label2.Location = new System.Drawing.Point(118, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 15);
             this.label2.TabIndex = 3;
@@ -70,7 +70,7 @@ namespace Keygen
             // 
             // serialTextBox
             // 
-            this.serialTextBox.Location = new System.Drawing.Point(12, 139);
+            this.serialTextBox.Location = new System.Drawing.Point(118, 139);
             this.serialTextBox.Name = "serialTextBox";
             this.serialTextBox.ReadOnly = true;
             this.serialTextBox.Size = new System.Drawing.Size(193, 23);
@@ -79,7 +79,7 @@ namespace Keygen
             // devicesComboBox
             // 
             this.devicesComboBox.FormattingEnabled = true;
-            this.devicesComboBox.Location = new System.Drawing.Point(12, 95);
+            this.devicesComboBox.Location = new System.Drawing.Point(118, 95);
             this.devicesComboBox.Name = "devicesComboBox";
             this.devicesComboBox.Size = new System.Drawing.Size(193, 23);
             this.devicesComboBox.TabIndex = 4;
@@ -87,7 +87,7 @@ namespace Keygen
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 77);
+            this.label3.Location = new System.Drawing.Point(118, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 15);
             this.label3.TabIndex = 5;
@@ -96,7 +96,7 @@ namespace Keygen
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 167);
+            this.label4.Location = new System.Drawing.Point(118, 167);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(157, 15);
             this.label4.TabIndex = 7;
@@ -104,7 +104,7 @@ namespace Keygen
             // 
             // startTimeTextBox
             // 
-            this.startTimeTextBox.Location = new System.Drawing.Point(12, 185);
+            this.startTimeTextBox.Location = new System.Drawing.Point(118, 185);
             this.startTimeTextBox.Name = "startTimeTextBox";
             this.startTimeTextBox.ReadOnly = true;
             this.startTimeTextBox.Size = new System.Drawing.Size(193, 23);
@@ -113,7 +113,7 @@ namespace Keygen
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 211);
+            this.label5.Location = new System.Drawing.Point(118, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 15);
             this.label5.TabIndex = 9;
@@ -121,14 +121,14 @@ namespace Keygen
             // 
             // endTimeDatePicker
             // 
-            this.endTimeDatePicker.Location = new System.Drawing.Point(12, 229);
+            this.endTimeDatePicker.Location = new System.Drawing.Point(118, 229);
             this.endTimeDatePicker.Name = "endTimeDatePicker";
             this.endTimeDatePicker.Size = new System.Drawing.Size(193, 23);
             this.endTimeDatePicker.TabIndex = 10;
             // 
             // generateKeyButton
             // 
-            this.generateKeyButton.Location = new System.Drawing.Point(12, 283);
+            this.generateKeyButton.Location = new System.Drawing.Point(118, 283);
             this.generateKeyButton.Name = "generateKeyButton";
             this.generateKeyButton.Size = new System.Drawing.Size(193, 40);
             this.generateKeyButton.TabIndex = 11;
@@ -140,7 +140,7 @@ namespace Keygen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(221, 332);
+            this.ClientSize = new System.Drawing.Size(423, 332);
             this.Controls.Add(this.generateKeyButton);
             this.Controls.Add(this.endTimeDatePicker);
             this.Controls.Add(this.label5);
@@ -153,7 +153,7 @@ namespace Keygen
             this.Controls.Add(this.label1);
             this.Controls.Add(this.usernameTextBox);
             this.Name = "Keygen";
-            this.Text = "Keygen";
+            this.Text = "Генератор ключей для BatchImageProcessing";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Keygen_FormClosing);
             this.Load += new System.EventHandler(this.Keygen_Load);
             this.ResumeLayout(false);

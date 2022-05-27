@@ -131,7 +131,7 @@ namespace BatchImageProcessing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 450);
+            this.ClientSize = new System.Drawing.Size(485, 421);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AuthorLabel);
             this.Controls.Add(this.OptionsPanel);

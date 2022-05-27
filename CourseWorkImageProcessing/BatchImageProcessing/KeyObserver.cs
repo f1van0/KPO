@@ -51,20 +51,6 @@ namespace BatchImageProcessing
             return null;
         }
 
-        public bool VerifyData(byte[] data1, byte[] data2)
-        {
-            if (data1.Length != data2.Length)
-                return false;
-
-            for (int i = 0; i < data1.Length; i++)
-            {
-                if (data1[i] != data2[i])
-                    return false;
-            }
-
-            return true;
-        }
-
         private void FindKey()
         {
             //Найден ключ, который к тому же является подлинным

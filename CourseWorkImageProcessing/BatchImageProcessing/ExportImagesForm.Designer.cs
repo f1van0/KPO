@@ -47,34 +47,36 @@ namespace BatchImageProcessing
             // amountOfExportingImagesLabel
             // 
             this.amountOfExportingImagesLabel.AutoSize = true;
-            this.amountOfExportingImagesLabel.Location = new System.Drawing.Point(13, 21);
+            this.amountOfExportingImagesLabel.Location = new System.Drawing.Point(11, 16);
             this.amountOfExportingImagesLabel.Name = "amountOfExportingImagesLabel";
-            this.amountOfExportingImagesLabel.Size = new System.Drawing.Size(299, 20);
+            this.amountOfExportingImagesLabel.Size = new System.Drawing.Size(237, 15);
             this.amountOfExportingImagesLabel.TabIndex = 0;
             this.amountOfExportingImagesLabel.Text = "Количество выгружаемых изображений: ";
             // 
             // PathTextBox
             // 
-            this.PathTextBox.Location = new System.Drawing.Point(7, 289);
+            this.PathTextBox.Location = new System.Drawing.Point(6, 217);
+            this.PathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PathTextBox.Name = "PathTextBox";
             this.PathTextBox.ReadOnly = true;
-            this.PathTextBox.Size = new System.Drawing.Size(361, 27);
+            this.PathTextBox.Size = new System.Drawing.Size(316, 23);
             this.PathTextBox.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 267);
+            this.label3.Location = new System.Drawing.Point(6, 200);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(341, 20);
+            this.label3.Size = new System.Drawing.Size(273, 15);
             this.label3.TabIndex = 6;
             this.label3.Text = "Путь к папке, в которую сохраняются элементы";
             // 
             // ChangeDirectoryButton
             // 
-            this.ChangeDirectoryButton.Location = new System.Drawing.Point(378, 287);
+            this.ChangeDirectoryButton.Location = new System.Drawing.Point(331, 215);
+            this.ChangeDirectoryButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ChangeDirectoryButton.Name = "ChangeDirectoryButton";
-            this.ChangeDirectoryButton.Size = new System.Drawing.Size(94, 29);
+            this.ChangeDirectoryButton.Size = new System.Drawing.Size(82, 22);
             this.ChangeDirectoryButton.TabIndex = 7;
             this.ChangeDirectoryButton.Text = "Изменить";
             this.ChangeDirectoryButton.UseVisualStyleBackColor = true;
@@ -82,9 +84,10 @@ namespace BatchImageProcessing
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(230, 345);
+            this.ExportButton.Location = new System.Drawing.Point(331, 259);
+            this.ExportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(138, 29);
+            this.ExportButton.Size = new System.Drawing.Size(121, 22);
             this.ExportButton.TabIndex = 8;
             this.ExportButton.Text = "Экспортировать";
             this.ExportButton.UseVisualStyleBackColor = true;
@@ -93,26 +96,26 @@ namespace BatchImageProcessing
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 65);
+            this.label1.Location = new System.Drawing.Point(11, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(363, 20);
+            this.label1.Size = new System.Drawing.Size(286, 15);
             this.label1.TabIndex = 12;
             this.label1.Text = "Строка формирующая название для изображения";
             // 
             // exportNameTextBox
             // 
-            this.exportNameTextBox.Location = new System.Drawing.Point(13, 88);
+            this.exportNameTextBox.Location = new System.Drawing.Point(11, 66);
+            this.exportNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exportNameTextBox.Name = "exportNameTextBox";
-            this.exportNameTextBox.Size = new System.Drawing.Size(459, 27);
+            this.exportNameTextBox.Size = new System.Drawing.Size(402, 23);
             this.exportNameTextBox.TabIndex = 13;
             this.exportNameTextBox.Text = "%Number%. %Name%.png";
             // 
             // imageNameButton
             // 
-            this.imageNameButton.Location = new System.Drawing.Point(14, 125);
-            this.imageNameButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.imageNameButton.Location = new System.Drawing.Point(12, 94);
             this.imageNameButton.Name = "imageNameButton";
-            this.imageNameButton.Size = new System.Drawing.Size(234, 31);
+            this.imageNameButton.Size = new System.Drawing.Size(205, 23);
             this.imageNameButton.TabIndex = 14;
             this.imageNameButton.Text = "Добавить название изображения";
             this.imageNameButton.UseVisualStyleBackColor = true;
@@ -120,10 +123,9 @@ namespace BatchImageProcessing
             // 
             // orderNumberButton
             // 
-            this.orderNumberButton.Location = new System.Drawing.Point(14, 164);
-            this.orderNumberButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.orderNumberButton.Location = new System.Drawing.Point(12, 123);
             this.orderNumberButton.Name = "orderNumberButton";
-            this.orderNumberButton.Size = new System.Drawing.Size(234, 31);
+            this.orderNumberButton.Size = new System.Drawing.Size(205, 23);
             this.orderNumberButton.TabIndex = 15;
             this.orderNumberButton.Text = "Добавить порядковый номер";
             this.orderNumberButton.UseVisualStyleBackColor = true;
@@ -131,10 +133,9 @@ namespace BatchImageProcessing
             // 
             // exportDateButton
             // 
-            this.exportDateButton.Location = new System.Drawing.Point(14, 203);
-            this.exportDateButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.exportDateButton.Location = new System.Drawing.Point(12, 152);
             this.exportDateButton.Name = "exportDateButton";
-            this.exportDateButton.Size = new System.Drawing.Size(234, 31);
+            this.exportDateButton.Size = new System.Drawing.Size(205, 23);
             this.exportDateButton.TabIndex = 16;
             this.exportDateButton.Text = "Добавить дату экспорта";
             this.exportDateButton.UseVisualStyleBackColor = true;
@@ -144,17 +145,17 @@ namespace BatchImageProcessing
             // 
             this.label2.AutoSize = true;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(487, 21);
+            this.label2.Location = new System.Drawing.Point(426, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(417, 242);
+            this.label2.Size = new System.Drawing.Size(328, 182);
             this.label2.TabIndex = 17;
             this.label2.Text = resources.GetString("label2.Text");
             // 
             // ExportImagesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 389);
+            this.ClientSize = new System.Drawing.Size(766, 292);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.exportDateButton);
             this.Controls.Add(this.orderNumberButton);
@@ -166,8 +167,9 @@ namespace BatchImageProcessing
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PathTextBox);
             this.Controls.Add(this.amountOfExportingImagesLabel);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ExportImagesForm";
-            this.Text = "ExportImagesForm";
+            this.Text = "Экспорт изображений";
             this.Load += new System.EventHandler(this.ExportImagesForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

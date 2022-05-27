@@ -62,28 +62,6 @@ namespace BatchImageProcessing
 			createTable();
 		}
 
-		public List<ImageRow> Select()
-		{
-			List<ImageRow> data = new List<ImageRow>();
-			using (var command = connection.CreateCommand())
-			{
-				command.CommandText = @"SELECT name, exported, resolution, filters_amount, processing_time, date FROM Image";
-				command.ExecuteNonQuery();
-				var result = command.ExecuteReader();
-				while (result.Read())
-				{
-					ImageRow temp = new ImageRow();
-					temp.Name = result.GetString(0);
-					temp.Exported = result.GetInt32(1);
-					temp.Resolution = result.GetString(2);
-					temp.AppliedFiltersAmount = result.GetInt32(3);
-					temp.Date = DateTime.Parse(result.GetString(4));
-					data.Add(temp);
-				}
-			}
-			return data;
-		}
-
 		public void Insert(ImageRow row)
 		{
 			if (row.Name == null || row.Date == null)
