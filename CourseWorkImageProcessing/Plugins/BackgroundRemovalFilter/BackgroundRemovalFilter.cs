@@ -33,7 +33,7 @@ namespace BackgroundRemovalFilter
 
 		public Bitmap Apply(Bitmap sourceImage)
         {
-			inputFloodFillTolerance = Settings.SettingsVariables[0].Value / 1000;
+			inputFloodFillTolerance = (float)Settings.SettingsVariables[0].Value / 1000;
 			inputMaskBlurFactor = Settings.SettingsVariables[1].Value % 2 == 1 ?
 				Settings.SettingsVariables[1].Value : ++Settings.SettingsVariables[1].Value;
 
