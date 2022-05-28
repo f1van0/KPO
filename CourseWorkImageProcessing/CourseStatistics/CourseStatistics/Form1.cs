@@ -36,7 +36,7 @@ namespace CourseStatistics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -164,7 +164,7 @@ namespace CourseStatistics
             _numberOfImages = (int)numericUpDown1.Value;
 
             imageItemsDataGrid.Rows.Clear();
-            for (int i= 0; i < _numberOfImages; i++)
+            for (int i = 0; i < _numberOfImages; i++)
             {
                 string[] row = { imageRows[i].Name, imageRows[i].Resolution, imageRows[i].AppliedFiltersAmount.ToString(), (imageRows[i].ProcessingTime / 1000).ToString(), imageRows[i].Date.ToString() };
                 imageItemsDataGrid.Rows.Add(row);
