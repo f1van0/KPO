@@ -118,7 +118,7 @@ namespace BatchImageProcessing
             // 
             this.СписокПлагиновStripMenuItem.Name = "СписокПлагиновStripMenuItem";
             this.СписокПлагиновStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.СписокПлагиновStripMenuItem.Text = "Список фильтров";
+            this.СписокПлагиновStripMenuItem.Text = "Список плагинов";
             this.СписокПлагиновStripMenuItem.Click += new System.EventHandler(this.ФильрыStripMenuItem_Click);
             // 
             // изображениеToolStripMenuItem

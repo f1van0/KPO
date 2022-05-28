@@ -7,7 +7,7 @@ namespace ResizeFilter
 {
     public class ResizeFilter : IImageFilterDynamicLibrary
     {
-        public string Name => "Изменение области изображения";
+        public string Name => "Изменение размеров холста";
         public string Version => "1.0";
         public string Author => "Фролов Иван";
 
