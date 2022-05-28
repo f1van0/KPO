@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint31 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint32 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint33 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint34 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 2D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint35 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 3D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint36 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
+            System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.uploadChartResolutions = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.titleInfoLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.printButton = new System.Windows.Forms.Button();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.savedImagesAmountLabel = new System.Windows.Forms.Label();
@@ -65,6 +65,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.uploadChartResolutions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveChartResolutions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageItemsDataGrid)).BeginInit();
@@ -76,41 +77,41 @@
             // 
             // uploadChartResolutions
             // 
-            chartArea1.Name = "ChartArea1";
-            this.uploadChartResolutions.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.uploadChartResolutions.Legends.Add(legend1);
+            chartArea11.Name = "ChartArea1";
+            this.uploadChartResolutions.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend1";
+            this.uploadChartResolutions.Legends.Add(legend11);
             this.uploadChartResolutions.Location = new System.Drawing.Point(7, 36);
             this.uploadChartResolutions.Name = "uploadChartResolutions";
-            series1.ChartArea = "ChartArea1";
-            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F);
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            dataPoint1.BorderWidth = 1;
-            dataPoint1.MarkerSize = 5;
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            this.uploadChartResolutions.Series.Add(series1);
+            series11.ChartArea = "ChartArea1";
+            series11.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F);
+            series11.Legend = "Legend1";
+            series11.Name = "Series1";
+            dataPoint31.BorderWidth = 1;
+            dataPoint31.MarkerSize = 5;
+            series11.Points.Add(dataPoint31);
+            series11.Points.Add(dataPoint32);
+            series11.Points.Add(dataPoint33);
+            series11.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.uploadChartResolutions.Series.Add(series11);
             this.uploadChartResolutions.Size = new System.Drawing.Size(886, 328);
             this.uploadChartResolutions.TabIndex = 0;
             this.uploadChartResolutions.Text = "chart1";
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            title1.Name = "Title1";
-            title1.Text = "Градация популярности разрешений у загруженных изображений:";
-            this.uploadChartResolutions.Titles.Add(title1);
+            title11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            title11.Name = "Title1";
+            title11.Text = "Градация популярности разрешений у загруженных изображений:";
+            this.uploadChartResolutions.Titles.Add(title11);
             this.uploadChartResolutions.Click += new System.EventHandler(this.chart1_Click);
             // 
-            // titleInfoLabel
+            // label1
             // 
-            this.titleInfoLabel.AutoSize = true;
-            this.titleInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.titleInfoLabel.Location = new System.Drawing.Point(12, 9);
-            this.titleInfoLabel.Name = "titleInfoLabel";
-            this.titleInfoLabel.Size = new System.Drawing.Size(732, 32);
-            this.titleInfoLabel.TabIndex = 1;
-            this.titleInfoLabel.Text = "Статистика использования приложения за 20.05.2022";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(420, 26);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Статистика использования приложения";
             // 
             // printButton
             // 
@@ -132,7 +133,7 @@
             this.savedImagesAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.savedImagesAmountLabel.Location = new System.Drawing.Point(4, 8);
             this.savedImagesAmountLabel.Name = "savedImagesAmountLabel";
-            this.savedImagesAmountLabel.Size = new System.Drawing.Size(433, 25);
+            this.savedImagesAmountLabel.Size = new System.Drawing.Size(364, 20);
             this.savedImagesAmountLabel.TabIndex = 5;
             this.savedImagesAmountLabel.Text = "Количество сохраненных фотографий: 86";
             // 
@@ -156,36 +157,36 @@
             this.uploadImagesAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.uploadImagesAmountLabel.Location = new System.Drawing.Point(3, 9);
             this.uploadImagesAmountLabel.Name = "uploadImagesAmountLabel";
-            this.uploadImagesAmountLabel.Size = new System.Drawing.Size(444, 25);
+            this.uploadImagesAmountLabel.Size = new System.Drawing.Size(373, 20);
             this.uploadImagesAmountLabel.TabIndex = 7;
             this.uploadImagesAmountLabel.Text = "Количество загруженных фотографий: 113";
             // 
             // saveChartResolutions
             // 
-            chartArea2.Name = "ChartArea1";
-            this.saveChartResolutions.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.saveChartResolutions.Legends.Add(legend2);
+            chartArea12.Name = "ChartArea1";
+            this.saveChartResolutions.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.saveChartResolutions.Legends.Add(legend12);
             this.saveChartResolutions.Location = new System.Drawing.Point(8, 80);
             this.saveChartResolutions.Name = "saveChartResolutions";
-            series2.ChartArea = "ChartArea1";
-            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F);
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            dataPoint4.BorderWidth = 1;
-            dataPoint4.MarkerSize = 5;
-            series2.Points.Add(dataPoint4);
-            series2.Points.Add(dataPoint5);
-            series2.Points.Add(dataPoint6);
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            this.saveChartResolutions.Series.Add(series2);
+            series12.ChartArea = "ChartArea1";
+            series12.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F);
+            series12.Legend = "Legend1";
+            series12.Name = "Series1";
+            dataPoint34.BorderWidth = 1;
+            dataPoint34.MarkerSize = 5;
+            series12.Points.Add(dataPoint34);
+            series12.Points.Add(dataPoint35);
+            series12.Points.Add(dataPoint36);
+            series12.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.saveChartResolutions.Series.Add(series12);
             this.saveChartResolutions.Size = new System.Drawing.Size(886, 328);
             this.saveChartResolutions.TabIndex = 8;
             this.saveChartResolutions.Text = "chart2";
-            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            title2.Name = "Title1";
-            title2.Text = "Градация популярности разрешений у сохраненных изображений:";
-            this.saveChartResolutions.Titles.Add(title2);
+            title12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            title12.Name = "Title1";
+            title12.Text = "Градация популярности разрешений у сохраненных изображений:";
+            this.saveChartResolutions.Titles.Add(title12);
             // 
             // averageAppliedFiltersLabel
             // 
@@ -193,7 +194,7 @@
             this.averageAppliedFiltersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.averageAppliedFiltersLabel.Location = new System.Drawing.Point(4, 28);
             this.averageAppliedFiltersLabel.Name = "averageAppliedFiltersLabel";
-            this.averageAppliedFiltersLabel.Size = new System.Drawing.Size(433, 25);
+            this.averageAppliedFiltersLabel.Size = new System.Drawing.Size(364, 20);
             this.averageAppliedFiltersLabel.TabIndex = 9;
             this.averageAppliedFiltersLabel.Text = "Количество сохраненных фотографий: 86";
             // 
@@ -203,7 +204,7 @@
             this.averageProcessingTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.averageProcessingTimeLabel.Location = new System.Drawing.Point(4, 48);
             this.averageProcessingTimeLabel.Name = "averageProcessingTimeLabel";
-            this.averageProcessingTimeLabel.Size = new System.Drawing.Size(433, 25);
+            this.averageProcessingTimeLabel.Size = new System.Drawing.Size(364, 20);
             this.averageProcessingTimeLabel.TabIndex = 10;
             this.averageProcessingTimeLabel.Text = "Количество сохраненных фотографий: 86";
             // 
@@ -221,49 +222,38 @@
             this.imageItemsDataGrid.Location = new System.Drawing.Point(7, 84);
             this.imageItemsDataGrid.Name = "imageItemsDataGrid";
             this.imageItemsDataGrid.ReadOnly = true;
-            this.imageItemsDataGrid.RowHeadersWidth = 51;
             this.imageItemsDataGrid.Size = new System.Drawing.Size(551, 726);
             this.imageItemsDataGrid.TabIndex = 11;
             // 
             // name
             // 
             this.name.HeaderText = "Название";
-            this.name.MinimumWidth = 6;
             this.name.Name = "name";
             this.name.ReadOnly = true;
-            this.name.Width = 125;
             // 
             // resolution
             // 
             this.resolution.HeaderText = "Разрешение изображения";
-            this.resolution.MinimumWidth = 6;
             this.resolution.Name = "resolution";
             this.resolution.ReadOnly = true;
-            this.resolution.Width = 125;
             // 
             // filtersApplied
             // 
             this.filtersApplied.HeaderText = "Применено фильтров";
-            this.filtersApplied.MinimumWidth = 6;
             this.filtersApplied.Name = "filtersApplied";
             this.filtersApplied.ReadOnly = true;
-            this.filtersApplied.Width = 125;
             // 
             // processingTime
             // 
             this.processingTime.HeaderText = "Время обработки";
-            this.processingTime.MinimumWidth = 6;
             this.processingTime.Name = "processingTime";
             this.processingTime.ReadOnly = true;
-            this.processingTime.Width = 125;
             // 
             // date
             // 
             this.date.HeaderText = "Дата";
-            this.date.MinimumWidth = 6;
             this.date.Name = "date";
             this.date.ReadOnly = true;
-            this.date.Width = 125;
             // 
             // label2
             // 
@@ -271,7 +261,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label2.Location = new System.Drawing.Point(5, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(496, 25);
+            this.label2.Size = new System.Drawing.Size(414, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "Вывод последних n обработанных изображений";
             // 
@@ -289,7 +279,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label3.Location = new System.Drawing.Point(3, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(269, 25);
+            this.label3.Size = new System.Drawing.Size(225, 20);
             this.label3.TabIndex = 14;
             this.label3.Text = "Количество изображений";
             // 
@@ -327,6 +317,11 @@
             this.panel3.Size = new System.Drawing.Size(901, 416);
             this.panel3.TabIndex = 17;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileName = "report";
+            this.saveFileDialog1.Filter = "Excel таблица |*.xls";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,9 +332,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.printButton);
-            this.Controls.Add(this.titleInfoLabel);
+            this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Статистика приложения";
+            this.Text = "Статистика для приложения BatchImageProcessing";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uploadChartResolutions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveChartResolutions)).EndInit();
@@ -359,7 +354,7 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart uploadChartResolutions;
-        private System.Windows.Forms.Label titleInfoLabel;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button printButton;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.Label savedImagesAmountLabel;
@@ -381,6 +376,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn filtersApplied;
         private System.Windows.Forms.DataGridViewTextBoxColumn processingTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
