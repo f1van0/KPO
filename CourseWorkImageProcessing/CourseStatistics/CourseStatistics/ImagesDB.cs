@@ -261,7 +261,14 @@ namespace CourseStatistics
 						[processing_time] INT NOT NULL,
 						[date] TEXT NOT NULL
 					)";
-                command.ExecuteNonQuery();
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch(SqliteException ex)
+                {
+                    throw(new Exception());
+                }
             }
         }
 

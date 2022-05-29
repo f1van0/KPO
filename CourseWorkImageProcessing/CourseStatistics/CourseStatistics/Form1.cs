@@ -30,7 +30,15 @@ namespace CourseStatistics
         public Form1()
         {
             InitializeComponent();
-            _imagesDB = new ImagesDB();
+            try
+            {
+                _imagesDB = new ImagesDB();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось получить статистику из файла");
+                return;
+            }
             UpdateInformation();
         }
 
@@ -121,7 +129,16 @@ namespace CourseStatistics
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string path = openFileDialog1.FileName;
-                _imagesDB = new ImagesDB(path);
+                try
+                {
+                    _imagesDB = new ImagesDB(path);
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось получить статистику из файла");
+                    return;
+                }
+                
                 UpdateInformation();
             }
         }
@@ -176,6 +193,9 @@ namespace CourseStatistics
             var results = ImagesDB.Instance.SelectResolutionsGradation(status);
             results.Reverse();
 
+            if (chart.Series.Count == 0)
+                chart.Series.Add(new Series("Разрешение изображений"));
+            
             chart.Series[0].Points.Clear();
             chart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
             chart.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;

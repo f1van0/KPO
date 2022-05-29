@@ -25,62 +25,6 @@ namespace ScalingFilter
 			Settings = new Settings(defaultSettings, SettingsFileName);
 		}
 
-		public struct MultiColor
-		{
-			public List<Color> Colors;
-		}
-
-		public class MultiColorMatrix
-		{
-			public int Width;
-			public int Height;
-			private MultiColor[,] _colorMatrix;
-
-			public MultiColorMatrix()
-			{
-				_colorMatrix = new MultiColor[0, 0];
-			}
-
-			public MultiColorMatrix(int width, int height)
-			{
-				Width = width;
-				Height = height;
-				_colorMatrix = new MultiColor[width, height];
-			}
-
-			public void AddColorTo(int x, int y, Color color)
-            {
-				if (x < 0 || x >= Width || y < 0 || y > Height)
-					return;
-
-				_colorMatrix[x, y].Colors.Add(color);
-			}
-
-			public Color GetAverageColor(int x, int y)
-            {
-				int avgA = 0, avgR = 0, avgB = 0, avgG = 0;
-
-				if (x < 0 || x >= Width || y < 0 || y > Height)
-					return Color.FromArgb(0, 0, 0, 0);
-				
-				foreach(var colorItem in _colorMatrix[x, y].Colors)
-                {
-					avgA += colorItem.A;
-					avgR += colorItem.R;
-					avgB += colorItem.B;
-					avgG += colorItem.G;
-				}
-
-				int amount = _colorMatrix[x, y].Colors.Count;
-				avgA /= amount;
-				avgR /= amount;
-				avgG /= amount;
-				avgB /= amount;
-
-				return Color.FromArgb(avgA, avgR, avgB, avgG);
-			}
-		}
-
 		public Bitmap Apply(Bitmap sourceImage)
         {
 			int j;
