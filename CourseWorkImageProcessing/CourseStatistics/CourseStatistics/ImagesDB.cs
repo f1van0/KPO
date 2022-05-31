@@ -167,6 +167,10 @@ namespace CourseStatistics
                     avgValue += temp.AppliedFiltersAmount;
                 }
             }
+
+            if (iter == 0)
+                return 0;
+
             return avgValue / iter;
         }
 
@@ -192,6 +196,10 @@ namespace CourseStatistics
                     avgTime += temp.ProcessingTime;
                 }
             }
+
+            if (iter == 0)
+                return 0;
+
             return avgTime / iter;
         }
 

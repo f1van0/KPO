@@ -6,7 +6,7 @@ namespace ContrastFilter
 {
     public class ContrastFilter : IImageFilterDynamicLibrary
     {
-        public string Name => "Изменение контраста";
+        public string Name => "Изменение контрастности";
 
         public string Version => "1.0";
 
